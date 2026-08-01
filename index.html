@@ -170,43 +170,74 @@
       <div class="screen-content">
         <div class="segment bbq-segment" aria-label="BBQ表示切替">
           <button type="button" class="bbq-tab active" data-bbq-view="menu">お品書き</button>
-          <button type="button" class="bbq-tab" data-bbq-view="heat">火加減</button>
+          <button type="button" class="bbq-tab" data-bbq-view="heat">レシピ</button>
           <button type="button" class="bbq-tab" data-bbq-view="timer">タイマー</button>
         </div>
 
         <div id="bbqMenu" class="bbq-view active">
           <div class="menu-intro"><p>TONIGHT'S MENU</p><h2>今夜は、家族で<br>味わう12皿。</h2><span>全12品</span></div>
           <div class="course-list">
-            <article><img src="./assets/images/menu/camembert.jpg" alt="グリルで温めた丸ごとカマンベール" loading="lazy"><span class="course-no">01</span><div><p>APPETIZER</p><h3>カマンベール丸ごと</h3><p>オリーブオイル、ブラックペッパー、はちみつ。とろけたチーズをパンにつけて。</p></div></article>
+            <article><img src="./assets/images/menu/camembert.jpg" alt="グリルで温めたカマンベールのハニーペッパー焼き" loading="lazy"><span class="course-no">01</span><div><p>APPETIZER</p><h3>カマンベールのハニーペッパー焼き</h3><p>オリーブオイル、はちみつ、ブラックペッパー。とろけたチーズをバゲットにつけて。</p></div></article>
             <article><img src="./assets/images/menu/garlic-shrimp.jpg" alt="鉄板で焼くガーリックシュリンプ" loading="lazy"><span class="course-no">02</span><div><p>APPETIZER</p><h3>ガーリックシュリンプ</h3><p>有頭エビ、にんにく、バター。立ち上がる香りからコースが始まる。</p></div></article>
             <article class="main-course"><img src="./assets/images/menu/beef-tongue.jpg" alt="焼き目をつけた厚切り牛タン" loading="lazy"><span class="course-no">03</span><div><p>MEAT 01</p><h3>厚切り牛タン</h3><p>最初は塩だけで。仕上げにレモンをひと搾り。</p></div></article>
-            <article class="main-course hero-course"><img src="./assets/images/menu/sirloin.jpg" alt="焼き目をつけて切り分けたサーロイン" loading="lazy"><span class="course-no">04</span><div><p>MAIN DISH</p><h3>みなもと牛サーロイン</h3><p>一枚で豪快に焼き上げ、みんなの前で切り分ける。</p><span class="chef-note">今夜の主役</span></div></article>
+            <article class="main-course hero-course"><img src="./assets/images/menu/sirloin.jpg" alt="焼き目をつけて切り分けた厚切りサーロイン" loading="lazy"><span class="course-no">04</span><div><p>MAIN DISH</p><h3>厚切りサーロインステーキ</h3><p>一枚で豪快に焼き上げ、みんなの前で切り分ける。</p><span class="chef-note">Broil Kingの真骨頂</span></div></article>
             <article class="main-course"><img src="./assets/images/menu/harami.jpg" alt="タレをまとったハラミ" loading="lazy"><span class="course-no">05</span><div><p>MEAT 03</p><h3>ハラミ</h3><p>香ばしい焼き目とタレ。子ども人気No.1。</p></div></article>
             <article><img src="./assets/images/menu/pork-belly.jpg" alt="こんがり焼いた厚切り豚バラ" loading="lazy"><span class="course-no">06</span><div><p>MEAT 04</p><h3>厚切り豚バラ</h3><p>塩こしょうだけで、表面は香ばしく中はジューシーに。</p></div></article>
-            <article><img src="./assets/images/menu/chicken.jpg" alt="ガーリック味と照り焼き味の鶏もも" loading="lazy"><span class="course-no">07</span><div><p>MEAT 05</p><h3>鶏もも 2種</h3><p>ガーリック味と照り焼き味。好みで選べる二つの味。</p></div></article>
-            <article><img src="./assets/images/menu/vegetables.jpg" alt="焼き目のついた夏野菜" loading="lazy"><span class="course-no">08</span><div><p>VEGETABLES</p><h3>夏野菜グリル</h3><p>玉ねぎ、エリンギ、アスパラ、パプリカ、ズッキーニをオリーブオイルで。</p></div></article>
-            <article><img src="./assets/images/menu/seafood.jpg" alt="バター醤油のホタテと塩焼きのエビ" loading="lazy"><span class="course-no">09</span><div><p>SEAFOOD</p><h3>ホタテ &amp; エビ</h3><p>ホタテはバター醤油。エビは素材を楽しむ塩焼きで。</p></div></article>
-            <article><img src="./assets/images/menu/sausages.jpg" alt="グリルで焼いた大容量ソーセージ" loading="lazy"><span class="course-no">10</span><div><p>FAMILY FAVORITE</p><h3>大容量ソーセージ</h3><p>表面はパリッと。子どもが喜ぶBBQの定番。</p></div></article>
-            <article><img src="./assets/images/menu/grilled-rice-ball.jpg" alt="バター醤油の焼きおにぎり" loading="lazy"><span class="course-no">11</span><div><p>FINISH 01</p><h3>バター醤油 焼きおにぎり</h3><p>香ばしい醤油と溶けたバターで仕上げる。</p></div></article>
+            <article><img src="./assets/images/menu/chicken.jpg" alt="皮を香ばしく焼いた鶏ももステーキ" loading="lazy"><span class="course-no">07</span><div><p>MEAT 05</p><h3>鶏ももステーキ</h3><p>皮はパリパリ。最後に照り焼きソースで仕上げる。</p></div></article>
+            <article><img class="scallop-photo" src="./assets/images/menu/seafood.jpg" alt="殻ごと焼いたホタテバター醤油" loading="lazy"><span class="course-no">08</span><div><p>SEAFOOD</p><h3>ホタテバター醤油</h3><p>殻ごと蒸し焼きにして、バターと醤油をまとわせる。</p></div></article>
+            <article><img src="./assets/images/menu/vegetables.jpg" alt="焼き目のついた夏野菜" loading="lazy"><span class="course-no">09</span><div><p>VEGETABLES</p><h3>焼き野菜</h3><p>アスパラ、ズッキーニ、パプリカ、玉ねぎ、エリンギをオリーブオイルで。</p></div></article>
+            <article><img src="./assets/images/menu/grilled-rice-ball.jpg" alt="バター醤油の焼きおにぎり" loading="lazy"><span class="course-no">10</span><div><p>FINISH 01</p><h3>バター醤油 焼きおにぎり</h3><p>醤油と溶けたバターを重ねて、香ばしく仕上げる。</p></div></article>
+            <article><img src="./assets/images/menu/sausages.jpg" alt="グリルで焼いた大容量ソーセージ" loading="lazy"><span class="course-no">11</span><div><p>FAMILY FAVORITE</p><h3>大容量ソーセージ</h3><p>表面はパリッと。子どもが喜ぶBBQの定番。</p></div></article>
             <article><img src="./assets/images/menu/yakisoba.jpg" alt="鉄板で仕上げた焼きそば" loading="lazy"><span class="course-no">12</span><div><p>FINISH 02</p><h3>鉄板焼きそば</h3><p>熱い鉄板で一気に仕上げる、コース最後のひと皿。</p></div></article>
           </div>
         </div>
 
         <div id="bbqHeat" class="bbq-view">
           <div class="heat-legend"><span class="heat high">強火</span><span class="heat medium">中火</span><span class="heat low">弱火</span><span class="heat indirect">間接</span></div>
-          <div class="heat-guide">
-            <article><div><span class="heat indirect">間接</span><b>カマンベール</b></div><p>コンロ端・フタあり。約10分。</p></article>
-            <article><div><span class="heat medium">中火</span><b>ガーリックシュリンプ</b></div><p>鉄板で3〜4分、返して2分。</p></article>
-            <article><div><span class="heat high">強火</span><b>厚切り牛タン</b></div><p>片面約2分、裏面1〜2分。</p></article>
-            <article class="heat-main"><div><span class="heat high">強火→間接</span><b>サーロイン</b></div><p>片面90秒ずつ焼き目 → 弱火側でフタ5〜7分 → 休ませ5分。</p></article>
-            <article><div><span class="heat high">強火</span><b>ハラミ</b></div><p>両面2〜3分。タレは最後。</p></article>
-            <article><div><span class="heat medium">中火</span><b>厚切り豚バラ</b></div><p>片面3〜4分。炎が上がれば弱火側へ。</p></article>
-            <article><div><span class="heat indirect">中火→間接</span><b>鶏もも</b></div><p>皮7分、返して5分。中心75℃・1分以上を目安。</p></article>
-            <article><div><span class="heat medium">中火</span><b>野菜</b></div><p>オイルを塗り8〜10分。焦げ目後は端へ。</p></article>
-            <article><div><span class="heat medium">中火</span><b>ホタテ・エビ</b></div><p>ホタテは鉄板でバター醤油。エビは殻が赤くなるまで。</p></article>
-            <article><div><span class="heat medium">中火</span><b>ソーセージ</b></div><p>転がしながら6〜8分。</p></article>
-            <article><div><span class="heat medium">中火</span><b>焼きおにぎり</b></div><p>素焼きで固め、醤油は仕上げ。</p></article>
-            <article><div><span class="heat high">鉄板</span><b>焼きそば</b></div><p>鉄板をしっかり温め、短時間で。</p></article>
+          <p class="recipe-lead">料理をタップすると、材料と手順が開きます。</p>
+          <div class="recipe-list">
+            <details class="recipe-card" open>
+              <summary><span class="recipe-no">01</span><div><small>180℃前後 · 約10分</small><b>カマンベールのハニーペッパー焼き</b></div></summary>
+              <div class="recipe-body"><h3>材料</h3><p class="ingredient-chips"><span>カマンベール 1個</span><span>オリーブオイル</span><span>はちみつ</span><span>ブラックペッパー</span><span>バゲット</span></p><h3>作り方</h3><ol><li>上面へ格子状の切れ目を入れる。</li><li>スキレットまたはアルミ皿へ置き、オリーブオイルを少量かける。</li><li>フタを閉め、180℃前後で約10分。</li><li>はちみつとブラックペッパーをかけ、バゲットにつける。</li></ol></div>
+            </details>
+            <details class="recipe-card">
+              <summary><span class="recipe-no">02</span><div><small>中火 · 3〜4分＋2分</small><b>ガーリックシュリンプ</b></div></summary>
+              <div class="recipe-body"><h3>材料</h3><p class="ingredient-chips"><span>エビ</span><span>にんにく</span><span>バター</span><span>パセリ</span><span>レモン</span></p><h3>作り方</h3><ol><li>スキレットへバターを入れ、にんにくを炒める。</li><li>エビを入れ、フタを閉めて3〜4分。</li><li>裏返して2分焼く。</li><li>パセリを散らし、レモンを絞る。</li></ol></div>
+            </details>
+            <details class="recipe-card">
+              <summary><span class="recipe-no">03</span><div><small>250℃ · 2分＋1〜2分</small><b>厚切り牛タン</b></div></summary>
+              <div class="recipe-body"><ol><li>グリルを250℃程度まで予熱する。</li><li>牛タンを並べ、約2分焼く。</li><li>裏返して1〜2分。</li><li>塩とレモンで仕上げる。</li></ol><p class="recipe-point">焼きすぎ厳禁。</p></div>
+            </details>
+            <details class="recipe-card main-recipe">
+              <summary><span class="recipe-no">04</span><div><small>強火→間接 · 休ませ5分</small><b>厚切りサーロインステーキ</b></div></summary>
+              <div class="recipe-body"><ol><li>肉を常温に戻し、塩だけ振る。</li><li>強火で90秒、裏面も90秒。</li><li>弱火側へ移し、フタを閉めて5〜7分。</li><li>アルミホイルで包み、5分休ませる。</li><li>カットして、最後にブラックペッパー。</li></ol><p class="recipe-point">これがBroil Kingの真骨頂。</p></div>
+            </details>
+            <details class="recipe-card">
+              <summary><span class="recipe-no">05</span><div><small>強火 · 両面2〜3分</small><b>ハラミ</b></div></summary>
+              <div class="recipe-body"><ol><li>強火で片面2〜3分。</li><li>裏返して2〜3分。</li><li>焼けてからタレを絡める。</li></ol><p class="recipe-point">子ども人気No.1。</p></div>
+            </details>
+            <details class="recipe-card">
+              <summary><span class="recipe-no">06</span><div><small>中火 · 6分＋5分</small><b>厚切り豚バラ</b></div></summary>
+              <div class="recipe-body"><ol><li>塩こしょうを振る。</li><li>中火へ置き、フタを閉めて6分。</li><li>裏返し、フタを閉めて5分。</li></ol><p class="recipe-point">余分な脂が落ちて香ばしくなる。</p></div>
+            </details>
+            <details class="recipe-card">
+              <summary><span class="recipe-no">07</span><div><small>中火→間接 · 7分＋5分</small><b>鶏ももステーキ</b></div></summary>
+              <div class="recipe-body"><ol><li>皮目から焼く。</li><li>フタを閉めて7分。</li><li>裏返して5分。</li><li>最後に照り焼きソースを絡める。</li></ol><p class="recipe-point">皮をパリパリに。中心75℃・1分以上を目安にする。</p></div>
+            </details>
+            <details class="recipe-card">
+              <summary><span class="recipe-no">08</span><div><small>中火 · 5分＋30秒</small><b>ホタテバター醤油</b></div></summary>
+              <div class="recipe-body"><ol><li>ホタテを殻ごとグリルへ置く。</li><li>フタを閉めて5分。</li><li>バターと醤油を加える。</li><li>さらに30秒加熱する。</li></ol></div>
+            </details>
+            <details class="recipe-card">
+              <summary><span class="recipe-no">09</span><div><small>中火 · 約8〜10分</small><b>焼き野菜</b></div></summary>
+              <div class="recipe-body"><h3>材料</h3><p class="ingredient-chips"><span>アスパラ</span><span>ズッキーニ</span><span>パプリカ</span><span>玉ねぎ</span><span>エリンギ</span></p><h3>作り方</h3><ol><li>野菜へオリーブオイルを薄く塗る。</li><li>中火で約8〜10分、時々返しながら焼く。</li></ol></div>
+            </details>
+            <details class="recipe-card">
+              <summary><span class="recipe-no">10</span><div><small>中火 · 焼き目を見ながら</small><b>焼きおにぎり</b></div></summary>
+              <div class="recipe-body"><ol><li>まず両面を素焼きして表面を固める。</li><li>醤油とバターを塗る。</li><li>さらに両面を香ばしく焼く。</li></ol><p class="recipe-point">焦げやすいので醤油は最後。</p></div>
+            </details>
+            <details class="recipe-card compact-recipe"><summary><span class="recipe-no">11</span><div><small>中火 · 6〜8分</small><b>大容量ソーセージ</b></div></summary><div class="recipe-body"><ol><li>中火で転がしながら6〜8分。</li><li>全体へ焼き目がつき、皮が張ったら完成。</li></ol></div></details>
+            <details class="recipe-card compact-recipe"><summary><span class="recipe-no">12</span><div><small>鉄板 · 短時間</small><b>鉄板焼きそば</b></div></summary><div class="recipe-body"><ol><li>鉄板をしっかり温める。</li><li>具材、麺、ソースの順で加え、一気に仕上げる。</li></ol></div></details>
           </div>
           <p class="safety-note">鶏肉・豚肉は中心まで十分に加熱。生肉用トングと盛り付け用を分ける。</p>
         </div>
