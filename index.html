@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0a3953">
+<meta name="theme-color" content="#092d3b">
 <meta name="description" content="関家8人の天橋立・伊根・美山1泊2日旅行用アプリ">
 <meta name="format-detection" content="telephone=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -12,324 +12,329 @@
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./assets/icons/icon-180.png">
 <link rel="icon" type="image/png" sizes="192x192" href="./assets/icons/icon-192.png">
-<title>関家の旅｜天橋立・伊根</title>
+<link rel="preload" href="./assets/images/hero-ine.jpg" as="image">
 <link rel="stylesheet" href="./assets/css/style.css">
+<title>関家の旅｜海の京都</title>
 </head>
 <body>
 <div class="app-shell">
-  <header class="hero">
-    <div class="sun"></div><div class="wave"></div>
-    <div class="hero-inner">
-      <div class="toprow">
-        <div class="brand">SEKI FAMILY TRIP</div>
-        <div class="date-pill">2026.08.03–04</div>
-      </div>
-      <h1>海の京都へ。</h1>
-      <p>伊根の舟屋、海鮮、絶景、ヴィラBBQ。家族8人の1泊2日を、ひとつの旅アプリに。</p>
-      <div class="hero-actions">
-        <span class="hero-chip">8人旅</span>
-        <span class="hero-chip">14:00–15:00 CHECK IN</span>
-        <span class="hero-chip">BBQ ¥20,000</span>
-      </div>
-    </div>
-  </header>
-
-  <main class="content">
+  <main>
     <section id="home" class="screen active">
-      <div class="card">
-        <div class="section-head">
-          <div><div class="eyebrow">TODAY</div><h2>旅のダッシュボード</h2></div>
-          <div class="sub">8/3 7:00出発</div>
+      <header class="travel-hero">
+        <img src="./assets/images/hero-ine.jpg" alt="" class="hero-photo">
+        <div class="hero-shade"></div>
+        <div class="hero-top">
+          <span class="wordmark">SEKI FAMILY JOURNEY</span>
+          <span class="trip-date">AUG 3—4, 2026</span>
         </div>
-        <div class="summary-grid">
-          <div class="summary"><span>参加人数</span><b>8人</b></div>
-          <div class="summary"><span>宿泊費</span><b>¥28,000</b></div>
-          <div class="summary"><span>交通費</span><b>¥14,800</b></div>
-          <div class="summary"><span>基本総額</span><b id="homeTotal">¥85,800</b></div>
+        <div class="hero-copy">
+          <p class="kicker">KYOTO BY THE SEA</p>
+          <h1>海と、食と、<br>家族の夏。</h1>
+          <p class="hero-lead">天橋立・伊根・美山をめぐる<br>8人だけのトラベルガイド</p>
         </div>
-        <div class="progress-wrap">
-          <div class="progress-top"><span>旅の準備</span><span id="progressLabel">0 / 8</span></div>
-          <div class="progress"><i id="progressBar"></i></div>
+        <div class="hero-plan">
+          <span>DAY 1</span>
+          <strong id="heroPlanName">PLAN A · 海水浴</strong>
         </div>
-      </div>
+      </header>
 
-      <div class="card">
-        <div class="now-card">
-          <small>NEXT ACTION</small>
-          <h3>7:00 湊町を出発</h3>
-          <p>高速に乗る前に、飲み物・酔い止め・モバイルバッテリーを最終確認。</p>
-        </div>
-      </div>
+      <div class="home-content">
+        <article class="next-card">
+          <div class="next-card-head">
+            <span class="live-dot"></span>
+            <span id="nextActionLabel">NEXT</span>
+            <span id="nextCountdown" class="countdown">8/3 7:00</span>
+          </div>
+          <p id="nextActionTime" class="next-time">07:00</p>
+          <h2 id="nextActionTitle">湊町を出発</h2>
+          <p id="nextActionMeta">飲み物・酔い止め・モバイルバッテリーを最終確認。</p>
+          <button type="button" class="text-link" data-go="plan">旅程をひらく <span>→</span></button>
+        </article>
 
-      <div class="card">
-        <div class="section-head"><div><div class="eyebrow">HIGHLIGHTS</div><h2>今回の見どころ</h2></div></div>
-        <div class="summary-grid">
-          <div class="summary"><span>朝</span><b>伊根湾</b></div>
-          <div class="summary"><span>昼</span><b>海鮮</b></div>
-          <div class="summary"><span>夕方</span><b>ヴィラ</b></div>
-          <div class="summary"><span>翌日</span><b>美山</b></div>
-        </div>
-        <div class="action-row">
-          <button type="button" class="primary" data-go="plan">プランを見る</button>
-          <button type="button" class="secondary" data-go="more" data-subview="budgetView">予算を見る</button>
-        </div>
+        <section class="editorial-section">
+          <div class="editorial-head">
+            <div><p class="kicker dark">QUICK ACCESS</p><h2>今日使うもの</h2></div>
+            <span class="section-note">片手で、すぐ。</span>
+          </div>
+          <div class="feature-pair">
+            <button type="button" class="feature-card bbq-feature" data-go="bbq">
+              <span class="feature-index">01</span>
+              <span class="feature-copy"><b>今日のお品書き</b><small>コース・火加減・タイマー</small></span>
+              <span class="feature-arrow">↗</span>
+            </button>
+            <button type="button" class="feature-card shoot-feature" data-go="shoot">
+              <span class="feature-index">02</span>
+              <span class="feature-copy"><b>撮影ディレクション</b><small>構図・画角・撮り逃し防止</small></span>
+              <span class="feature-arrow">↗</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="destination-story">
+          <img src="./assets/images/miyama.jpg" alt="美山の茅葺き集落を歩く家族をイメージした風景">
+          <div class="story-overlay"></div>
+          <div class="story-copy">
+            <p class="kicker">DAY 2 · MIYAMA</p>
+            <h2>赤いポストのある<br>日本の原風景へ。</h2>
+            <button type="button" class="glass-button" data-go="plan">2日目を見る</button>
+          </div>
+        </section>
+
+        <section class="editorial-section tools-section">
+          <div class="editorial-head"><div><p class="kicker dark">TRAVEL TOOLS</p><h2>旅の道具箱</h2></div></div>
+          <div class="tool-grid">
+            <button type="button" data-go="more" data-subview="budgetView"><span>¥</span><b>予算・支出</b><small>実際の支払いも記録</small></button>
+            <button type="button" data-go="more" data-subview="checkView"><span>✓</span><b>持ち物</b><small id="homePackingProgress">0 / 8</small></button>
+            <button type="button" data-go="more" data-subview="kidsView"><span>★</span><b>ミッション</b><small id="homeKidsProgress">0 XP</small></button>
+            <button type="button" data-go="shopping"><span>＋</span><b>買い物追加</b><small>数量変更・追加購入</small></button>
+          </div>
+        </section>
       </div>
     </section>
 
     <section id="plan" class="screen">
-      <div class="card">
-        <div class="section-head">
-          <div><div class="eyebrow">DAY 1</div><h2>初日のコース</h2></div>
-          <div class="sub">タップで切替</div>
-        </div>
-        <div class="segment">
-          <button type="button" class="plan-tab active" data-plan="a">A｜海水浴</button>
-          <button type="button" class="plan-tab" data-plan="b">B｜神社・絶景</button>
+      <header class="screen-hero compact-hero">
+        <div><p class="kicker">ITINERARY</p><h1>旅のしおり</h1><p>時間、住所、移動目安をひとつに。</p></div>
+      </header>
+      <div class="screen-content">
+        <div class="segment premium-segment" aria-label="初日のプラン選択">
+          <button type="button" class="plan-tab active" data-plan="a">A <span>海水浴</span></button>
+          <button type="button" class="plan-tab" data-plan="b">B <span>神社・絶景</span></button>
         </div>
 
         <div id="planA" class="plan active">
-          <div class="cover a"><h3>伊根 × 泊海水浴場</h3><span class="emoji">🌊</span></div>
-          <div class="timeline">
-            <div class="event"><div class="time">7:00</div><div class="event-card"><h3>湊町を出発</h3><p>途中休憩は1回。</p></div></div>
-            <div class="event"><div class="time">9:45</div><div class="event-card"><h3>伊根湾めぐり遊覧船</h3><p>舟屋を海側から眺める約25分。</p><div class="tags"><span class="tag">約6,000円</span><span class="tag">動画映え</span></div></div></div>
-            <div class="event"><div class="time">10:30</div><div class="event-card"><h3>伊根の舟屋散策</h3><p>町並みと家族カットを短時間で撮影。</p></div></div>
-            <div class="event"><div class="time">11:00</div><div class="event-card"><h3>舟屋食堂</h3><p>地魚ランチ。夜のBBQを考えて食べすぎない。</p><div class="tags"><span class="tag">約13,000円</span></div></div></div>
-            <div class="event"><div class="time">12:20</div><div class="event-card"><h3>泊海水浴場</h3><p>約60分。波打ち際と子どもの遊ぶシーン中心。</p><div class="tags"><span class="tag">約3,500円</span></div></div></div>
-            <div class="event"><div class="time">14:30</div><div class="event-card"><h3>ヴィラチェックイン</h3><p>プール・休憩・BBQ準備。</p></div></div>
+          <div class="day-heading"><span>DAY 1</span><div><h2>伊根と、夏の海。</h2><p>PLAN A · BEACH</p></div></div>
+          <div class="route-list">
+            <article class="route-item"><time>07:00</time><div><p class="route-type">DEPARTURE</p><h3>湊町を出発</h3><p>高速へ。途中休憩1回を想定。</p><div class="route-meta"><span>🚗 約2時間45分</span></div></div></article>
+            <article class="route-item"><time>09:45</time><div><p class="route-type">CRUISE · 25 MIN</p><h3>伊根湾めぐり遊覧船</h3><p>舟屋を海側から眺める。カモメ動画はここ。</p><address>京都府与謝郡伊根町字日出11</address><div class="route-actions"><a href="https://www.google.com/maps/search/?api=1&amp;query=%E4%BC%8A%E6%A0%B9%E6%B9%BE%E3%82%81%E3%81%90%E3%82%8A%E9%81%8A%E8%A6%A7%E8%88%B9" target="_blank" rel="noopener">Google Maps ↗</a><span>次へ 車約4分</span></div></div></article>
+            <article class="route-item"><time>10:30</time><div><p class="route-type">WALK & SHOOT</p><h3>伊根の舟屋散策</h3><p>家族の引き写真、路地、舟屋のディテールを撮影。</p><address>京都府与謝郡伊根町字平田周辺</address><div class="route-actions"><a href="https://www.google.com/maps/search/?api=1&amp;query=%E4%BC%8A%E6%A0%B9%E3%81%AE%E8%88%9F%E5%B1%8B" target="_blank" rel="noopener">Google Maps ↗</a><span>散策 約30分</span></div></div></article>
+            <article class="route-item"><time>11:00</time><div><p class="route-type">LUNCH</p><h3>舟屋食堂</h3><p>海を見ながら地魚ランチ。支払いは現金のみ。</p><address>京都府与謝郡伊根町字平田491 2F</address><div class="route-actions"><a href="https://www.google.com/maps/search/?api=1&amp;query=%E8%88%9F%E5%B1%8B%E9%A3%9F%E5%A0%82+%E4%BC%8A%E6%A0%B9" target="_blank" rel="noopener">Google Maps ↗</a><span>ランチ 約60分</span></div></div></article>
+            <article class="route-item"><time>12:20</time><div><p class="route-type">BEACH · 60 MIN</p><h3>泊海水浴場</h3><p>監視時間10:00〜17:00。駐車協力金1,000円。</p><address>京都府与謝郡伊根町字泊</address><div class="route-actions"><a href="https://www.google.com/maps/search/?api=1&amp;query=%E6%B3%8A%E6%B5%B7%E6%B0%B4%E6%B5%B4%E5%A0%B4+%E4%BC%8A%E6%A0%B9" target="_blank" rel="noopener">Google Maps ↗</a><span>舟屋から 車約10分</span></div></div></article>
+            <article class="route-item featured-route"><time>14:30</time><div><p class="route-type">CHECK IN</p><h3>マリントピア天橋立</h3><p>プール、休憩、BBQ準備。棟により住所が異なるため予約票を確認。</p><div class="route-actions"><a href="https://www.google.com/maps/search/?api=1&amp;query=%E3%83%9E%E3%83%AA%E3%83%B3%E3%83%88%E3%83%94%E3%82%A2%E5%A4%A9%E6%A9%8B%E7%AB%8B" target="_blank" rel="noopener">Google Mapsで検索 ↗</a></div></div></article>
           </div>
         </div>
 
         <div id="planB" class="plan">
-          <div class="cover b"><h3>伊根 × 元伊勢 × 傘松公園</h3><span class="emoji">⛩️</span></div>
-          <div class="timeline">
-            <div class="event"><div class="time">7:00</div><div class="event-card"><h3>湊町を出発</h3><p>伊根へ直行。</p></div></div>
-            <div class="event"><div class="time">9:45</div><div class="event-card"><h3>伊根湾めぐり遊覧船</h3><p>海側から舟屋群を楽しむ。</p><div class="tags"><span class="tag">約6,000円</span></div></div></div>
-            <div class="event"><div class="time">10:30</div><div class="event-card"><h3>舟屋散策</h3><p>町並みと海を背景に撮影。</p></div></div>
-            <div class="event"><div class="time">11:00</div><div class="event-card"><h3>舟屋食堂</h3><p>食後は府中地区へ。</p><div class="tags"><span class="tag">約13,000円</span></div></div></div>
-            <div class="event"><div class="time">12:45</div><div class="event-card"><h3>元伊勢籠神社</h3><p>参拝・記念写真・御朱印。</p><div class="tags"><span class="tag">参拝無料</span><span class="tag">駐車 約800円</span></div></div></div>
-            <div class="event"><div class="time">13:10</div><div class="event-card"><h3>傘松公園</h3><p>股のぞきで天橋立を一望。</p><div class="tags"><span class="tag">家族 約4,000円</span></div></div></div>
-            <div class="event"><div class="time">14:30</div><div class="event-card"><h3>ヴィラチェックイン</h3><p>到着後はプールとBBQ準備。</p></div></div>
+          <div class="day-heading"><span>DAY 1</span><div><h2>伊根と、天橋立。</h2><p>PLAN B · VIEW</p></div></div>
+          <div class="route-list">
+            <article class="route-item"><time>07:00</time><div><p class="route-type">DEPARTURE</p><h3>湊町を出発</h3><p>伊根へ直行。途中休憩1回。</p><div class="route-meta"><span>🚗 約2時間45分</span></div></div></article>
+            <article class="route-item"><time>09:45</time><div><p class="route-type">CRUISE · 25 MIN</p><h3>伊根湾めぐり遊覧船</h3><p>海側から舟屋群を楽しむ。</p><address>京都府与謝郡伊根町字日出11</address><div class="route-actions"><a href="https://www.google.com/maps/search/?api=1&amp;query=%E4%BC%8A%E6%A0%B9%E6%B9%BE%E3%82%81%E3%81%90%E3%82%8A%E9%81%8A%E8%A6%A7%E8%88%B9" target="_blank" rel="noopener">Google Maps ↗</a></div></div></article>
+            <article class="route-item"><time>10:30</time><div><p class="route-type">WALK & SHOOT</p><h3>伊根の舟屋散策</h3><p>町並みと海を背景に家族カット。</p><address>京都府与謝郡伊根町字平田周辺</address></div></article>
+            <article class="route-item"><time>11:00</time><div><p class="route-type">LUNCH</p><h3>舟屋食堂</h3><p>ランチ後、府中地区へ移動。</p><address>京都府与謝郡伊根町字平田491 2F</address><div class="route-actions"><a href="https://www.google.com/maps/search/?api=1&amp;query=%E8%88%9F%E5%B1%8B%E9%A3%9F%E5%A0%82+%E4%BC%8A%E6%A0%B9" target="_blank" rel="noopener">Google Maps ↗</a><span>次へ 車約35分</span></div></div></article>
+            <article class="route-item"><time>12:45</time><div><p class="route-type">SHRINE</p><h3>元伊勢籠神社</h3><p>参拝、記念写真、御朱印。</p><address>京都府宮津市字大垣430</address><div class="route-actions"><a href="https://www.google.com/maps/search/?api=1&amp;query=%E5%85%83%E4%BC%8A%E5%8B%A2%E7%B1%A0%E7%A5%9E%E7%A4%BE" target="_blank" rel="noopener">Google Maps ↗</a><span>開門 8:00〜17:00</span></div></div></article>
+            <article class="route-item"><time>13:10</time><div><p class="route-type">PANORAMA</p><h3>天橋立傘松公園</h3><p>股のぞきと家族リアクションを撮影。</p><address>京都府宮津市大垣75</address><div class="route-actions"><a href="https://www.google.com/maps/search/?api=1&amp;query=%E5%A4%A9%E6%A9%8B%E7%AB%8B%E5%82%98%E6%9D%BE%E5%85%AC%E5%9C%92" target="_blank" rel="noopener">Google Maps ↗</a><span>籠神社から徒歩圏</span></div></div></article>
+            <article class="route-item featured-route"><time>14:30</time><div><p class="route-type">CHECK IN</p><h3>マリントピア天橋立</h3><p>予約した棟の住所を予約票で確認。</p><div class="route-actions"><a href="https://www.google.com/maps/search/?api=1&amp;query=%E3%83%9E%E3%83%AA%E3%83%B3%E3%83%88%E3%83%94%E3%82%A2%E5%A4%A9%E6%A9%8B%E7%AB%8B" target="_blank" rel="noopener">Google Mapsで検索 ↗</a></div></div></article>
           </div>
         </div>
-      </div>
 
-      <div class="card">
-        <div class="section-head"><div><div class="eyebrow">DAY 2</div><h2>美山かやぶきの里</h2></div></div>
-        <div class="timeline">
-          <div class="event"><div class="time">10:00</div><div class="event-card"><h3>ヴィラを出発</h3><p>忘れ物確認後、山間ルートへ。</p></div></div>
-          <div class="event"><div class="time">11:30</div><div class="event-card"><h3>かやぶきの里</h3><p>赤いポスト、茅葺き屋根、田園風景。</p><div class="tags"><span class="tag">散策無料</span><span class="tag">映え</span></div></div></div>
-          <div class="event"><div class="time">13:00</div><div class="event-card"><h3>ローコスト昼食</h3><p>道の駅・軽食・マクドなど。</p></div></div>
-          <div class="event"><div class="time">16:00</div><div class="event-card"><h3>大阪帰着目安</h3><p>車内で旅の感想を撮る。</p></div></div>
+        <div class="day-heading day-two"><span>DAY 2</span><div><h2>美山、原風景へ。</h2><p>MIYAMA KAYABUKI</p></div></div>
+        <div class="route-list">
+          <article class="route-item"><time>10:00</time><div><p class="route-type">DEPARTURE</p><h3>ヴィラを出発</h3><p>忘れ物と冷蔵庫を確認。</p><div class="route-meta"><span>🚗 約1時間30分</span></div></div></article>
+          <article class="route-item"><time>11:30</time><div><p class="route-type">VILLAGE WALK</p><h3>美山かやぶきの里</h3><p>住民の暮らしに配慮しながら、赤いポストと茅葺き屋根を撮影。</p><address>京都府南丹市美山町北</address><div class="route-actions"><a href="https://www.google.com/maps/search/?api=1&amp;query=%E7%BE%8E%E5%B1%B1%E3%81%8B%E3%82%84%E3%81%B6%E3%81%8D%E3%81%AE%E9%87%8C" target="_blank" rel="noopener">Google Maps ↗</a><span>散策 約60分</span></div></div></article>
+          <article class="route-item"><time>13:00</time><div><p class="route-type">LUNCH</p><h3>ローコスト昼食</h3><p>道の駅、軽食など状況に合わせて。</p></div></article>
+          <article class="route-item"><time>16:00</time><div><p class="route-type">HOME</p><h3>大阪帰着目安</h3><p>車内でベストシーンと旅の感想を撮る。</p></div></article>
         </div>
+        <p class="source-note">住所・営業時間は公式観光情報をもとに掲載。道路状況や天候により所要時間は変動します。</p>
       </div>
     </section>
 
     <section id="shopping" class="screen">
-      <div class="card">
-        <div class="section-head">
-          <div><div class="eyebrow">SHOPPING LIST</div><h2>ロピア買い出しリスト</h2></div>
-          <div class="sub">8人分・BBQ約2万円</div>
-        </div>
-
-        <div class="now-card" style="background:linear-gradient(135deg,#5b3f2f,#b97842)">
-          <small>BUYING GUIDE</small>
-          <h3>肉は約4.6kgを目安</h3>
-          <p>サーロインは見せ場、ハラミは実食の主役。豚・鶏・ソーセージで量とコスパを調整。</p>
-        </div>
-        <div class="shopping-progress">
-          <div class="progress-top"><span>買い出し全体</span><span id="shoppingProgressLabel">0 / 34</span></div>
+      <header class="screen-hero shop-hero">
+        <div><p class="kicker">LOPIA SHOPPING</p><h1>買い出し</h1><p>数量変更も、追加購入も。</p></div>
+      </header>
+      <div class="screen-content">
+        <article class="progress-panel">
+          <div><p class="kicker dark">SHOPPING PROGRESS</p><strong id="shoppingProgressLabel">0 / 34</strong></div>
           <div class="progress"><i id="shoppingProgressBar"></i></div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="section-head"><div><div class="eyebrow">MEAT</div><h2>肉</h2></div><div id="meatProgress" class="category-progress">0 / 0</div></div>
-        <label class="check-row"><input class="shop-item" data-state-key="beef-tongue" data-category="meat" type="checkbox"><span>厚切り牛タン 700g</span><span>🥩</span></label>
-        <label class="check-row"><input class="shop-item" data-state-key="sirloin" data-category="meat" type="checkbox"><span>みなもと牛サーロイン 800g</span><span>🥩</span></label>
-        <label class="check-row"><input class="shop-item" data-state-key="harami" data-category="meat" type="checkbox"><span>ハラミ 1.2kg</span><span>🥩</span></label>
-        <label class="check-row"><input class="shop-item" data-state-key="pork-belly" data-category="meat" type="checkbox"><span>厚切り豚バラ 500g</span><span>🐖</span></label>
-        <label class="check-row"><input class="shop-item" data-state-key="chicken-thigh" data-category="meat" type="checkbox"><span>鶏もも 600g</span><span>🐓</span></label>
-        <label class="check-row"><input class="shop-item" data-state-key="sausage" data-category="meat" type="checkbox"><span>大容量ソーセージ 800g</span><span>🌭</span></label>
-      </div>
-
-      <div class="card">
-        <div class="section-head"><div><div class="eyebrow">SEAFOOD & CHEESE</div><h2>海鮮・前菜</h2></div><div id="seafoodProgress" class="category-progress">0 / 0</div></div>
-        <label class="check-row"><input class="shop-item" data-state-key="shrimp" data-category="seafood" type="checkbox"><span>エビ 16尾</span><span>🦐</span></label>
-        <label class="check-row"><input class="shop-item" data-state-key="scallops" data-category="seafood" type="checkbox"><span>ホタテ 12個</span><span>🦪</span></label>
-        <label class="check-row"><input class="shop-item" data-state-key="camembert" data-category="seafood" type="checkbox"><span>カマンベール 2個</span><span>🧀</span></label>
-        <label class="check-row"><input class="shop-item" data-state-key="baguette" data-category="seafood" type="checkbox"><span>バゲット 2本</span><span>🥖</span></label>
-      </div>
-
-      <div class="card">
-        <div class="section-head"><div><div class="eyebrow">VEGETABLES</div><h2>野菜</h2></div><div id="vegetablesProgress" class="category-progress">0 / 0</div></div>
-        <label class="check-row"><input class="shop-item" data-state-key="onion" data-category="vegetables" type="checkbox"><span>玉ねぎ 2個</span><span>🧅</span></label>
-        <label class="check-row"><input class="shop-item" data-state-key="zucchini" data-category="vegetables" type="checkbox"><span>ズッキーニ 2本</span><span>🥒</span></label>
-        <label class="check-row"><input class="shop-item" data-state-key="paprika" data-category="vegetables" type="checkbox"><span>パプリカ 3個</span><span>🫑</span></label>
-        <label class="check-row"><input class="shop-item" data-state-key="asparagus" data-category="vegetables" type="checkbox"><span>アスパラ 2束</span><span>🌱</span></label>
-        <label class="check-row"><input class="shop-item" data-state-key="eringi" data-category="vegetables" type="checkbox"><span>エリンギ 2パック</span><span>🍄</span></label>
-        <label class="check-row"><input class="shop-item" data-state-key="corn" data-category="vegetables" type="checkbox"><span>とうもろこし 4本</span><span>🌽</span></label>
-      </div>
-
-      <div class="card">
-        <div class="section-head"><div><div class="eyebrow">FINISH & DESSERT</div><h2>締め・デザート</h2></div><div id="finishProgress" class="category-progress">0 / 0</div></div>
-        <label class="check-row"><input class="shop-item" data-state-key="grilled-rice-ball" data-category="finish" type="checkbox"><span>焼きおにぎり 12個</span><span>🍙</span></label>
-        <label class="check-row"><input class="shop-item" data-state-key="yakisoba" data-category="finish" type="checkbox"><span>焼きそば 4玉</span><span>🍜</span></label>
-        <label class="check-row"><input class="shop-item" data-state-key="pineapple" data-category="finish" type="checkbox"><span>パイナップル 1個</span><span>🍍</span></label>
-        <label class="check-row"><input class="shop-item" data-state-key="vanilla-ice-cream" data-category="finish" type="checkbox"><span>バニラアイス 2L</span><span>🍨</span></label>
-      </div>
-
-      <div class="card">
-        <div class="section-head"><div><div class="eyebrow">SEASONING & TOOLS</div><h2>調味料・消耗品</h2></div><div id="suppliesProgress" class="category-progress">0 / 0</div></div>
-        <label class="check-row"><input class="shop-item" data-state-key="salt" data-category="supplies" type="checkbox"><span>塩</span><span>🧂</span></label>
-        <label class="check-row"><input class="shop-item" data-state-key="black-pepper" data-category="supplies" type="checkbox"><span>黒こしょう</span><span>⚫</span></label>
-        <label class="check-row"><input class="shop-item" data-state-key="yakiniku-sauce" data-category="supplies" type="checkbox"><span>焼肉のタレ</span><span>🥣</span></label>
-        <label class="check-row"><input class="shop-item" data-state-key="lemon" data-category="supplies" type="checkbox"><span>レモン</span><span>🍋</span></label>
-        <label class="check-row"><input class="shop-item" data-state-key="butter" data-category="supplies" type="checkbox"><span>バター</span><span>🧈</span></label>
-        <label class="check-row"><input class="shop-item" data-state-key="garlic" data-category="supplies" type="checkbox"><span>にんにく</span><span>🧄</span></label>
-        <label class="check-row"><input class="shop-item" data-state-key="olive-oil" data-category="supplies" type="checkbox"><span>オリーブオイル</span><span>🫒</span></label>
-        <label class="check-row"><input class="shop-item" data-state-key="honey" data-category="supplies" type="checkbox"><span>はちみつ</span><span>🍯</span></label>
-        <label class="check-row"><input class="shop-item" data-state-key="soy-sauce" data-category="supplies" type="checkbox"><span>醤油</span><span>🥣</span></label>
-        <label class="check-row"><input class="shop-item" data-state-key="teriyaki-sauce" data-category="supplies" type="checkbox"><span>照り焼きソース</span><span>🥣</span></label>
-        <label class="check-row"><input class="shop-item" data-state-key="aluminum-tray" data-category="supplies" type="checkbox"><span>アルミ皿</span><span>🍽️</span></label>
-        <label class="check-row"><input class="shop-item" data-state-key="aluminum-foil" data-category="supplies" type="checkbox"><span>アルミホイル</span><span>📦</span></label>
-        <label class="check-row"><input class="shop-item" data-state-key="kitchen-paper" data-category="supplies" type="checkbox"><span>キッチンペーパー</span><span>🧻</span></label>
-        <label class="check-row"><input class="shop-item" data-state-key="garbage-bags" data-category="supplies" type="checkbox"><span>ゴミ袋</span><span>🗑️</span></label>
-
-        <div class="action-row">
-          <button type="button" id="resetShopping" class="secondary">チェック解除</button>
-          <button type="button" id="shoppingSaved" class="primary">保存確認</button>
-        </div>
+        </article>
+        <div id="shopCategories"></div>
+        <section class="form-card">
+          <div class="section-title"><div><p class="kicker dark">ADD ITEM</p><h2>追加で買うもの</h2></div></div>
+          <div class="field-grid">
+            <label><span>商品名</span><input id="customItemName" type="text" maxlength="40" placeholder="例：氷"></label>
+            <label><span>数量</span><input id="customItemQty" type="text" maxlength="20" placeholder="例：2袋"></label>
+            <label class="wide"><span>カテゴリ</span><select id="customItemCategory"><option value="supplies">調味料・消耗品</option><option value="meat">肉</option><option value="seafood">海鮮・前菜</option><option value="vegetables">野菜</option><option value="finish">締め・デザート</option></select></label>
+          </div>
+          <button type="button" id="addShoppingItem" class="solid-button">リストに追加</button>
+          <button type="button" id="resetShopping" class="danger-link">全チェックを解除</button>
+        </section>
       </div>
     </section>
 
     <section id="bbq" class="screen">
-      <div class="card">
-        <div class="section-head">
-          <div><div class="eyebrow">BBQ GUIDE</div><h2>Broil King 調理ガイド</h2></div>
-          <div class="sub">8人分</div>
+      <header class="photo-screen-hero">
+        <img src="./assets/images/bbq-course.jpg" alt="ガスグリルで焼くサーロインと海鮮、野菜のBBQイメージ">
+        <div class="hero-shade"></div>
+        <div><p class="kicker">VILLA DINNER</p><h1>今夜の<br>BBQコース</h1><p>Broil Kingで仕上げる、家族8人のフルコース。</p></div>
+      </header>
+      <div class="screen-content">
+        <div class="segment bbq-segment" aria-label="BBQ表示切替">
+          <button type="button" class="bbq-tab active" data-bbq-view="menu">お品書き</button>
+          <button type="button" class="bbq-tab" data-bbq-view="heat">火加減</button>
+          <button type="button" class="bbq-tab" data-bbq-view="timer">タイマー</button>
         </div>
-        <div class="now-card" style="background:linear-gradient(135deg,#412b23,#9e5f36)">
-          <small>基本の流れ</small>
-          <h3>予熱 → 焼き目 → フタ調理 → 休ませる</h3>
-          <p>ガスグリルは、フタを閉めてオーブンのように使うのがコツ。</p>
+
+        <div id="bbqMenu" class="bbq-view active">
+          <div class="menu-intro"><p>COURSE</p><h2>焼く順番まで、<br>これで迷わない。</h2><span>全13品</span></div>
+          <div class="course-list">
+            <article><span class="course-no">01</span><div><p>前菜</p><h3>🧀 カマンベール丸ごと</h3><p>オリーブオイル、ブラックペッパー、はちみつ。コンロの端で溶かしてパンにつける。</p></div></article>
+            <article><span class="course-no">02</span><div><p>前菜</p><h3>🦐 ガーリックシュリンプ</h3><p>有頭エビ、にんにく、バターを鉄板で。香りが立ったら食べ頃。</p></div></article>
+            <article class="main-course"><span class="course-no">03</span><div><p>肉 ①</p><h3>🥩 厚切り牛タン</h3><p>最初は塩のみ。仕上げにレモン。</p></div></article>
+            <article class="main-course hero-course"><span class="course-no">04</span><div><p>肉 ② · MAIN</p><h3>🥩 みなもと牛サーロイン</h3><p>一枚で焼き、しっかり休ませてから、みんなで切り分ける。</p><span class="chef-note">今夜の主役</span></div></article>
+            <article class="main-course"><span class="course-no">05</span><div><p>肉 ③</p><h3>🥩 ハラミ</h3><p>子ども人気No.1。焼き上がってからタレ。</p></div></article>
+            <article><span class="course-no">06</span><div><p>肉 ④</p><h3>🐖 厚切り豚バラ</h3><p>塩こしょうだけ。脂が落ちるガスグリル向き。</p></div></article>
+            <article><span class="course-no">07</span><div><p>肉 ⑤</p><h3>🐓 鶏もも 2種</h3><p>ガーリック味と照り焼き味。中心までしっかり火を通す。</p></div></article>
+            <article><span class="course-no">08</span><div><p>野菜</p><h3>夏野菜グリル</h3><p>玉ねぎ、エリンギ、アスパラ、パプリカ、ズッキーニ。全部オリーブオイルで。</p></div></article>
+            <article><span class="course-no">09</span><div><p>海鮮</p><h3>🦪 ホタテ &amp; 🦐 エビ</h3><p>ホタテはバター醤油。エビは塩焼き。</p></div></article>
+            <article><span class="course-no">10</span><div><p>子ども定番</p><h3>🌭 大容量ソーセージ</h3><p>パリッと焼いて、子ども大歓喜。</p></div></article>
+            <article><span class="course-no">11</span><div><p>締め ①</p><h3>🍙 バター醤油 焼きおにぎり</h3><p>先に両面を固め、最後に醤油とバター。</p></div></article>
+            <article><span class="course-no">12</span><div><p>締め ②</p><h3>🍜 鉄板焼きそば</h3><p>最後は鉄板で一気に。</p></div></article>
+            <article class="dessert-course"><span class="course-no">13</span><div><p>DESSERT</p><h3>🍍 焼きパイナップル</h3><p>香ばしく焼いて、冷たいバニラアイスをのせる。</p><span class="chef-note">これマジで美味い。</span></div></article>
+          </div>
         </div>
-        <div class="now-card" style="margin-top:12px;background:linear-gradient(135deg,#0a3953,#159a98)">
-          <small>BBQ TIMER</small>
-          <h3 id="timerDisplay" class="timer-display">05:00</h3>
-          <p id="timerStatus" class="timer-status">5分をセット</p>
-          <div class="timer-grid">
-            <button type="button" class="timer-preset" data-seconds="90">90秒</button>
-            <button type="button" class="timer-preset" data-seconds="300">5分</button>
-            <button type="button" class="timer-preset" data-seconds="600">10分</button>
+
+        <div id="bbqHeat" class="bbq-view">
+          <div class="heat-legend"><span class="heat high">強火</span><span class="heat medium">中火</span><span class="heat low">弱火</span><span class="heat indirect">間接</span></div>
+          <div class="heat-guide">
+            <article><div><span class="heat indirect">間接</span><b>カマンベール</b></div><p>コンロ端・フタあり。約10分。</p></article>
+            <article><div><span class="heat medium">中火</span><b>ガーリックシュリンプ</b></div><p>鉄板で3〜4分、返して2分。</p></article>
+            <article><div><span class="heat high">強火</span><b>厚切り牛タン</b></div><p>片面約2分、裏面1〜2分。</p></article>
+            <article class="heat-main"><div><span class="heat high">強火→間接</span><b>サーロイン</b></div><p>片面90秒ずつ焼き目 → 弱火側でフタ5〜7分 → 休ませ5分。</p></article>
+            <article><div><span class="heat high">強火</span><b>ハラミ</b></div><p>両面2〜3分。タレは最後。</p></article>
+            <article><div><span class="heat medium">中火</span><b>厚切り豚バラ</b></div><p>片面3〜4分。炎が上がれば弱火側へ。</p></article>
+            <article><div><span class="heat indirect">中火→間接</span><b>鶏もも</b></div><p>皮7分、返して5分。中心75℃・1分以上を目安。</p></article>
+            <article><div><span class="heat medium">中火</span><b>野菜</b></div><p>オイルを塗り8〜10分。焦げ目後は端へ。</p></article>
+            <article><div><span class="heat medium">中火</span><b>ホタテ・エビ</b></div><p>ホタテは鉄板でバター醤油。エビは殻が赤くなるまで。</p></article>
+            <article><div><span class="heat medium">中火</span><b>ソーセージ</b></div><p>転がしながら6〜8分。</p></article>
+            <article><div><span class="heat medium">中火</span><b>焼きおにぎり</b></div><p>素焼きで固め、醤油は仕上げ。</p></article>
+            <article><div><span class="heat high">鉄板</span><b>焼きそば</b></div><p>鉄板をしっかり温め、短時間で。</p></article>
+            <article><div><span class="heat medium">中火</span><b>パイナップル</b></div><p>片面約2分。焼き目をつける。</p></article>
           </div>
-          <div class="timer-actions">
-            <button type="button" id="timerStart" class="primary">スタート</button>
-            <button type="button" id="timerReset" class="secondary">リセット</button>
-          </div>
+          <p class="safety-note">鶏肉・豚肉は中心まで十分に加熱。生肉用トングと盛り付け用を分ける。</p>
+        </div>
+
+        <div id="bbqTimer" class="bbq-view">
+          <article class="timer-card">
+            <p class="kicker">GRILL TIMER</p>
+            <strong id="timerDisplay">05:00</strong>
+            <p id="timerStatus">5分をセット</p>
+            <div class="timer-presets"><button type="button" data-seconds="90">90秒<small>焼き目</small></button><button type="button" data-seconds="300">5分<small>フタ調理</small></button><button type="button" data-seconds="600">10分<small>チーズ</small></button></div>
+            <div class="timer-actions"><button type="button" id="timerStart" class="solid-button light">スタート</button><button type="button" id="timerReset" class="outline-button light">リセット</button></div>
+          </article>
         </div>
       </div>
-      <div class="card">
-        <details open><summary><b>🥩 サーロイン 800g</b></summary><p>常温に戻す → 塩 → 強火で片面90秒ずつ → 弱火側へ移動してフタ5〜7分 → アルミホイルで5分休ませる。</p></details>
-        <details><summary><b>🥩 厚切り牛タン 700g</b></summary><p>高温で片面約2分、裏面1〜2分。焼きすぎず、最後に塩とレモン。</p></details>
-        <details><summary><b>🥩 ハラミ 1.2kg</b></summary><p>強火で両面2〜3分。焼き上がってからタレを絡める。</p></details>
-        <details><summary><b>🐖 厚切り豚バラ 500g</b></summary><p>中火で片面3〜4分ずつ。脂が落ちて炎が上がったら弱火側へ移す。</p></details>
-        <details><summary><b>🐓 鶏もも 600g</b></summary><p>皮目から中火で7分、裏返して5分。中心まで火を通し、最後に照り焼きソース。</p></details>
-        <details><summary><b>🦐 ガーリックシュリンプ</b></summary><p>アルミ皿にバター・にんにく・エビ。フタを閉め3〜4分、裏返して2分。仕上げにレモン。</p></details>
-        <details><summary><b>🧀 カマンベール</b></summary><p>上面に切れ目を入れ、アルミ皿で約180℃・10分。はちみつと黒こしょう、バゲットを添える。</p></details>
-        <details><summary><b>🌽 焼き野菜</b></summary><p>オリーブオイルを薄く塗り、中火で8〜10分。焦げ目がついたら火の弱い場所へ。</p></details>
-        <details><summary><b>🍙 焼きおにぎり</b></summary><p>最初は何も塗らず両面を固め、醤油を塗ってから短時間で香ばしく仕上げる。</p></details>
-        <details><summary><b>🍍 焼きパイナップル</b></summary><p>厚切りを強火で片面2分ずつ。バニラアイスを添える。</p></details>
+    </section>
+
+    <section id="shoot" class="screen">
+      <header class="screen-hero shoot-header">
+        <div><p class="kicker">SHOT DIRECTOR</p><h1>旅を、一本の<br>映画にする。</h1><p>何を、どの構図で撮るか。現場で迷わない撮影指示書。</p></div>
+      </header>
+      <div class="screen-content">
+        <article class="progress-panel dark-panel">
+          <div><p class="kicker">SHOOTING PROGRESS</p><strong id="shootProgress">0 / 0</strong></div>
+          <div class="progress"><i id="shootProgressBar"></i></div>
+        </article>
+        <div class="shoot-legend"><span><i>W</i>ワイド</span><span><i>C</i>寄り</span><span><i>M</i>動き</span><span><i>V</i>縦動画</span></div>
+        <div id="shotList"></div>
+        <button type="button" id="resetShoot" class="danger-link">撮影チェックをすべて解除</button>
       </div>
     </section>
 
     <section id="more" class="screen">
-      <div id="moreTop" class="subview active">
-        <div class="card">
-          <div class="section-head"><div><div class="eyebrow">MORE</div><h2>旅の便利機能</h2></div></div>
+      <header class="screen-hero compact-hero">
+        <div><p class="kicker">TRAVEL TOOLS</p><h1>旅の道具箱</h1><p>お金、持ち物、子どものお楽しみ。</p></div>
+      </header>
+      <div class="screen-content">
+        <div id="moreTop" class="subview active">
           <div class="more-menu">
-            <button type="button" class="more-link" data-subview="budgetView"><span>¥</span>予算</button>
-            <button type="button" class="more-link" data-subview="shootView"><span>🎥</span>撮影</button>
-            <button type="button" class="more-link" data-subview="checkView"><span>✓</span>持ち物</button>
-            <button type="button" class="more-link" data-subview="kidsView"><span>🏆</span>子どもミッション</button>
+            <button type="button" data-subview="budgetView"><span>¥</span><div><b>予算・実支出</b><small>残額まで自動計算</small></div></button>
+            <button type="button" data-subview="checkView"><span>✓</span><div><b>持ち物</b><small>忘れ物を防ぐ</small></div></button>
+            <button type="button" data-subview="kidsView"><span>★</span><div><b>子どもミッション</b><small>XPを集めてランクアップ</small></div></button>
           </div>
         </div>
-      </div>
 
-      <div id="budgetView" class="subview">
-        <div class="card">
-          <button type="button" class="back-btn" data-back>← 戻る</button>
-          <div class="section-head"><div><div class="eyebrow">BUDGET</div><h2>費用シミュレーター</h2></div></div>
-          <label class="cost-row"><input checked disabled type="checkbox"><span>宿泊費</span><b>28,000円</b></label>
-          <label class="cost-row"><input checked disabled type="checkbox"><span>高速＋ガソリン</span><b>14,800円</b></label>
-          <label class="cost-row"><input checked disabled type="checkbox"><span>BBQ</span><b>20,000円</b></label>
-          <label class="cost-row"><input class="cost" data-budget-key="ine-cruise" checked data-cost="6000" type="checkbox"><span>伊根湾遊覧船</span><b>6,000円</b></label>
-          <label class="cost-row"><input class="cost" data-budget-key="funaya-lunch" checked data-cost="13000" type="checkbox"><span>舟屋食堂</span><b>13,000円</b></label>
-          <label class="cost-row"><input class="cost" data-budget-key="cafe" data-cost="4500" type="checkbox"><span>カフェ</span><b>4,500円</b></label>
-          <label class="cost-row"><input id="costA" class="cost course-cost" name="day1-course" checked data-cost="3500" type="radio"><span>プランA｜海水浴</span><b>3,500円</b></label>
-          <label class="cost-row"><input id="costB" class="cost course-cost" name="day1-course" data-cost="4800" type="radio"><span>プランB｜神社・傘松</span><b>4,800円</b></label>
-          <label class="cost-row"><input class="cost" data-budget-key="miyama" checked data-cost="500" type="checkbox"><span>美山 駐車等</span><b>500円</b></label>
-          <div class="total-box"><span>旅行総額目安</span><strong id="total">85,800円</strong><div id="perPerson" class="budget-per-person">1人あたり 約10,725円</div></div>
+        <div id="budgetView" class="subview">
+          <button type="button" class="back-button" data-back>← 道具箱へ</button>
+          <section class="budget-summary">
+            <p class="kicker">TRIP BUDGET</p>
+            <span>予定総額</span><strong id="total">85,800円</strong><small id="perPerson">1人あたり 約10,725円</small>
+            <div class="budget-actual"><div><span>実支出</span><b id="actualTotal">0円</b></div><div><span>予定残額</span><b id="budgetRemaining">85,800円</b></div></div>
+          </section>
+          <details class="estimate-details"><summary>予定費用の内訳</summary>
+            <label class="cost-row fixed"><input checked disabled type="checkbox"><span>宿泊費</span><b>28,000円</b></label>
+            <label class="cost-row fixed"><input checked disabled type="checkbox"><span>高速＋ガソリン</span><b>14,800円</b></label>
+            <label class="cost-row fixed"><input checked disabled type="checkbox"><span>BBQ</span><b>20,000円</b></label>
+            <label class="cost-row"><input class="cost" data-budget-key="ine-cruise" checked data-cost="6000" type="checkbox"><span>伊根湾遊覧船</span><b>6,000円</b></label>
+            <label class="cost-row"><input class="cost" data-budget-key="funaya-lunch" checked data-cost="13000" type="checkbox"><span>舟屋食堂</span><b>13,000円</b></label>
+            <label class="cost-row"><input class="cost" data-budget-key="cafe" data-cost="4500" type="checkbox"><span>カフェ</span><b>4,500円</b></label>
+            <label class="cost-row"><input id="costA" class="cost course-cost" name="day1-course" checked data-cost="3500" type="radio"><span>プランA｜海水浴</span><b>3,500円</b></label>
+            <label class="cost-row"><input id="costB" class="cost course-cost" name="day1-course" data-cost="4800" type="radio"><span>プランB｜神社・傘松</span><b>4,800円</b></label>
+            <label class="cost-row"><input class="cost" data-budget-key="miyama" checked data-cost="500" type="checkbox"><span>美山 駐車等</span><b>500円</b></label>
+          </details>
+          <section class="form-card expense-form">
+            <div class="section-title"><div><p class="kicker dark">ADD EXPENSE</p><h2>支出を記録</h2></div></div>
+            <div class="field-grid">
+              <label><span>内容</span><input id="expenseName" type="text" maxlength="40" placeholder="例：駐車場"></label>
+              <label><span>金額</span><input id="expenseAmount" type="number" min="0" inputmode="numeric" placeholder="1000"></label>
+              <label class="wide"><span>カテゴリ</span><select id="expenseCategory"><option>交通</option><option>食事</option><option>観光</option><option>買い物</option><option>宿泊</option><option>その他</option></select></label>
+            </div>
+            <button type="button" id="addExpense" class="solid-button">支出を追加</button>
+          </section>
+          <div id="expenseList" class="expense-list"></div>
         </div>
-      </div>
 
-      <div id="shootView" class="subview">
-        <div class="card">
-          <button type="button" class="back-btn" data-back>← 戻る</button>
-          <div class="section-head"><div><div class="eyebrow">SHOOTING MODE</div><h2>撮影チェック</h2></div><div id="shootProgress" class="category-progress">0 / 8</div></div>
-          <label class="check-row"><input class="shoot-item" data-state-key="departure-family" type="checkbox"><span>出発前の家族集合</span><span>🏠</span></label>
-          <label class="check-row"><input class="shoot-item" data-state-key="boat-departure" type="checkbox"><span>遊覧船の出航カット</span><span>🚢</span></label>
-          <label class="check-row"><input class="shoot-item" data-state-key="funaya-family" type="checkbox"><span>舟屋を背景に家族全員</span><span>🏘️</span></label>
-          <label class="check-row"><input class="shoot-item" data-state-key="kids-at-sea" type="checkbox"><span>子どもが海へ走る後ろ姿</span><span>🌊</span></label>
-          <label class="check-row"><input class="shoot-item" data-state-key="villa-reaction" type="checkbox"><span>ヴィラ到着リアクション</span><span>🏡</span></label>
-          <label class="check-row"><input class="shoot-item" data-state-key="steak-hands" type="checkbox"><span>ステーキを切る手元</span><span>🥩</span></label>
-          <label class="check-row"><input class="shoot-item" data-state-key="sunset-toast" type="checkbox"><span>夕方の乾杯</span><span>🥂</span></label>
-          <label class="check-row"><input class="shoot-item" data-state-key="miyama-walk" type="checkbox"><span>美山で歩く後ろ姿</span><span>🌾</span></label>
-          <div class="action-row"><button type="button" id="resetShoot" class="secondary">チェック解除</button><button type="button" id="shootSaved" class="primary">保存確認</button></div>
+        <div id="checkView" class="subview">
+          <button type="button" class="back-button" data-back>← 道具箱へ</button>
+          <div class="section-title"><div><p class="kicker dark">PACKING</p><h2>持ち物チェック</h2></div><strong id="todoProgress">0 / 8</strong></div>
+          <div class="simple-check-list">
+            <label><input class="todo" data-state-key="cash-card" type="checkbox"><span>現金・カード</span><i>💳</i></label>
+            <label><input class="todo" data-state-key="mobile-battery" type="checkbox"><span>モバイルバッテリー</span><i>🔋</i></label>
+            <label><input class="todo" data-state-key="sunscreen" type="checkbox"><span>日焼け止め</span><i>🧴</i></label>
+            <label><input class="todo" data-state-key="sunglasses" type="checkbox"><span>サングラス</span><i>🕶️</i></label>
+            <label><input class="todo" data-state-key="dji-mic" type="checkbox"><span>DJI Mic Mini 2</span><i>🎙️</i></label>
+            <label><input class="todo" data-state-key="cooler-bag" type="checkbox"><span>保冷バッグ</span><i>🧊</i></label>
+            <label><input class="todo" data-state-key="swimwear-towels" type="checkbox"><span>水着・タオル</span><i>🏊</i></label>
+            <label><input class="todo" data-state-key="black-apron" type="checkbox"><span>黒エプロン</span><i>🖤</i></label>
+          </div>
+          <button type="button" id="resetTodos" class="danger-link">持ち物チェックをすべて解除</button>
         </div>
-      </div>
 
-      <div id="checkView" class="subview">
-        <div class="card">
-          <button type="button" class="back-btn" data-back>← 戻る</button>
-          <div class="section-head"><div><div class="eyebrow">CHECK LIST</div><h2>持ち物</h2></div><div id="todoProgress" class="category-progress">0 / 8</div></div>
-          <label class="check-row"><input class="todo" data-state-key="cash-card" type="checkbox"><span>現金・カード</span><span>💳</span></label>
-          <label class="check-row"><input class="todo" data-state-key="mobile-battery" type="checkbox"><span>モバイルバッテリー</span><span>🔋</span></label>
-          <label class="check-row"><input class="todo" data-state-key="sunscreen" type="checkbox"><span>日焼け止め</span><span>🧴</span></label>
-          <label class="check-row"><input class="todo" data-state-key="sunglasses" type="checkbox"><span>サングラス</span><span>🕶️</span></label>
-          <label class="check-row"><input class="todo" data-state-key="dji-mic" type="checkbox"><span>DJI Mic Mini 2</span><span>🎙️</span></label>
-          <label class="check-row"><input class="todo" data-state-key="cooler-bag" type="checkbox"><span>保冷バッグ</span><span>🧊</span></label>
-          <label class="check-row"><input class="todo" data-state-key="swimwear-towels" type="checkbox"><span>水着・タオル</span><span>🏊</span></label>
-          <label class="check-row"><input class="todo" data-state-key="black-apron" type="checkbox"><span>黒エプロン</span><span>🖤</span></label>
-          <div class="action-row"><button type="button" id="resetTodos" class="secondary">チェック解除</button><button type="button" id="saveToast" class="primary">保存確認</button></div>
-        </div>
-      </div>
-
-      <div id="kidsView" class="subview">
-        <div class="card">
-          <button type="button" class="back-btn" data-back>← 戻る</button>
-          <div class="section-head"><div><div class="eyebrow">KIDS MISSION</div><h2>子どもミッション</h2></div><div id="kidsProgress" class="category-progress">0 / 5</div></div>
-          <label class="check-row"><input class="kids-item" data-state-key="find-seagull" type="checkbox"><span>カモメを見つける</span><span>🕊️</span></label>
-          <label class="check-row"><input class="kids-item" data-state-key="family-jump" type="checkbox"><span>家族全員でジャンプ写真</span><span>🕴️</span></label>
-          <label class="check-row"><input class="kids-item" data-state-key="dad-photo" type="checkbox"><span>お父さんとツーショット</span><span>📸</span></label>
-          <label class="check-row"><input class="kids-item" data-state-key="help-bbq" type="checkbox"><span>BBQで一品手伝う</span><span>🍖</span></label>
-          <label class="check-row"><input class="kids-item" data-state-key="find-red-post" type="checkbox"><span>美山の赤いポストを発見</span><span>📮</span></label>
-          <div class="action-row"><button type="button" id="resetKids" class="secondary">リセット</button><button type="button" id="kidsSaved" class="primary">達成確認</button></div>
+        <div id="kidsView" class="subview">
+          <button type="button" class="back-button" data-back>← 道具箱へ</button>
+          <section class="mission-hero">
+            <div class="mission-ring" id="missionRing"><div><strong id="kidsXp">0</strong><small>XP</small></div></div>
+            <div><p class="kicker">KIDS QUEST</p><h2 id="kidsRank">かけだし旅人</h2><p id="kidsProgress">0 / 10 ミッション</p></div>
+          </section>
+          <div class="badge-row" id="badgeRow"><span data-level="50">🌊<small>SEA</small></span><span data-level="100">🔥<small>BBQ</small></span><span data-level="150">🏆<small>MASTER</small></span></div>
+          <div id="kidsMissionGrid" class="mission-grid"></div>
+          <button type="button" id="resetKids" class="danger-link">ミッションをリセット</button>
         </div>
       </div>
     </section>
-
   </main>
 
   <nav class="bottom-nav" aria-label="メインナビゲーション">
     <button type="button" class="nav-btn active" data-screen="home"><span>⌂</span>ホーム</button>
-    <button type="button" class="nav-btn" data-screen="plan"><span>🗓</span>旅程</button>
-    <button type="button" class="nav-btn" data-screen="shopping"><span>🛒</span>買い出し</button>
-    <button type="button" class="nav-btn" data-screen="bbq"><span>🔥</span>BBQ</button>
-    <button type="button" class="nav-btn" data-screen="more"><span>•••</span>その他</button>
+    <button type="button" class="nav-btn" data-screen="plan"><span>◷</span>旅程</button>
+    <button type="button" class="nav-btn" data-screen="shopping"><span>▣</span>買い出し</button>
+    <button type="button" class="nav-btn" data-screen="bbq"><span>♨</span>BBQ</button>
+    <button type="button" class="nav-btn" data-screen="shoot"><span>●</span>撮影</button>
   </nav>
 </div>
+<div class="app-modal" id="quantityModal" aria-hidden="true">
+  <div class="modal-backdrop" data-close-quantity></div>
+  <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="quantityModalTitle">
+    <p class="kicker">SHOPPING LIST</p>
+    <h2 id="quantityModalTitle">数量を変更</h2>
+    <label class="field-label" for="quantityModalInput">数量・単位</label>
+    <input id="quantityModalInput" type="text" maxlength="20" autocomplete="off" inputmode="text">
+    <div class="modal-actions">
+      <button type="button" class="secondary-button" data-close-quantity>キャンセル</button>
+      <button type="button" class="primary-button" id="saveQuantity">保存</button>
+    </div>
+  </section>
+</div>
 <div class="toast" id="toast" role="status" aria-live="polite">保存しました</div>
-
 <script src="./assets/js/app.js" defer></script>
 </body>
 </html>

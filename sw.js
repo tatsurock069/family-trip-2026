@@ -1,10 +1,13 @@
 const CACHE_PREFIX = 'seki-family-trip-';
-const CACHE = CACHE_PREFIX + 'v3';
+const CACHE = CACHE_PREFIX + 'v4';
 const APP_SHELL = [
   './',
   './index.html',
   './assets/css/style.css',
   './assets/js/app.js',
+  './assets/images/hero-ine.jpg',
+  './assets/images/bbq-course.jpg',
+  './assets/images/miyama.jpg',
   './manifest.webmanifest',
   './assets/icons/icon-180.png',
   './assets/icons/icon-192.png',
