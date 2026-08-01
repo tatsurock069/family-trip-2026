@@ -1,5 +1,5 @@
 const CACHE_PREFIX = 'seki-family-trip-';
-const CACHE = CACHE_PREFIX + 'v4';
+const CACHE = CACHE_PREFIX + 'v5';
 const APP_SHELL = [
   './',
   './index.html',
@@ -8,6 +8,22 @@ const APP_SHELL = [
   './assets/images/hero-ine.jpg',
   './assets/images/bbq-course.jpg',
   './assets/images/miyama.jpg',
+  './assets/images/menu/camembert.jpg',
+  './assets/images/menu/garlic-shrimp.jpg',
+  './assets/images/menu/beef-tongue.jpg',
+  './assets/images/menu/sirloin.jpg',
+  './assets/images/menu/harami.jpg',
+  './assets/images/menu/pork-belly.jpg',
+  './assets/images/menu/chicken.jpg',
+  './assets/images/menu/vegetables.jpg',
+  './assets/images/menu/seafood.jpg',
+  './assets/images/menu/sausages.jpg',
+  './assets/images/menu/grilled-rice-ball.jpg',
+  './assets/images/menu/yakisoba.jpg',
+  './assets/images/shot-samples/wide.jpg',
+  './assets/images/shot-samples/close.jpg',
+  './assets/images/shot-samples/motion.jpg',
+  './assets/images/shot-samples/vertical.jpg',
   './manifest.webmanifest',
   './assets/icons/icon-180.png',
   './assets/icons/icon-192.png',

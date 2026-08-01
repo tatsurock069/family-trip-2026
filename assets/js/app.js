@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ['beef-tongue','meat','厚切り牛タン','700g','🥩'],['sirloin','meat','みなもと牛サーロイン','800g','🥩'],['harami','meat','ハラミ','1.2kg','🥩'],['pork-belly','meat','厚切り豚バラ','500g','🐖'],['chicken-thigh','meat','鶏もも','600g','🐓'],['sausage','meat','大容量ソーセージ','800g','🌭'],
     ['shrimp','seafood','エビ','16尾','🦐'],['scallops','seafood','ホタテ','12個','🦪'],['camembert','seafood','カマンベール','2個','🧀'],['baguette','seafood','バゲット','2本','🥖'],
     ['onion','vegetables','玉ねぎ','2個','🧅'],['zucchini','vegetables','ズッキーニ','2本','🥒'],['paprika','vegetables','パプリカ','3個','🫑'],['asparagus','vegetables','アスパラ','2束','🌱'],['eringi','vegetables','エリンギ','2パック','🍄'],['corn','vegetables','とうもろこし','4本','🌽'],
-    ['grilled-rice-ball','finish','焼きおにぎり','12個','🍙'],['yakisoba','finish','焼きそば','4玉','🍜'],['pineapple','finish','パイナップル','1個','🍍'],['vanilla-ice-cream','finish','バニラアイス','2L','🍨'],
+    ['grilled-rice-ball','finish','焼きおにぎり','12個','🍙'],['yakisoba','finish','焼きそば','4玉','🍜'],['vanilla-ice-cream','finish','バニラアイス','2L','🍨'],
     ['salt','supplies','塩','1個','🧂'],['black-pepper','supplies','黒こしょう','1個','⚫'],['yakiniku-sauce','supplies','焼肉のタレ','1本','🥣'],['lemon','supplies','レモン','適量','🍋'],['butter','supplies','バター','1個','🧈'],['garlic','supplies','にんにく','1個','🧄'],['olive-oil','supplies','オリーブオイル','1本','🫒'],['honey','supplies','はちみつ','1本','🍯'],['soy-sauce','supplies','醤油','1本','🥣'],['teriyaki-sauce','supplies','照り焼きソース','1本','🥣'],['aluminum-tray','supplies','アルミ皿','数枚','🍽️'],['aluminum-foil','supplies','アルミホイル','1本','📦'],['kitchen-paper','supplies','キッチンペーパー','1個','🧻'],['garbage-bags','supplies','ゴミ袋','1組','🗑️']
   ].map(([key, category, name, qty, emoji]) => ({ key, category, name, qty, emoji, custom: false }));
 
@@ -397,7 +397,6 @@ document.addEventListener('DOMContentLoaded', () => {
     ['steak-hands','bbq','ステーキを切り分ける手元','包丁の斜め前から。断面にピント。','C','60fps動画'],
     ['sunset-toast','bbq','夕方の乾杯','グラスを中央、夕空を背景に。2テイク。','C','横動画'],
     ['family-table','bbq','食卓を囲む家族全員','テーブル端から広角。食べ始めの自然な会話。','W','横動画'],
-    ['dessert-pull','bbq','アイスが溶ける焼きパイン','置いた直後を寄りで10秒。','C','縦動画'],
     ['miyama-walk','miyama','茅葺きの里を歩く後ろ姿','道をリード線にして、ゆっくり追う。','M','横動画'],
     ['red-post','miyama','赤いポストと子ども','ポストを左1/3、茅葺きを奥に。','W','縦写真'],
     ['kayabuki-wide','miyama','茅葺き屋根の全景','空を入れすぎず、屋根と田園を主役に。','W','横写真'],
