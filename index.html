@@ -85,7 +85,7 @@
           <div class="tool-grid">
             <button type="button" data-go="more" data-subview="budgetView"><span>¥</span><b>予算・支出</b><small>実際の支払いも記録</small></button>
             <button type="button" data-go="more" data-subview="checkView"><span>✓</span><b>持ち物</b><small id="homePackingProgress">0 / 8</small></button>
-            <button type="button" data-go="more" data-subview="kidsView"><span>★</span><b>ミッション</b><small id="homeKidsProgress">0 XP</small></button>
+            <button type="button" data-go="mission"><span>★</span><b>ミッション</b><small id="homeKidsProgress">0 XP</small></button>
             <button type="button" data-go="shopping"><span>＋</span><b>買い物追加</b><small>数量変更・追加購入</small></button>
           </div>
         </section>
@@ -247,6 +247,28 @@
       </div>
     </section>
 
+    <section id="mission" class="screen">
+      <header class="screen-hero mission-header">
+        <div><p class="kicker">KIDS QUEST</p><h1>旅を遊びに<br>変えよう。</h1><p>見つける、手伝う、笑わせる。家族でXPを集めよう。</p></div>
+      </header>
+      <div class="screen-content">
+        <section class="mission-hero">
+          <div class="mission-ring" id="missionRing"><div><strong id="kidsXp">0</strong><small>XP</small></div></div>
+          <div><p class="kicker">YOUR RANK</p><h2 id="kidsRank">かけだし旅人</h2><p id="kidsProgress">0 / 20 ミッション</p></div>
+        </section>
+        <div class="badge-row" id="badgeRow"><span data-level="80">🌊<small>SEA</small></span><span data-level="160">🔥<small>BBQ</small></span><span data-level="250">🏆<small>MASTER</small></span></div>
+        <div class="mission-tabs" aria-label="ミッションカテゴリ">
+          <button type="button" class="active" data-mission-category="all">すべて</button>
+          <button type="button" data-mission-category="ine">伊根</button>
+          <button type="button" data-mission-category="bbq">BBQ</button>
+          <button type="button" data-mission-category="family">家族</button>
+          <button type="button" data-mission-category="miyama">美山</button>
+        </div>
+        <div id="kidsMissionGrid" class="mission-grid"></div>
+        <button type="button" id="resetKids" class="danger-link">ミッションをリセット</button>
+      </div>
+    </section>
+
     <section id="more" class="screen">
       <header class="screen-hero compact-hero">
         <div><p class="kicker">TRAVEL TOOLS</p><h1>旅の道具箱</h1><p>お金、持ち物、子どものお楽しみ。</p></div>
@@ -256,7 +278,7 @@
           <div class="more-menu">
             <button type="button" data-subview="budgetView"><span>¥</span><div><b>予算・実支出</b><small>残額まで自動計算</small></div></button>
             <button type="button" data-subview="checkView"><span>✓</span><div><b>持ち物</b><small>忘れ物を防ぐ</small></div></button>
-            <button type="button" data-subview="kidsView"><span>★</span><div><b>子どもミッション</b><small>XPを集めてランクアップ</small></div></button>
+            <button type="button" data-go="mission"><span>★</span><div><b>子どもミッション</b><small>XPを集めてランクアップ</small></div></button>
           </div>
         </div>
 
@@ -306,16 +328,6 @@
           <button type="button" id="resetTodos" class="danger-link">持ち物チェックをすべて解除</button>
         </div>
 
-        <div id="kidsView" class="subview">
-          <button type="button" class="back-button" data-back>← 道具箱へ</button>
-          <section class="mission-hero">
-            <div class="mission-ring" id="missionRing"><div><strong id="kidsXp">0</strong><small>XP</small></div></div>
-            <div><p class="kicker">KIDS QUEST</p><h2 id="kidsRank">かけだし旅人</h2><p id="kidsProgress">0 / 10 ミッション</p></div>
-          </section>
-          <div class="badge-row" id="badgeRow"><span data-level="50">🌊<small>SEA</small></span><span data-level="100">🔥<small>BBQ</small></span><span data-level="150">🏆<small>MASTER</small></span></div>
-          <div id="kidsMissionGrid" class="mission-grid"></div>
-          <button type="button" id="resetKids" class="danger-link">ミッションをリセット</button>
-        </div>
       </div>
     </section>
   </main>
@@ -326,6 +338,7 @@
     <button type="button" class="nav-btn" data-screen="shopping"><span>▣</span>買い出し</button>
     <button type="button" class="nav-btn" data-screen="bbq"><span>♨</span>BBQ</button>
     <button type="button" class="nav-btn" data-screen="shoot"><span>●</span>撮影</button>
+    <button type="button" class="nav-btn" data-screen="mission"><span>★</span>ミッション</button>
   </nav>
 </div>
 <div class="app-modal" id="quantityModal" aria-hidden="true">

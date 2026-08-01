@@ -504,14 +504,22 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const MISSIONS = [
-    ['find-seagull','🕊️','カモメを見つける',10],['boat-captain','🚢','遊覧船の船長気分でポーズ',10],
-    ['family-jump','🕴️','家族全員でジャンプ写真',15],['dad-photo','📸','お父さんとツーショット',15],
-    ['help-bbq','🍖','BBQで一品手伝う',20],['veggie-hero','🥦','焼き野菜をひとつ食べる',15],
-    ['timer-captain','⏱️','BBQタイマー係になる',15],['find-red-post','📮','美山の赤いポストを発見',15],
-    ['thank-you','🤝','家族の誰かにありがとうを言う',15],['best-memory','🏆','旅の一番を発表する',20]
-  ].map(([key,emoji,title,xp]) => ({key,emoji,title,xp}));
+    ['find-seagull','ine','🕊️','カモメを見つける',10],['boat-captain','ine','🚢','遊覧船の船長ポーズ',10],
+    ['count-funaya','ine','🏘️','舟屋を10軒見つける',15],['record-waves','ine','🎙️','伊根の波音を録音する',10],
+    ['seafood-reporter','ine','🐟','ランチを食レポする',15],
+    ['help-bbq','bbq','🍖','BBQで一品手伝う',20],['veggie-hero','bbq','🥦','焼き野菜をひとつ食べる',15],
+    ['timer-captain','bbq','⏱️','BBQタイマー係になる',15],['grill-sound','bbq','🎬','焼ける音を動画に撮る',15],
+    ['table-setter','bbq','🍽️','お皿をみんなに配る',10],
+    ['family-jump','family','🕴️','家族全員でジャンプ写真',15],['dad-photo','family','📸','お父さんとツーショット',15],
+    ['mom-photo','family','💐','お母さんとツーショット',15],['grandma-smile','family','😊','おばあちゃんを笑顔にする',15],
+    ['thank-you','family','🤝','家族の誰かにありがとうを言う',15],
+    ['find-red-post','miyama','📮','美山の赤いポストを発見',15],['count-roofs','miyama','🏠','茅葺き屋根を5軒見つける',15],
+    ['quiet-walk','miyama','🤫','1分間静かに里を歩く',15],['nature-sound','miyama','🌿','美山の自然音を録音する',10],
+    ['best-memory','miyama','🏆','旅の一番を発表する',20]
+  ].map(([key,category,emoji,title,xp]) => ({key,category,emoji,title,xp}));
   const legacyMissionKeys = ['find-seagull','family-jump','dad-photo','help-bbq','find-red-post'];
   let missionState = migrateState(storage.get('sekiTripKids', {}), legacyMissionKeys);
+  let activeMissionCategory = 'all';
 
   function updateMissions() {
     const completed = MISSIONS.filter((mission) => missionState[mission.key]);
@@ -522,7 +530,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('homeKidsProgress').textContent = xp + ' XP';
     document.getElementById('missionRing').style.setProperty('--mission-progress', (xp / maxXp * 360) + 'deg');
     document.getElementById('kidsRank').textContent =
-      xp >= 150 ? 'トリップマスター' : xp >= 100 ? '家族の冒険家' : xp >= 50 ? '海の探検家' : 'かけだし旅人';
+      xp >= 250 ? 'トリップマスター' : xp >= 160 ? '家族の冒険家' : xp >= 80 ? '海の探検家' : 'かけだし旅人';
     document.querySelectorAll('#badgeRow [data-level]').forEach((badge) => {
       badge.classList.toggle('unlocked', xp >= Number(badge.dataset.level));
     });
@@ -530,7 +538,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function renderMissions() {
     const grid = document.getElementById('kidsMissionGrid');
-    grid.innerHTML = MISSIONS.map((mission) =>
+    const visibleMissions = MISSIONS.filter((mission) => activeMissionCategory === 'all' || mission.category === activeMissionCategory);
+    grid.innerHTML = visibleMissions.map((mission) =>
       '<label class="mission-card ' + (missionState[mission.key] ? 'completed' : '') + '">' +
         '<input class="kids-item" data-state-key="' + mission.key + '" type="checkbox" ' + (missionState[mission.key] ? 'checked' : '') + '>' +
         '<span class="mission-emoji">' + mission.emoji + '</span><b>' + mission.title + '</b><small>+' + mission.xp + ' XP</small></label>'
@@ -546,6 +555,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     updateMissions();
   }
+
+  document.querySelectorAll('[data-mission-category]').forEach((button) => {
+    button.addEventListener('click', () => {
+      activeMissionCategory = button.dataset.missionCategory;
+      document.querySelectorAll('[data-mission-category]').forEach((tab) => {
+        const active = tab === button;
+        tab.classList.toggle('active', active);
+        tab.setAttribute('aria-pressed', String(active));
+      });
+      renderMissions();
+    });
+  });
 
   document.getElementById('resetKids').addEventListener('click', () => {
     if (!window.confirm('ミッションをすべてリセットしますか？')) return;
