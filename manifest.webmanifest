@@ -1,11 +1,16 @@
 {
   "name": "関家 天橋立・伊根旅行",
   "short_name": "関家の旅",
+  "id": "./",
   "start_url": "./",
+  "scope": "./",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
   "background_color": "#eef7f9",
   "theme_color": "#0a3953",
   "lang": "ja",
+  "categories": ["travel", "lifestyle"],
   "icons": [
     {
       "src": "./assets/icons/icon-192.png",
@@ -15,11 +20,6 @@
     {
       "src": "./assets/icons/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
-    },
-    {
-      "src": "./assets/icons/icon-180.png",
-      "sizes": "180x180",
       "type": "image/png"
     }
   ]
