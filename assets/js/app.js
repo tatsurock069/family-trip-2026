@@ -172,6 +172,16 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById(selectedPlan === 'a' ? 'costA' : 'costB').checked = true;
     const dayOneTitle = document.getElementById('dayOneTitle');
     if (dayOneTitle) dayOneTitle.textContent = selectedPlan === 'a' ? '伊根と、夏の海。' : '伊根と、天橋立。';
+    const planHighlightCard = document.getElementById('planHighlightCard');
+    const planHighlightImage = document.getElementById('planHighlightImage');
+    if (planHighlightCard && planHighlightImage) {
+      const planB = selectedPlan === 'b';
+      planHighlightCard.dataset.guideTarget = planB ? 'kasamatsu' : 'beach';
+      planHighlightImage.src = planB ? './assets/images/destinations/kasamatsu.jpg' : './assets/images/destinations/tomari-beach.jpg';
+      planHighlightImage.alt = planB ? '傘松公園から天橋立を望むイメージ' : '静かな入り江にある泊海水浴場のイメージ';
+      document.getElementById('planHighlightMeta').textContent = planB ? '13:10 · PLAN B' : '12:20 · PLAN A';
+      document.getElementById('planHighlightTitle').textContent = planB ? '天橋立傘松公園' : '泊海水浴場';
+    }
     storage.set('sekiTripPlan', selectedPlan);
     updateTotal();
     renderShots();
@@ -189,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const TRIP_EVENTS = {
     a: [
-      ['2026-08-03T07:00:00+09:00', '07:00', '湊町を出発', '飲み物・酔い止め・モバイルバッテリーを最終確認。'],
+      ['2026-08-03T07:00:00+09:00', '07:00', '自宅を出発', '飲み物・酔い止め・モバイルバッテリーを最終確認。'],
       ['2026-08-03T09:45:00+09:00', '09:45', '伊根湾めぐり遊覧船', '乗船前に家族の集合カット。出航動画も忘れずに。'],
       ['2026-08-03T10:30:00+09:00', '10:30', '伊根の舟屋散策', 'ワイド、家族、路地のディテールを撮影。'],
       ['2026-08-03T11:00:00+09:00', '11:00', '舟屋食堂でランチ', '現金を用意。海鮮の寄りと食べる表情を撮る。'],
@@ -202,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ['2026-08-04T17:30:00+09:00', '17:30', '大阪へ帰着', '車内でベストシーンと感想を収録。']
     ],
     b: [
-      ['2026-08-03T07:00:00+09:00', '07:00', '湊町を出発', '飲み物・酔い止め・モバイルバッテリーを最終確認。'],
+      ['2026-08-03T07:00:00+09:00', '07:00', '自宅を出発', '飲み物・酔い止め・モバイルバッテリーを最終確認。'],
       ['2026-08-03T09:45:00+09:00', '09:45', '伊根湾めぐり遊覧船', '乗船前に家族の集合カット。出航動画も忘れずに。'],
       ['2026-08-03T10:30:00+09:00', '10:30', '伊根の舟屋散策', 'ワイド、家族、路地のディテールを撮影。'],
       ['2026-08-03T11:00:00+09:00', '11:00', '舟屋食堂でランチ', '現金を用意。食後は府中地区へ。'],

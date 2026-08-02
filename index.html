@@ -32,7 +32,7 @@
             <span id="nextActionLabel">NEXT</span>
             <span id="nextCountdown" class="countdown">8/3 7:00</span>
           </div>
-          <div class="next-card-main"><p id="nextActionTime" class="next-time">07:00</p><div><h2 id="nextActionTitle">湊町を出発</h2><p id="nextActionMeta">飲み物・酔い止め・モバイルバッテリーを最終確認。</p></div></div>
+          <div class="next-card-main"><p id="nextActionTime" class="next-time">07:00</p><div><h2 id="nextActionTitle">自宅を出発</h2><p id="nextActionMeta">飲み物・酔い止め・モバイルバッテリーを最終確認。</p></div></div>
           <button type="button" class="text-link" data-go="plan">旅程をひらく <span>→</span></button>
         </article>
 
@@ -40,6 +40,7 @@
           <div class="home-section-head"><div><p>DAY 1</p><h2>海の京都へ</h2></div><button type="button" data-go="plan">旅程を見る</button></div>
           <div class="highlight-scroll" aria-label="1日目の見どころ">
             <button type="button" class="highlight-card" data-guide-target="ine"><img src="./assets/images/hero-ine.jpg" alt="伊根湾に並ぶ舟屋"><span><small>09:45 · INE</small><b>伊根の舟屋</b></span></button>
+            <button type="button" id="planHighlightCard" class="highlight-card" data-guide-target="beach"><img id="planHighlightImage" src="./assets/images/destinations/tomari-beach.jpg" alt="静かな入り江にある泊海水浴場のイメージ"><span><small id="planHighlightMeta">12:20 · PLAN A</small><b id="planHighlightTitle">泊海水浴場</b></span></button>
             <button type="button" class="highlight-card" data-guide-target="villa"><img src="./assets/images/destinations/hanamomiji.jpg" alt="宮津湾を望むヴィラのイメージ"><span><small>14:00 · VILLA</small><b>温泉ヴィラ はなもみじ</b></span></button>
             <button type="button" class="highlight-card" data-go="bbq"><img src="./assets/images/bbq-course.jpg" alt="ガスグリルで楽しむアメリカンBBQ"><span><small>18:00 · DINNER</small><b>至高のアメリカンBBQ</b></span></button>
           </div>
@@ -48,7 +49,7 @@
         <section class="highlight-section">
           <div class="home-section-head"><div><p>DAY 2</p><h2>朝のヴィラと美山</h2></div><button type="button" data-go="plan">旅程を見る</button></div>
           <div class="highlight-scroll two-up" aria-label="2日目の見どころ">
-            <button type="button" class="highlight-card" data-go="shopping"><img src="./assets/images/home/villa-hotdog.jpg" alt="ヴィラのテラスで楽しむホットドッグ"><span><small>BREAKFAST</small><b>ヴィラでホットドッグ</b></span></button>
+            <button type="button" class="highlight-card" data-guide-target="villa"><img src="./assets/images/home/villa-hotdog.jpg" alt="ヴィラのテラスで楽しむホットドッグ"><span><small>BREAKFAST</small><b>ヴィラでホットドッグ</b></span></button>
             <button type="button" class="highlight-card" data-guide-target="miyama"><img src="./assets/images/miyama.jpg" alt="美山かやぶきの里の風景"><span><small>13:30 · MIYAMA</small><b>美山かやぶきの里</b></span></button>
           </div>
         </section>
@@ -83,7 +84,7 @@
 
         <div id="planA" class="plan active">
           <div class="route-list">
-            <article class="route-item"><time>07:00</time><div><p class="route-type">DEPARTURE</p><h3>湊町を出発</h3><p>高速へ。途中休憩1回を想定。</p><div class="route-meta"><span>🚗 約2時間45分</span></div></div></article>
+            <article class="route-item"><time>07:00</time><div><p class="route-type">DEPARTURE</p><h3>自宅を出発</h3><p>高速へ。途中休憩1回を想定。</p><div class="route-meta"><span>🚗 約2時間45分</span></div></div></article>
             <article class="route-item"><time>09:45</time><div><p class="route-type">CRUISE · 25 MIN</p><h3>伊根湾めぐり遊覧船</h3><p>舟屋を海側から眺める。カモメ動画はここ。</p><address>京都府与謝郡伊根町字日出11</address><div class="route-actions"><a href="https://www.google.com/maps/search/?api=1&amp;query=%E4%BC%8A%E6%A0%B9%E6%B9%BE%E3%82%81%E3%81%90%E3%82%8A%E9%81%8A%E8%A6%A7%E8%88%B9" target="_blank" rel="noopener">Google Maps ↗</a><button type="button" data-guide-target="ine">観光地紹介 →</button><span>次へ 車約4分</span></div></div></article>
             <article class="route-item"><time>10:30</time><div><p class="route-type">WALK & SHOOT</p><h3>伊根の舟屋散策</h3><p>家族の引き写真、路地、舟屋のディテールを撮影。</p><address>京都府与謝郡伊根町字平田周辺</address><div class="route-actions"><a href="https://www.google.com/maps/search/?api=1&amp;query=%E4%BC%8A%E6%A0%B9%E3%81%AE%E8%88%9F%E5%B1%8B" target="_blank" rel="noopener">Google Maps ↗</a><button type="button" data-guide-target="ine">観光地紹介 →</button><span>散策 約30分</span></div></div></article>
             <article class="route-item"><time>11:00</time><div><p class="route-type">LUNCH</p><h3>舟屋食堂</h3><p>海を見ながら地魚ランチ。支払いは現金のみ。</p><address>京都府与謝郡伊根町字平田491 2F</address><div class="route-actions"><a href="https://www.google.com/maps/search/?api=1&amp;query=%E8%88%9F%E5%B1%8B%E9%A3%9F%E5%A0%82+%E4%BC%8A%E6%A0%B9" target="_blank" rel="noopener">Google Maps ↗</a><span>ランチ 約60分</span></div></div></article>
@@ -94,7 +95,7 @@
 
         <div id="planB" class="plan">
           <div class="route-list">
-            <article class="route-item"><time>07:00</time><div><p class="route-type">DEPARTURE</p><h3>湊町を出発</h3><p>伊根へ直行。途中休憩1回。</p><div class="route-meta"><span>🚗 約2時間45分</span></div></div></article>
+            <article class="route-item"><time>07:00</time><div><p class="route-type">DEPARTURE</p><h3>自宅を出発</h3><p>伊根へ直行。途中休憩1回。</p><div class="route-meta"><span>🚗 約2時間45分</span></div></div></article>
             <article class="route-item"><time>09:45</time><div><p class="route-type">CRUISE · 25 MIN</p><h3>伊根湾めぐり遊覧船</h3><p>海側から舟屋群を楽しむ。</p><address>京都府与謝郡伊根町字日出11</address><div class="route-actions"><a href="https://www.google.com/maps/search/?api=1&amp;query=%E4%BC%8A%E6%A0%B9%E6%B9%BE%E3%82%81%E3%81%90%E3%82%8A%E9%81%8A%E8%A6%A7%E8%88%B9" target="_blank" rel="noopener">Google Maps ↗</a><button type="button" data-guide-target="ine">観光地紹介 →</button></div></div></article>
             <article class="route-item"><time>10:30</time><div><p class="route-type">WALK & SHOOT</p><h3>伊根の舟屋散策</h3><p>町並みと海を背景に家族カット。</p><address>京都府与謝郡伊根町字平田周辺</address><div class="route-actions"><button type="button" data-guide-target="ine">観光地紹介 →</button></div></div></article>
             <article class="route-item"><time>11:00</time><div><p class="route-type">LUNCH</p><h3>舟屋食堂</h3><p>ランチ後、府中地区へ移動。</p><address>京都府与謝郡伊根町字平田491 2F</address><div class="route-actions"><a href="https://www.google.com/maps/search/?api=1&amp;query=%E8%88%9F%E5%B1%8B%E9%A3%9F%E5%A0%82+%E4%BC%8A%E6%A0%B9" target="_blank" rel="noopener">Google Maps ↗</a><span>次へ 車約35分</span></div></div></article>
@@ -486,6 +487,6 @@
   </section>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite">保存しました</div>
-<script src="./assets/js/app.js?v=18" defer></script>
+<script src="./assets/js/app.js?v=19" defer></script>
 </body>
 </html>
