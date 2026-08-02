@@ -21,15 +21,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const screens = [...document.querySelectorAll('.screen')];
   const navs = [...document.querySelectorAll('.nav-btn')];
+  const screenScrollPositions = new Map();
   let toastTimer;
   let editingQuantityKey = null;
+  let guideReturn = {screen: 'home', scrollY: 0};
 
-  function scrollTop() {
+  function scrollToPosition(top, smooth = false) {
     const root = document.documentElement;
     const previous = root.style.scrollBehavior;
-    root.style.scrollBehavior = 'auto';
-    window.scrollTo(0, 0);
+    root.style.scrollBehavior = smooth && !window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'smooth' : 'auto';
+    window.scrollTo(0, top);
     requestAnimationFrame(() => { root.style.scrollBehavior = previous; });
+  }
+
+  function scrollTop(smooth = false) { scrollToPosition(0, smooth); }
+
+  function activeScreenId() {
+    return document.querySelector('.screen.active')?.id || 'home';
   }
 
   function showToast(message) {
@@ -50,8 +58,14 @@ document.addEventListener('DOMContentLoaded', () => {
     scrollTop();
   }
 
-  function showScreen(id, resetMore = true) {
+  function showScreen(id, resetMore = true, options = {}) {
     if (!document.getElementById(id)) return;
+    const currentId = activeScreenId();
+    if (currentId === id && options.activeToTop) {
+      scrollTop(true);
+      return;
+    }
+    if (currentId !== id) screenScrollPositions.set(currentId, window.scrollY);
     screens.forEach((screen) => {
       const active = screen.id === id;
       screen.classList.toggle('active', active);
@@ -63,14 +77,34 @@ document.addEventListener('DOMContentLoaded', () => {
       nav.classList.toggle('active', active);
       nav.setAttribute('aria-current', active ? 'page' : 'false');
     });
-    if (id === 'more' && resetMore) showSubview('moreTop');
-    scrollTop();
+    if (id === 'more' && resetMore) {
+      showSubview('moreTop');
+      screenScrollPositions.set(id, 0);
+      return;
+    }
+    const targetY = Number.isFinite(options.scrollY)
+      ? options.scrollY
+      : (options.restore === false ? 0 : (screenScrollPositions.get(id) || 0));
+    requestAnimationFrame(() => scrollToPosition(targetY));
   }
 
-  navs.forEach((nav) => nav.addEventListener('click', () => showScreen(nav.dataset.screen)));
+  navs.forEach((nav) => nav.addEventListener('click', () => {
+    showScreen(nav.dataset.screen, true, {activeToTop: true});
+  }));
+
+  const guideLabels = {home:'ホーム', plan:'旅程', bbq:'BBQ', shoot:'撮影', mission:'ミッション', shopping:'買い出し', more:'お道具箱'};
+  function rememberGuideOrigin() {
+    const screen = activeScreenId();
+    if (screen === 'guide') return;
+    guideReturn = {screen, scrollY: window.scrollY};
+    const back = document.getElementById('guideBack');
+    if (back) back.textContent = '← ' + (guideLabels[screen] || '元の画面') + 'へ戻る';
+  }
+
   document.querySelectorAll('[data-go]').forEach((button) => {
     button.addEventListener('click', () => {
-      showScreen(button.dataset.go, !button.dataset.subview);
+      if (button.dataset.go === 'guide') rememberGuideOrigin();
+      showScreen(button.dataset.go, !button.dataset.subview, {restore: button.dataset.go !== 'guide' && !button.dataset.subview});
       if (button.dataset.subview) showSubview(button.dataset.subview);
     });
   });
@@ -80,6 +114,17 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('[data-back]').forEach((button) => {
     button.addEventListener('click', () => showSubview('moreTop'));
   });
+
+  document.getElementById('guideBack')?.addEventListener('click', () => {
+    showScreen(guideReturn.screen, true, {scrollY: guideReturn.scrollY});
+  });
+
+  const backToTop = document.getElementById('backToTop');
+  function updateBackToTop() {
+    backToTop?.classList.toggle('visible', window.scrollY > 560);
+  }
+  backToTop?.addEventListener('click', () => scrollTop(true));
+  window.addEventListener('scroll', updateBackToTop, {passive: true});
 
   const tripDaySections = [...document.querySelectorAll('.trip-day-section')];
   function setDayOpen(section, open) {
@@ -106,7 +151,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const guideFilters = [...document.querySelectorAll('[data-guide-filter]')];
   function filterGuide(value = 'all') {
-    guideFilters.forEach((button) => button.classList.toggle('active', button.dataset.guideFilter === value));
+    guideFilters.forEach((button) => {
+      const active = button.dataset.guideFilter === value;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', String(active));
+    });
     document.querySelectorAll('.destination-card').forEach((card) => {
       card.hidden = value !== 'all' && card.dataset.guideDay !== value;
     });
@@ -116,14 +165,44 @@ document.addEventListener('DOMContentLoaded', () => {
     button.addEventListener('click', () => {
       const target = document.getElementById('destination-' + button.dataset.guideTarget);
       if (!target) return;
+      rememberGuideOrigin();
       filterGuide('all');
-      showScreen('guide');
+      showScreen('guide', true, {restore: false});
       requestAnimationFrame(() => {
         target.scrollIntoView({ block: 'start', behavior: 'auto' });
         target.classList.add('spotlight');
         window.setTimeout(() => target.classList.remove('spotlight'), 1300);
       });
     });
+  });
+
+  const carouselHintSeen = Boolean(storage.get('sekiTripCarouselHintSeen', false));
+  document.querySelectorAll('.highlight-scroll').forEach((scroller) => {
+    const guide = scroller.nextElementSibling;
+    const dots = [...(guide?.querySelectorAll('.carousel-dots i') || [])];
+    if (carouselHintSeen) guide?.classList.add('hint-seen');
+    let frame = 0;
+    function updateCarousel() {
+      frame = 0;
+      const cards = [...scroller.querySelectorAll('.highlight-card')];
+      if (!cards.length) return;
+      const center = scroller.scrollLeft + scroller.clientWidth / 2;
+      let activeIndex = 0;
+      let nearest = Infinity;
+      cards.forEach((card, index) => {
+        const distance = Math.abs(card.offsetLeft + card.offsetWidth / 2 - center);
+        if (distance < nearest) { nearest = distance; activeIndex = index; }
+      });
+      dots.forEach((dot, index) => dot.classList.toggle('active', index === activeIndex));
+      if (Math.abs(scroller.scrollLeft) > 8) {
+        document.querySelectorAll('.carousel-guide').forEach((item) => item.classList.add('hint-seen'));
+        storage.set('sekiTripCarouselHintSeen', true);
+      }
+    }
+    scroller.addEventListener('scroll', () => {
+      if (!frame) frame = requestAnimationFrame(updateCarousel);
+    }, {passive: true});
+    updateCarousel();
   });
 
   const planTabs = [...document.querySelectorAll('.plan-tab')];
@@ -227,6 +306,19 @@ document.addEventListener('DOMContentLoaded', () => {
     ]
   };
 
+  const NEXT_MAP_QUERIES = {
+    '伊根湾めぐり遊覧船': '伊根湾めぐり遊覧船',
+    '伊根の舟屋散策': '伊根の舟屋',
+    '舟屋食堂でランチ': '舟屋食堂 伊根',
+    '泊海水浴場': '泊海水浴場 伊根',
+    '元伊勢籠神社': '元伊勢籠神社',
+    '天橋立傘松公園': '天橋立傘松公園',
+    '10号館で鍵を受け取る': 'マリントピア天橋立10号館 京都府宮津市難波野344',
+    'BBQスタート': '温泉ヴィラ はなもみじ 京都府宮津市難波野335-35',
+    'はなもみじをチェックアウト': '温泉ヴィラ はなもみじ 京都府宮津市難波野335-35',
+    '美山かやぶきの里': '美山かやぶきの里'
+  };
+
   function updateNextAction() {
     const now = new Date();
     const events = TRIP_EVENTS[selectedPlan].map(([iso, time, title, meta]) => ({
@@ -238,6 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const time = document.getElementById('nextActionTime');
     const title = document.getElementById('nextActionTitle');
     const meta = document.getElementById('nextActionMeta');
+    const mapLink = document.getElementById('nextActionMap');
 
     if (!next) {
       label.textContent = 'MEMORIES';
@@ -245,6 +338,7 @@ document.addEventListener('DOMContentLoaded', () => {
       time.textContent = '2026';
       title.textContent = '旅の記録を見返そう';
       meta.textContent = '家族でベストショットとミッションの結果を振り返る。';
+      mapLink.hidden = true;
       return;
     }
 
@@ -258,6 +352,9 @@ document.addEventListener('DOMContentLoaded', () => {
     time.textContent = next.time;
     title.textContent = next.title;
     meta.textContent = next.meta;
+    const mapQuery = NEXT_MAP_QUERIES[next.title];
+    mapLink.hidden = !mapQuery;
+    if (mapQuery) mapLink.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(mapQuery);
   }
 
   const CATEGORY_INFO = {
@@ -303,6 +400,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!Array.isArray(customShopping)) customShopping = [];
   let shoppingCollapsed = storage.get('sekiTripShoppingCollapsed', {});
   if (!shoppingCollapsed || typeof shoppingCollapsed !== 'object' || Array.isArray(shoppingCollapsed)) shoppingCollapsed = {};
+  let shoppingFilter = storage.get('sekiTripShoppingFilter', 'all') === 'pending' ? 'pending' : 'all';
 
   function allShoppingItems() {
     return [...SHOP_CATALOG, ...customShopping.map((item) => ({ ...item, custom: true, emoji: item.emoji || '＋' }))];
@@ -324,9 +422,14 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderShopping() {
     const container = document.getElementById('shopCategories');
     const items = allShoppingItems();
-    container.innerHTML = Object.entries(CATEGORY_INFO).map(([category, [title, english]]) => {
+    const categoryMarkup = Object.entries(CATEGORY_INFO).map(([category, [title, english]]) => {
       const collapsed = Boolean(shoppingCollapsed[category]);
-      const rows = items.filter((item) => item.category === category).map((item) => {
+      const categoryItems = items.filter((item) => item.category === category);
+      const visibleItems = shoppingFilter === 'pending'
+        ? categoryItems.filter((item) => !shoppingState[item.key])
+        : categoryItems;
+      if (shoppingFilter === 'pending' && !visibleItems.length) return '';
+      const rows = visibleItems.map((item) => {
         const qty = shoppingQuantities[item.key] || item.qty;
         return '<div class="shop-item-row ' + (shoppingState[item.key] ? 'checked' : '') + '" data-shop-key="' + escapeHTML(item.key) + '">' +
           '<label><input class="shop-item" data-state-key="' + escapeHTML(item.key) + '" type="checkbox" ' + (shoppingState[item.key] ? 'checked' : '') + '>' +
@@ -339,6 +442,7 @@ document.addEventListener('DOMContentLoaded', () => {
         '<button type="button" class="shop-category-head" data-shop-category-toggle="' + category + '" aria-expanded="' + String(!collapsed) + '"><div><p class="kicker dark">' + english + '</p><h2>' + title + '</h2></div><span class="shop-category-progress" id="shop-progress-' + category + '">0 / 0</span><i class="shop-category-chevron" aria-hidden="true">›</i></button>' +
         '<div class="shop-list"' + (collapsed ? ' hidden' : '') + '>' + (rows || '<p class="empty-note">項目なし</p>') + '</div></section>';
     }).join('');
+    container.innerHTML = categoryMarkup || '<div class="shopping-complete"><span>✓</span><b>買い出し完了</b><p>すべてチェック済みです。</p></div>';
 
     container.querySelectorAll('[data-shop-category-toggle]').forEach((button) => {
       button.addEventListener('click', () => {
@@ -351,6 +455,7 @@ document.addEventListener('DOMContentLoaded', () => {
         section.classList.toggle('collapsed', collapsed);
         list.hidden = collapsed;
         button.setAttribute('aria-expanded', String(!collapsed));
+        updateShoppingControls();
       });
     });
 
@@ -359,7 +464,8 @@ document.addEventListener('DOMContentLoaded', () => {
         shoppingState[input.dataset.stateKey] = input.checked;
         storage.set('sekiTripShopping', shoppingState);
         input.closest('.shop-item-row').classList.toggle('checked', input.checked);
-        updateShoppingProgress();
+        if (shoppingFilter === 'pending') renderShopping();
+        else updateShoppingProgress();
       });
     });
     container.querySelectorAll('[data-qty-key]').forEach((button) => {
@@ -392,7 +498,34 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
     updateShoppingProgress();
+    updateShoppingControls();
   }
+
+  function updateShoppingControls() {
+    document.querySelectorAll('[data-shopping-filter]').forEach((button) => {
+      const active = button.dataset.shoppingFilter === shoppingFilter;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', String(active));
+    });
+    const allCollapsed = Object.keys(CATEGORY_INFO).every((category) => Boolean(shoppingCollapsed[category]));
+    const toggle = document.getElementById('toggleAllShoppingCategories');
+    if (toggle) toggle.textContent = allCollapsed ? 'すべて開く' : 'すべて閉じる';
+  }
+
+  document.querySelectorAll('[data-shopping-filter]').forEach((button) => {
+    button.addEventListener('click', () => {
+      shoppingFilter = button.dataset.shoppingFilter;
+      storage.set('sekiTripShoppingFilter', shoppingFilter);
+      renderShopping();
+    });
+  });
+
+  document.getElementById('toggleAllShoppingCategories').addEventListener('click', () => {
+    const allCollapsed = Object.keys(CATEGORY_INFO).every((category) => Boolean(shoppingCollapsed[category]));
+    Object.keys(CATEGORY_INFO).forEach((category) => { shoppingCollapsed[category] = !allCollapsed; });
+    storage.set('sekiTripShoppingCollapsed', shoppingCollapsed);
+    renderShopping();
+  });
 
   function closeQuantityModal() {
     const modal = document.getElementById('quantityModal');
@@ -1044,6 +1177,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   bbqTabs.forEach((button) => button.addEventListener('click', () => showBbqView(button.dataset.bbqView)));
 
+  const recipeShortNames = ['チーズ', 'エビ', '牛タン', 'サーロイン', 'ハラミ', '豚バラ', '鶏もも', 'ホタテ', '野菜', '焼きおにぎり', 'ソーセージ', '焼きそば'];
+  const recipeCards = [...document.querySelectorAll('.recipe-card')];
+  const recipeQuickNav = document.getElementById('recipeQuickNav');
+  recipeCards.forEach((card, index) => { card.id = 'recipe-' + String(index + 1).padStart(2, '0'); });
+  recipeQuickNav.innerHTML = recipeCards.map((card, index) =>
+    '<button type="button" data-recipe-jump="' + card.id + '"><small>' + String(index + 1).padStart(2, '0') + '</small>' + escapeHTML(recipeShortNames[index] || card.querySelector('b')?.textContent || '') + '</button>'
+  ).join('');
+  recipeQuickNav.querySelectorAll('[data-recipe-jump]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const target = document.getElementById(button.dataset.recipeJump);
+      if (!target) return;
+      target.open = true;
+      target.scrollIntoView({behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start'});
+    });
+  });
+
   let timerRemaining = 5 * 60;
   let timerEndsAt = 0;
   let timerInterval = 0;
@@ -1102,11 +1251,29 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(updateNextAction, 60000);
   renderTimer();
 
+  let offlineReady = false;
+  function updateConnectivityStatus() {
+    const status = document.getElementById('connectivityStatus');
+    if (!status) return;
+    status.classList.toggle('offline', !navigator.onLine);
+    status.classList.toggle('ready', navigator.onLine && offlineReady);
+    const copy = status.querySelector('span');
+    if (!navigator.onLine) copy.textContent = 'オフラインで利用中';
+    else if (offlineReady) copy.textContent = 'オフライン準備完了';
+    else copy.textContent = 'オフライン準備を確認中';
+  }
+  window.addEventListener('online', updateConnectivityStatus);
+  window.addEventListener('offline', updateConnectivityStatus);
+  updateConnectivityStatus();
+
   if ('serviceWorker' in navigator && location.protocol !== 'file:') {
     window.addEventListener('load', async () => {
       const hadController = Boolean(navigator.serviceWorker.controller);
       try {
         await navigator.serviceWorker.register('./sw.js', {scope:'./'});
+        await navigator.serviceWorker.ready;
+        offlineReady = true;
+        updateConnectivityStatus();
         if (hadController) {
           let reloading = false;
           navigator.serviceWorker.addEventListener('controllerchange', () => {

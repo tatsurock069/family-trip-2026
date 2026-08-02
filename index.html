@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="./assets/icons/icon-180.png">
 <link rel="icon" type="image/png" sizes="192x192" href="./assets/icons/icon-192.png">
 <link rel="preload" href="./assets/images/hero-ine.jpg" as="image">
-<link rel="stylesheet" href="./assets/css/style.css?v=18">
+<link rel="stylesheet" href="./assets/css/style.css?v=20">
 <title>関家の旅｜海の京都</title>
 </head>
 <body>
@@ -33,7 +33,10 @@
             <span id="nextCountdown" class="countdown">8/3 7:00</span>
           </div>
           <div class="next-card-main"><p id="nextActionTime" class="next-time">07:00</p><div><h2 id="nextActionTitle">自宅を出発</h2><p id="nextActionMeta">飲み物・酔い止め・モバイルバッテリーを最終確認。</p></div></div>
-          <button type="button" class="text-link" data-go="plan">旅程をひらく <span>→</span></button>
+          <div class="next-action-links">
+            <button type="button" class="text-link" data-go="plan">旅程をひらく <span>→</span></button>
+            <a id="nextActionMap" class="next-map-link" href="#" target="_blank" rel="noopener" hidden>地図をひらく ↗</a>
+          </div>
         </article>
 
         <section class="highlight-section">
@@ -44,6 +47,7 @@
             <button type="button" class="highlight-card" data-guide-target="villa"><img src="./assets/images/destinations/hanamomiji.jpg" alt="宮津湾を望むヴィラのイメージ"><span><small>14:00 · VILLA</small><b>温泉ヴィラ はなもみじ</b></span></button>
             <button type="button" class="highlight-card" data-go="bbq"><img src="./assets/images/bbq-course.jpg" alt="ガスグリルで楽しむアメリカンBBQ"><span><small>18:00 · DINNER</small><b>至高のアメリカンBBQ</b></span></button>
           </div>
+          <div class="carousel-guide" aria-hidden="true"><span>横にスワイプ</span><div class="carousel-dots"><i class="active"></i><i></i><i></i><i></i></div></div>
         </section>
 
         <section class="highlight-section">
@@ -52,6 +56,7 @@
             <button type="button" class="highlight-card" data-guide-target="villa"><img src="./assets/images/home/villa-hotdog.jpg" alt="ヴィラのテラスで楽しむホットドッグ"><span><small>BREAKFAST</small><b>ヴィラでホットドッグ</b></span></button>
             <button type="button" class="highlight-card" data-guide-target="miyama"><img src="./assets/images/miyama.jpg" alt="美山かやぶきの里の風景"><span><small>13:30 · MIYAMA</small><b>美山かやぶきの里</b></span></button>
           </div>
+          <div class="carousel-guide" aria-hidden="true"><span>横にスワイプ</span><div class="carousel-dots"><i class="active"></i><i></i></div></div>
         </section>
 
         <button type="button" class="guide-entry" data-go="guide"><span><small>NEW · DESTINATION GUIDE</small><b>観光地紹介</b><em>6つの行き先を、公式情報から。</em></span><i>→</i></button>
@@ -145,6 +150,13 @@
           <div><p class="kicker dark">SHOPPING PROGRESS</p><strong id="shoppingProgressLabel">0 / 45</strong></div>
           <div class="progress"><i id="shoppingProgressBar"></i></div>
         </article>
+        <div class="shopping-toolbar">
+          <div class="shopping-filter" aria-label="買い出し表示切替">
+            <button type="button" class="active" data-shopping-filter="all" aria-pressed="true">すべて</button>
+            <button type="button" data-shopping-filter="pending" aria-pressed="false">未購入のみ</button>
+          </div>
+          <button type="button" id="toggleAllShoppingCategories" class="shopping-fold-all">すべて閉じる</button>
+        </div>
         <div id="shopCategories"></div>
         <section class="form-card">
           <div class="section-title"><div><p class="kicker dark">ADD ITEM</p><h2>追加で買うもの</h2></div></div>
@@ -193,6 +205,7 @@
         <div id="bbqHeat" class="bbq-view">
           <div class="heat-legend"><span class="heat high">強火</span><span class="heat medium">中火</span><span class="heat low">弱火</span><span class="heat indirect">間接</span></div>
           <p class="recipe-lead">料理をタップすると、材料と手順が開きます。</p>
+          <nav id="recipeQuickNav" class="recipe-quick-nav" aria-label="料理へジャンプ"></nav>
           <div class="recipe-list">
             <details class="recipe-card" open>
               <summary><span class="recipe-no">01</span><div><small>180℃前後 · 約10分</small><b>カマンベールのハニーペッパー焼き</b></div></summary>
@@ -327,6 +340,7 @@
         <div><p class="kicker">DESTINATION GUIDE</p><h1>観光地紹介</h1><p>行く前に知ると、旅がもっと面白い。</p></div>
       </header>
       <div class="screen-content guide-content">
+        <button type="button" id="guideBack" class="guide-back">← ホームへ戻る</button>
         <div class="guide-filter" aria-label="観光地の絞り込み">
           <button type="button" class="active" data-guide-filter="all">すべて</button>
           <button type="button" data-guide-filter="day1">Day 1</button>
@@ -368,6 +382,7 @@
       </header>
       <div class="screen-content">
         <div id="moreTop" class="subview active">
+          <div id="connectivityStatus" class="connectivity-status" role="status" aria-live="polite"><i></i><span>オフライン準備を確認中</span></div>
           <div class="more-menu">
             <button type="button" data-go="shopping"><span>＋</span><div><b>買い出し</b><small>進捗・数量変更・追加購入</small></div></button>
             <button type="button" data-subview="budgetView"><span>¥</span><div><b>予算・実支出</b><small>残額まで自動計算</small></div></button>
@@ -433,6 +448,7 @@
     <button type="button" class="nav-btn" data-screen="mission"><span>★</span>ミッション</button>
     <button type="button" class="nav-btn" data-screen="more"><span>＋</span>お道具箱</button>
   </nav>
+  <button type="button" id="backToTop" class="back-to-top" aria-label="ページ上部へ戻る"><span>↑</span>TOP</button>
 </div>
 <div class="app-modal" id="quantityModal" aria-hidden="true">
   <div class="modal-backdrop" data-close-quantity></div>
@@ -487,6 +503,6 @@
   </section>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite">保存しました</div>
-<script src="./assets/js/app.js?v=19" defer></script>
+<script src="./assets/js/app.js?v=20" defer></script>
 </body>
 </html>
