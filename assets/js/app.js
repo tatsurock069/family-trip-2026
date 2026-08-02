@@ -511,23 +511,47 @@ document.addEventListener('DOMContentLoaded', () => {
     ['find-seagull','ine','🕊️','カモメを見つける',10],['boat-captain','ine','🚢','遊覧船の船長ポーズ',10],
     ['count-funaya','ine','🏘️','舟屋を10軒見つける',15],['record-waves','ine','🎙️','伊根の波音を録音する',10],
     ['seafood-reporter','ine','🐟','ランチを食レポする',15],['find-blue-roof','ine','🔵','船から青い屋根を見つける',10],
-    ['family-photographer','ine','📷','家族の写真係をする',15],
+    ['family-photographer','ine','📷','みんなの写真係をする',15],['ine-blue-hunt','ine','🔎','青いものを5つ見つける',15],
+    ['funaya-purpose-quiz','ine','💡','舟屋の使い方を答える',15],['sea-color-name','ine','🎨','海の色に名前をつける',10],
+    ['wave-to-boat','ine','👋','すれ違う船に手を振る',10],['funaya-frame','ine','🖼️','海と舟屋を一枚に撮る',15],
+    ['ine-greeting','ine','☀️','伊根で元気にあいさつする',10],['favorite-funaya','ine','❤️','お気に入りの舟屋を決める',10],
+    ['quiet-funaya','ine','🤫','舟屋の町を静かに10分歩く',20],
     ['help-bbq','bbq','🍖','BBQで一品手伝う',20],['veggie-hero','bbq','🥦','焼き野菜をひとつ食べる',15],
     ['timer-captain','bbq','⏱️','BBQタイマー係になる',15],['grill-sound','bbq','🎬','焼ける音を動画に撮る',15],
     ['table-setter','bbq','🍽️','お皿をみんなに配る',10],['serve-sausage','bbq','🌭','ソーセージを取り分ける',10],
     ['clear-plates','bbq','🧹','食べ終わった皿を片付ける',15],['best-bbq-dish','bbq','👑','BBQの一番を決める',10],
+    ['wash-vegetables','bbq','💧','野菜を洗う',15],['carry-tableware','bbq','🥄','食器を安全に運ぶ',10],
+    ['hotdog-builder','bbq','🌭','ホットドッグを完成させる',15],['drink-server','bbq','🥤','飲み物を配る',10],
+    ['recipe-reader','bbq','📖','次の焼き方を読み上げる',10],['wait-grill','bbq','⌛','焼けるまでつまみ食いせず待つ',15],
+    ['sort-bbq-trash','bbq','♻️','BBQのゴミを分別する',20],
     ['family-jump','family','🕴️','家族全員でジャンプ写真',15],['dad-photo','family','📸','お父さんとツーショット',15],
     ['mom-photo','family','💐','お母さんとツーショット',15],['grandma-smile','family','😊','おばあちゃんを笑顔にする',15],
-    ['thank-you','family','🤝','家族の誰かにありがとうを言う',15],['siblings-photo','family','👧','兄弟姉妹を撮影する',15],
-    ['carry-bag','family','🎒','荷物をひとつ運ぶ',10],['help-tired','family','💪','一番疲れている人を手伝う',20],
+    ['thank-you','family','🤝','家族の誰かにありがとうを言う',15],['siblings-photo','family','👧','きょうだいの写真を撮る',15],
+    ['carry-bag','family','🎒','家族の荷物をひとつ運ぶ',10],['help-tired','family','💪','一番疲れている人を手伝う',20],
+    ['family-good-morning','family','☀️','家族全員におはようを言う',10],['sibling-high-five','family','🙌','きょうだい全員とハイタッチ',10],
+    ['grandma-story','family','📖','おばあちゃんの思い出話を聞く',15],['family-compliment','family','✨','家族の良いところを伝える',15],
+    ['family-funny-face','family','😆','家族で変顔写真を撮る',10],['family-photo-director','family','🎬','家族写真の監督になる',20],
+    ['family-laugh','family','😄','家族を3人以上笑わせる',15],
     ['find-red-post','miyama','📮','美山の赤いポストを発見',15],['count-roofs','miyama','🏠','茅葺き屋根を5軒見つける',15],
     ['quiet-walk','miyama','🤫','1分間静かに里を歩く',15],['nature-sound','miyama','🌿','美山の自然音を録音する',10],
     ['best-memory','miyama','🏆','旅の一番を発表する',20],['find-insects','miyama','🐞','虫を3種類見つける',15],
-    ['no-litter','miyama','🍃','ゴミを出さずに散策する',15]
+    ['no-litter','miyama','🍃','ゴミを出さずに散策する',15],['find-three-greens','miyama','🎨','緑色を3種類見つける',10],
+    ['roof-sketch','miyama','✏️','茅葺き屋根を絵に描く',20],['miyama-greeting','miyama','☀️','美山で元気にあいさつする',10],
+    ['find-stream','miyama','💧','水の流れる場所を見つける',15],['flower-photo','miyama','🌼','季節の花を撮影する',10],
+    ['compare-roofs','miyama','🔍','茅葺き屋根の違いを見つける',15],['miyama-siblings-photo','miyama','📷','茅葺き屋根と5人で撮る',15],
+    ['slow-village-walk','miyama','🚶','走らずゆっくり里を一周する',15],
+    ['grandma-luggage','common','🎒','おばあちゃんの荷物を持つ',20],['common-younger-help','common','🤲','年下のきょうだいを手伝う',20],
+    ['seatbelt-check','common','✅','シートベルトを声かけ確認する',10],['keep-car-clean','common','🧹','車内をきれいに保つ',15],
+    ['pass-drinks','common','🥤','みんなへ飲み物を配る',10],['next-plan-announcer','common','📣','次の予定をみんなに伝える',10],
+    ['thank-driver','common','🚙','運転ありがとうを伝える',15],['no-fighting','common','🕊️','30分きょうだいげんかをしない',20],
+    ['count-tunnels','common','🔢','通ったトンネルを数える',10],['car-song','common','🎵','車内でみんなと一曲歌う',10],
+    ['travel-quiz','common','❓','旅行クイズを一問出す',15],['forgotten-item-check','common','👀','出発前に忘れ物を確認する',15],
+    ['rest-stretch','common','🙆','休憩でみんなとストレッチする',10],['view-reporter','common','⛰️','車窓の発見を一つ発表する',10],
+    ['collect-smiles','common','😊','3人以上を笑顔にする',15]
   ].map(([key,category,emoji,title,xp]) => ({key,category,emoji,title,xp}));
   const MISSION_PROFILES = [
     ['eldest-son','優典'],['eldest-daughter','綾菜'],['second-son','慶典'],
-    ['second-daughter','杏菜'],['third-daughter','波瑠菜'],['family','家族']
+    ['second-daughter','杏菜'],['third-daughter','波瑠菜']
   ].map(([key,label]) => ({key,label}));
   const profileLabel = (key) => MISSION_PROFILES.find((profile) => profile.key === key)?.label || '優典';
   const profileKeys = new Set(MISSION_PROFILES.map((profile) => profile.key));
@@ -585,7 +609,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('homeKidsProgress').textContent = label + ' ' + xp + ' XP';
     document.getElementById('missionRing').style.setProperty('--mission-progress', (xp / maxXp * 360) + 'deg');
     document.getElementById('kidsRank').textContent =
-      xp >= 400 ? 'トリップマスター' : xp >= 260 ? '家族の冒険家' : xp >= 120 ? '海の探検家' : 'かけだし旅人';
+      xp >= 950 ? 'トリップマスター' : xp >= 600 ? '家族の冒険家' : xp >= 250 ? '海の探検家' : 'かけだし旅人';
     document.querySelectorAll('#badgeRow [data-level]').forEach((badge) => {
       badge.classList.toggle('unlocked', xp >= Number(badge.dataset.level));
     });
