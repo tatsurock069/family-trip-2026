@@ -732,9 +732,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('homeKidsProgress').textContent = label + ' ' + completedCount + ' / ' + MISSIONS.length;
     document.getElementById('missionRing').style.setProperty('--mission-progress', (rankProgress * 360) + 'deg');
     document.getElementById('kidsRank').textContent = rankForCount(completedCount);
-    document.querySelectorAll('#badgeRow [data-level]').forEach((badge) => {
-      badge.classList.toggle('unlocked', completedCount >= Number(badge.dataset.level));
-    });
     updateMissionResult();
   }
 
@@ -768,11 +765,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('[data-mission-category]').forEach((button) => {
       button.textContent = categoryLabels[button.dataset.missionCategory];
     });
-    const badgeLabels = preschool ? ['うみ','なかま','めいじん'] : ['SEA','TEAM','MASTER'];
-    document.querySelectorAll('#badgeRow small').forEach((label, index) => { label.textContent = badgeLabels[index]; });
-    document.getElementById('toggleMissionResult').textContent = missionResult.hidden
-      ? (preschool ? 'けっかを みる' : '結果を表示')
-      : (preschool ? 'けっかを とじる' : '結果を閉じる');
+    document.getElementById('missionResultToggleLabel').textContent = missionResult.hidden
+      ? (preschool ? 'できたものを みる' : '達成状況を確認')
+      : (preschool ? 'できたものを とじる' : '達成状況を閉じる');
+    document.getElementById('toggleMissionResult').setAttribute('aria-expanded', String(!missionResult.hidden));
     document.querySelectorAll('[data-mission-profile]').forEach((button) => {
       const active = button.dataset.missionProfile === activeMissionProfile;
       button.classList.toggle('active', active);
@@ -860,9 +856,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const missionResult = document.getElementById('missionResult');
   document.getElementById('toggleMissionResult').addEventListener('click', (event) => {
     missionResult.hidden = !missionResult.hidden;
-    event.currentTarget.textContent = missionResult.hidden
-      ? (isPreschoolProfile() ? 'けっかを みる' : '結果を表示')
-      : (isPreschoolProfile() ? 'けっかを とじる' : '結果を閉じる');
+    document.getElementById('missionResultToggleLabel').textContent = missionResult.hidden
+      ? (isPreschoolProfile() ? 'できたものを みる' : '達成状況を確認')
+      : (isPreschoolProfile() ? 'できたものを とじる' : '達成状況を閉じる');
+    event.currentTarget.setAttribute('aria-expanded', String(!missionResult.hidden));
     if (!missionResult.hidden) missionResult.scrollIntoView({behavior:'smooth', block:'nearest'});
   });
 
