@@ -1,10 +1,11 @@
 const CACHE_PREFIX = 'seki-family-trip-';
-const CACHE = CACHE_PREFIX + 'v21';
+const CACHE = CACHE_PREFIX + 'v22';
+const SHOT_GUIDE_CACHE = 'seki-shot-guides-v1';
 const APP_SHELL = [
   './',
   './index.html',
-  './assets/css/style.css?v=21',
-  './assets/js/app.js?v=21',
+  './assets/css/style.css?v=22',
+  './assets/js/app.js?v=22',
   './assets/images/hero-ine.jpg',
   './assets/images/bbq-course.jpg',
   './assets/images/miyama.jpg',
@@ -72,6 +73,21 @@ self.addEventListener('fetch', (event) => {
           return response;
         })
         .catch(() => caches.match('./index.html'))
+    );
+    return;
+  }
+
+  if (url.pathname.includes('/assets/images/shot-guide/')) {
+    event.respondWith(
+      caches.open(SHOT_GUIDE_CACHE).then((cache) =>
+        cache.match(request).then((cached) => cached || fetch(request).then((response) => {
+          if (response.ok) {
+            const copy = response.clone();
+            event.waitUntil(cache.put(request, copy));
+          }
+          return response;
+        }))
+      )
     );
     return;
   }

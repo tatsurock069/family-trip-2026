@@ -708,6 +708,11 @@ document.addEventListener('DOMContentLoaded', () => {
   ].map(([key,category,title,composition,frame,format,plan,priority,kind]) => ({key,category,title,composition,frame,format,plan,priority,kind}));
 
   const SHOTS = [...BASE_SHOTS, ...CREATOR_SHOTS];
+  const SHOT_GUIDE_CACHE = 'seki-shot-guides-v1';
+  const SHOT_GUIDE_TOTAL_BYTES = 2731668;
+  const SHOT_GUIDE_URLS = SHOTS.map((shot) => './assets/images/shot-guide/' + shot.key + '.webp');
+  const openShotSamples = new Set();
+  const shotGuideURL = (key) => './assets/images/shot-guide/' + key + '.webp';
 
   const legacyShotKeys = ['departure-family','boat-departure','funaya-family','kids-at-sea','villa-reaction','steak-hands','sunset-toast','miyama-walk'];
   function migrateState(saved, legacyKeys) {
@@ -789,15 +794,20 @@ document.addEventListener('DOMContentLoaded', () => {
       const allEntries = shots.filter((shot) => shot.category === category);
       const entries = filteredShots(allEntries);
       if (!entries.length) return '';
-      const cards = entries.map((shot) =>
+      const cards = entries.map((shot) => {
+        const sampleOpen = openShotSamples.has(shot.key);
+        return (
         '<article class="shot-card ' + (shotState[shot.key] ? 'checked ' : '') + (shotReviewState[shot.key] ? 'review-' + shotReviewState[shot.key] : '') + '">' +
           '<label class="shot-check-main"><span class="shot-frame">' + escapeHTML(shot.frame) + '</span>' +
           '<span class="shot-copy"><span class="shot-badges"><em class="priority-' + shot.priority + '">' + shot.priority.toUpperCase() + '</em><em>' + escapeHTML(shot.kind) + '</em></span>' +
           '<b>' + escapeHTML(shot.title) + '</b><p>' + escapeHTML(shot.composition) + '</p><small>' + escapeHTML(shot.format) + '</small></span>' +
           '<input class="shoot-item" data-state-key="' + escapeHTML(shot.key) + '" type="checkbox" ' + (shotState[shot.key] ? 'checked' : '') + ' aria-label="' + escapeHTML(shot.title) + 'を撮影済みにする"></label>' +
+          '<button type="button" class="shot-sample-toggle" data-shot-sample-toggle="' + escapeHTML(shot.key) + '" aria-expanded="' + String(sampleOpen) + '"><span>構図サンプル</span><i>' + (sampleOpen ? '閉じる −' : '見る ＋') + '</i></button>' +
+          '<div class="shot-sample-panel" data-shot-sample-panel="' + escapeHTML(shot.key) + '"' + (sampleOpen ? '' : ' hidden') + '><button type="button" class="shot-sample-image-button" data-shot-sample-open="' + escapeHTML(shot.key) + '" aria-label="' + escapeHTML(shot.title) + 'の構図サンプルを拡大"><img ' + (sampleOpen ? 'src="' + shotGuideURL(shot.key) + '" ' : '') + 'data-src="' + shotGuideURL(shot.key) + '" alt="' + escapeHTML(shot.title) + 'の構図サンプル" loading="lazy" decoding="async"></button><p>三分割線と青緑の目印を参考に。画像をタップすると拡大できます。</p></div>' +
           '<div class="shot-review-actions"><button type="button" class="' + (shotReviewState[shot.key] === 'best' ? 'active' : '') + '" data-shot-review="best" data-shot-key="' + escapeHTML(shot.key) + '">★ ベスト</button>' +
           '<button type="button" class="retake ' + (shotReviewState[shot.key] === 'retake' ? 'active' : '') + '" data-shot-review="retake" data-shot-key="' + escapeHTML(shot.key) + '">↻ 撮り直し</button></div></article>'
-      ).join('');
+        );
+      }).join('');
       const collapsed = Boolean(shotCollapsed[category]);
       const done = allEntries.filter((shot) => shotState[shot.key]).length;
       return '<section class="shot-category ' + (collapsed ? 'collapsed' : '') + '"><button type="button" class="shot-category-head" data-shot-category-toggle="' + category + '" aria-expanded="' + String(!collapsed) + '"><div><p class="kicker dark">' + english + '</p><h2>' + title + '</h2></div><span id="shot-progress-' + category + '">' + done + ' / ' + allEntries.length + '</span><i aria-hidden="true">›</i></button><div class="shot-category-body"' + (collapsed ? ' hidden' : '') + '>' + cards + '</div></section>';
@@ -810,6 +820,27 @@ document.addEventListener('DOMContentLoaded', () => {
         shotCollapsed[category] = !Boolean(shotCollapsed[category]);
         storage.set('sekiTripShotCollapsed', shotCollapsed);
         renderShots();
+      });
+    });
+    container.querySelectorAll('[data-shot-sample-toggle]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const key = button.dataset.shotSampleToggle;
+        const panel = container.querySelector('[data-shot-sample-panel="' + key + '"]');
+        const opening = !openShotSamples.has(key);
+        if (opening) openShotSamples.add(key); else openShotSamples.delete(key);
+        button.setAttribute('aria-expanded', String(opening));
+        button.querySelector('i').textContent = opening ? '閉じる −' : '見る ＋';
+        panel.hidden = !opening;
+        if (opening) {
+          const image = panel.querySelector('img[data-src]');
+          if (!image.getAttribute('src')) image.src = image.dataset.src;
+        }
+      });
+    });
+    container.querySelectorAll('[data-shot-sample-open]').forEach((button) => {
+      button.addEventListener('click', () => {
+        shotImageTrigger = button;
+        openShotImage(button.dataset.shotSampleOpen);
       });
     });
     container.querySelectorAll('.shoot-item').forEach((input) => {
@@ -843,6 +874,93 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     updateShotProgress();
     updateShotControls();
+  }
+
+  const shotImageModal = document.getElementById('shotImageModal');
+  let shotImageTrigger = null;
+  function openShotImage(key) {
+    const shot = SHOTS.find((entry) => entry.key === key);
+    if (!shot || !shotImageModal) return;
+    document.getElementById('shotImageModalImg').src = shotGuideURL(key);
+    document.getElementById('shotImageModalImg').alt = shot.title + 'の構図サンプル';
+    document.getElementById('shotImageModalTitle').textContent = shot.title;
+    document.getElementById('shotImageModalCopy').textContent = shot.composition + '（' + shot.format + '）';
+    shotImageModal.classList.add('open');
+    shotImageModal.setAttribute('aria-hidden', 'false');
+    shotImageModal.querySelector('.shot-image-close').focus();
+  }
+  function closeShotImage() {
+    if (!shotImageModal) return;
+    shotImageModal.classList.remove('open');
+    shotImageModal.setAttribute('aria-hidden', 'true');
+    shotImageTrigger?.focus();
+  }
+  shotImageModal?.querySelectorAll('[data-close-shot-image]').forEach((button) => button.addEventListener('click', closeShotImage));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && shotImageModal?.classList.contains('open')) closeShotImage();
+  });
+
+  const shotOfflineButton = document.getElementById('saveShotGuidesOffline');
+  const shotOfflineMeta = document.getElementById('shotOfflineMeta');
+  const shotOfflineProgress = document.getElementById('shotOfflineProgress');
+  const shotOfflineProgressBar = document.getElementById('shotOfflineProgressBar');
+  const shotOfflineProgressLabel = document.getElementById('shotOfflineProgressLabel');
+  function updateShotOfflineProgress(done, active = false) {
+    const total = SHOT_GUIDE_URLS.length;
+    shotOfflineProgress.hidden = !active && done === 0;
+    shotOfflineProgressBar.style.width = (done / total * 100) + '%';
+    shotOfflineProgressLabel.textContent = done + ' / ' + total;
+    if (!active && done === total) {
+      shotOfflineButton.textContent = '保存済み ✓';
+      shotOfflineButton.disabled = true;
+      shotOfflineMeta.textContent = '全101枚を保存済み。圏外でも構図サンプルを表示できます。';
+    } else if (!active && done > 0) {
+      shotOfflineButton.textContent = '続きを保存';
+      shotOfflineMeta.textContent = done + ' / ' + total + '枚を保存済み。残りを追加保存できます。';
+    } else if (!active) {
+      shotOfflineButton.textContent = '保存する';
+      shotOfflineMeta.textContent = '101枚・約2.7MB。Wi-Fi時の保存がおすすめです。';
+    }
+  }
+  async function countStoredShotGuides() {
+    if (!('caches' in window)) return 0;
+    const cache = await caches.open(SHOT_GUIDE_CACHE);
+    const states = await Promise.all(SHOT_GUIDE_URLS.map((url) => cache.match(url)));
+    return states.filter(Boolean).length;
+  }
+  async function refreshShotOfflineStatus() {
+    try { updateShotOfflineProgress(await countStoredShotGuides()); } catch { /* Status display is optional. */ }
+  }
+  shotOfflineButton?.addEventListener('click', async () => {
+    if (!('caches' in window)) { showToast('このブラウザでは一括保存を利用できません'); return; }
+    shotOfflineButton.disabled = true;
+    shotOfflineButton.textContent = '保存中…';
+    shotOfflineProgress.hidden = false;
+    try {
+      const cache = await caches.open(SHOT_GUIDE_CACHE);
+      let done = 0;
+      for (const url of SHOT_GUIDE_URLS) {
+        const stored = await cache.match(url);
+        if (!stored) {
+          const response = await fetch(url, {cache:'reload'});
+          if (!response.ok) throw new Error('Failed to download ' + url);
+          await cache.put(url, response.clone());
+        }
+        done += 1;
+        updateShotOfflineProgress(done, true);
+      }
+      updateShotOfflineProgress(SHOT_GUIDE_URLS.length);
+      showToast('撮影見本101枚をオフライン保存しました');
+    } catch {
+      const done = await countStoredShotGuides().catch(() => 0);
+      shotOfflineButton.disabled = false;
+      updateShotOfflineProgress(done);
+      showToast('保存が中断されました。通信を確認して再実行してください');
+    }
+  });
+  if (shotOfflineMeta) {
+    shotOfflineMeta.dataset.totalBytes = String(SHOT_GUIDE_TOTAL_BYTES);
+    refreshShotOfflineStatus();
   }
 
   document.querySelectorAll('[data-shot-filter]').forEach((button) => {

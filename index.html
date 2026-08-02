@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="./assets/icons/icon-180.png">
 <link rel="icon" type="image/png" sizes="192x192" href="./assets/icons/icon-192.png">
 <link rel="preload" href="./assets/images/hero-ine.jpg" as="image">
-<link rel="stylesheet" href="./assets/css/style.css?v=21">
+<link rel="stylesheet" href="./assets/css/style.css?v=22">
 <title>関家の旅｜海の京都</title>
 </head>
 <body>
@@ -283,6 +283,16 @@
             <figure><img src="./assets/images/shot-samples/vertical.jpg" alt="赤いポストを左三分の一に置いた縦構図" loading="lazy"><figcaption><b>V｜縦</b><span>主役を中央から外し、奥行きを入れる。</span></figcaption></figure>
           </div>
         </details>
+        <article class="shot-offline-card" aria-labelledby="shotOfflineTitle">
+          <div class="shot-offline-copy">
+            <span class="shot-offline-icon" aria-hidden="true">⇩</span>
+            <div><p class="kicker dark">OFFLINE SAMPLES</p><h2 id="shotOfflineTitle">撮影見本をオフライン保存</h2><p id="shotOfflineMeta">101枚・約2.7MB。Wi-Fi時の保存がおすすめです。</p></div>
+          </div>
+          <button type="button" id="saveShotGuidesOffline">保存する</button>
+          <div class="shot-offline-progress" id="shotOfflineProgress" hidden>
+            <div><i id="shotOfflineProgressBar"></i></div><span id="shotOfflineProgressLabel">0 / 101</span>
+          </div>
+        </article>
         <div class="shoot-legend"><span><i>W</i>ワイド</span><span><i>C</i>寄り</span><span><i>M</i>動き</span><span><i>V</i>縦動画</span><span><i>S</i>環境音</span></div>
         <div class="shoot-toolbar">
           <div class="shoot-filter" aria-label="撮影項目の絞り込み">
@@ -511,7 +521,15 @@
     <button type="button" class="primary-button rank-up-close" data-close-rank-up>つづける</button>
   </section>
 </div>
+<div class="app-modal shot-image-modal" id="shotImageModal" aria-hidden="true">
+  <div class="modal-backdrop" data-close-shot-image></div>
+  <section class="shot-image-dialog" role="dialog" aria-modal="true" aria-labelledby="shotImageModalTitle">
+    <button type="button" class="shot-image-close" data-close-shot-image aria-label="構図サンプルを閉じる">×</button>
+    <img id="shotImageModalImg" alt="">
+    <div><p class="kicker">COMPOSITION SAMPLE</p><h2 id="shotImageModalTitle"></h2><p id="shotImageModalCopy"></p></div>
+  </section>
+</div>
 <div class="toast" id="toast" role="status" aria-live="polite">保存しました</div>
-<script src="./assets/js/app.js?v=21" defer></script>
+<script src="./assets/js/app.js?v=22" defer></script>
 </body>
 </html>
