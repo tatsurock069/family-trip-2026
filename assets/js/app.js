@@ -206,6 +206,8 @@ document.addEventListener('DOMContentLoaded', () => {
     meat: ['肉', 'MEAT'],
     seafood: ['海鮮・前菜', 'SEAFOOD & STARTERS'],
     vegetables: ['野菜', 'VEGETABLES'],
+    hotdog: ['ホットドッグ', 'HOT DOG'],
+    drinks: ['飲み物', 'DRINKS'],
     finish: ['締め・デザート', 'FINISH & DESSERT'],
     supplies: ['調味料・消耗品', 'SEASONING & TOOLS']
   };
@@ -213,7 +215,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const SHOP_CATALOG = [
     ['beef-tongue','meat','厚切り牛タン','700g','🥩'],['sirloin','meat','みなもと牛サーロイン','800g','🥩'],['harami','meat','ハラミ','1.2kg','🥩'],['pork-belly','meat','厚切り豚バラ','500g','🐖'],['chicken-thigh','meat','鶏もも','600g','🐓'],['sausage','meat','大容量ソーセージ','800g','🌭'],
     ['shrimp','seafood','エビ','16尾','🦐'],['scallops','seafood','ホタテ','12個','🦪'],['camembert','seafood','カマンベール','2個','🧀'],['baguette','seafood','バゲット','2本','🥖'],
-    ['onion','vegetables','玉ねぎ','2個','🧅'],['zucchini','vegetables','ズッキーニ','2本','🥒'],['paprika','vegetables','パプリカ','3個','🫑'],['asparagus','vegetables','アスパラ','2束','🌱'],['eringi','vegetables','エリンギ','2パック','🍄'],['corn','vegetables','とうもろこし','4本','🌽'],
+    ['onion','vegetables','玉ねぎ','2個','🧅'],['zucchini','vegetables','ズッキーニ','2本','🥒'],['paprika','vegetables','パプリカ','3個','🫑'],['asparagus','vegetables','アスパラ','2束','🌱'],['eringi','vegetables','エリンギ','4パック','🍄'],['corn','vegetables','とうもろこし','4本','🌽'],
+    ['hotdog-buns','hotdog','ホットドッグ用パン','1袋','🥖'],['mustard','hotdog','マスタード','1本','🟡'],['pickles','hotdog','ピクルス','1瓶','🥒'],
+    ['chuhai','drinks','チューハイ','10缶','🥫'],['beer','drinks','ビール','6缶','🍺'],['non-alcohol','drinks','ノンアルコール飲料','6缶','🥫'],['makers-mark','drinks','メイカーズマーク','小瓶 1本','🥃'],['juice','drinks','ジュース','2L × 2本','🧃'],['tea','drinks','お茶','2L × 2本','🍵'],['milk','drinks','牛乳','1本','🥛'],['sparkling-water','drinks','炭酸水','6本','🫧'],
     ['grilled-rice-ball','finish','焼きおにぎり','12個','🍙'],['yakisoba','finish','焼きそば','4玉','🍜'],['vanilla-ice-cream','finish','バニラアイス','2L','🍨'],
     ['salt','supplies','塩','1個','🧂'],['black-pepper','supplies','黒こしょう','1個','⚫'],['yakiniku-sauce','supplies','焼肉のタレ','1本','🥣'],['lemon','supplies','レモン','適量','🍋'],['butter','supplies','バター','1個','🧈'],['garlic','supplies','にんにく','1個','🧄'],['olive-oil','supplies','オリーブオイル','1本','🫒'],['honey','supplies','はちみつ','1本','🍯'],['soy-sauce','supplies','醤油','1本','🥣'],['teriyaki-sauce','supplies','照り焼きソース','1本','🥣'],['aluminum-tray','supplies','アルミ皿','数枚','🍽️'],['aluminum-foil','supplies','アルミホイル','1本','📦'],['kitchen-paper','supplies','キッチンペーパー','1個','🧻'],['garbage-bags','supplies','ゴミ袋','1組','🗑️'],['parsley','supplies','パセリ','1パック','🌿']
   ].map(([key, category, name, qty, emoji]) => ({ key, category, name, qty, emoji, custom: false }));
