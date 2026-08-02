@@ -1,12 +1,12 @@
 const CACHE_PREFIX = 'seki-family-trip-';
-const CACHE = CACHE_PREFIX + 'v23';
+const CACHE = CACHE_PREFIX + 'v24';
 const SHOT_GUIDE_PREFIX = 'seki-shot-guides-';
 const SHOT_GUIDE_CACHE = SHOT_GUIDE_PREFIX + 'v2';
 const APP_SHELL = [
   './',
   './index.html',
-  './assets/css/style.css?v=23',
-  './assets/js/app.js?v=23',
+  './assets/css/style.css?v=24',
+  './assets/js/app.js?v=24',
   './assets/images/hero-ine.jpg',
   './assets/images/bbq-course.jpg',
   './assets/images/miyama.jpg',
