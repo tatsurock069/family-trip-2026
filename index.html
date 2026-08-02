@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="./assets/icons/icon-180.png">
 <link rel="icon" type="image/png" sizes="192x192" href="./assets/icons/icon-192.png">
 <link rel="preload" href="./assets/images/hero-ine.jpg" as="image">
-<link rel="stylesheet" href="./assets/css/style.css">
+<link rel="stylesheet" href="./assets/css/style.css?v=18">
 <title>関家の旅｜海の京都</title>
 </head>
 <body>
@@ -73,16 +73,15 @@
         <div><p class="kicker">ITINERARY</p><h1>旅のしおり</h1><p>時間、住所、移動目安をひとつに。</p></div>
       </header>
       <div class="screen-content">
-        <section class="day-accordion" data-trip-day="1">
-          <button type="button" class="day-toggle" aria-expanded="true" aria-controls="dayOnePanel"><span><small>DAY 1 · AUG 3</small><b id="dayOneTitle">伊根と、夏の海。</b></span><i aria-hidden="true">⌄</i></button>
-          <div id="dayOnePanel" class="day-panel">
+        <section class="trip-day-section" data-trip-day="1">
+          <div class="day-heading trip-day-heading"><span>DAY 1</span><div><h2 id="dayOneTitle">伊根と、夏の海。</h2><p>AUG 3 · MON</p></div><button type="button" class="day-inline-toggle" aria-expanded="true" aria-controls="dayOnePanel" aria-label="1日目を閉じる"><i aria-hidden="true">⌃</i></button></div>
+          <div id="dayOnePanel" class="day-content">
             <div class="segment premium-segment" aria-label="初日のプラン選択">
               <button type="button" class="plan-tab active" data-plan="a">A <span>海水浴</span></button>
               <button type="button" class="plan-tab" data-plan="b">B <span>神社・絶景</span></button>
             </div>
 
         <div id="planA" class="plan active">
-          <div class="day-heading"><span>DAY 1</span><div><h2>伊根と、夏の海。</h2><p>PLAN A · BEACH</p></div></div>
           <div class="route-list">
             <article class="route-item"><time>07:00</time><div><p class="route-type">DEPARTURE</p><h3>湊町を出発</h3><p>高速へ。途中休憩1回を想定。</p><div class="route-meta"><span>🚗 約2時間45分</span></div></div></article>
             <article class="route-item"><time>09:45</time><div><p class="route-type">CRUISE · 25 MIN</p><h3>伊根湾めぐり遊覧船</h3><p>舟屋を海側から眺める。カモメ動画はここ。</p><address>京都府与謝郡伊根町字日出11</address><div class="route-actions"><a href="https://www.google.com/maps/search/?api=1&amp;query=%E4%BC%8A%E6%A0%B9%E6%B9%BE%E3%82%81%E3%81%90%E3%82%8A%E9%81%8A%E8%A6%A7%E8%88%B9" target="_blank" rel="noopener">Google Maps ↗</a><button type="button" data-guide-target="ine">観光地紹介 →</button><span>次へ 車約4分</span></div></div></article>
@@ -94,7 +93,6 @@
         </div>
 
         <div id="planB" class="plan">
-          <div class="day-heading"><span>DAY 1</span><div><h2>伊根と、天橋立。</h2><p>PLAN B · VIEW</p></div></div>
           <div class="route-list">
             <article class="route-item"><time>07:00</time><div><p class="route-type">DEPARTURE</p><h3>湊町を出発</h3><p>伊根へ直行。途中休憩1回。</p><div class="route-meta"><span>🚗 約2時間45分</span></div></div></article>
             <article class="route-item"><time>09:45</time><div><p class="route-type">CRUISE · 25 MIN</p><h3>伊根湾めぐり遊覧船</h3><p>海側から舟屋群を楽しむ。</p><address>京都府与謝郡伊根町字日出11</address><div class="route-actions"><a href="https://www.google.com/maps/search/?api=1&amp;query=%E4%BC%8A%E6%A0%B9%E6%B9%BE%E3%82%81%E3%81%90%E3%82%8A%E9%81%8A%E8%A6%A7%E8%88%B9" target="_blank" rel="noopener">Google Maps ↗</a><button type="button" data-guide-target="ine">観光地紹介 →</button></div></div></article>
@@ -122,9 +120,9 @@
           </div>
         </section>
 
-        <section class="day-accordion" data-trip-day="2">
-          <button type="button" class="day-toggle" aria-expanded="false" aria-controls="dayTwoPanel"><span><small>DAY 2 · AUG 4</small><b>美山、原風景へ。</b></span><i aria-hidden="true">⌄</i></button>
-          <div id="dayTwoPanel" class="day-panel" hidden>
+        <section class="trip-day-section" data-trip-day="2">
+          <div class="day-heading trip-day-heading"><span>DAY 2</span><div><h2>美山、原風景へ。</h2><p>AUG 4 · TUE</p></div><button type="button" class="day-inline-toggle" aria-expanded="false" aria-controls="dayTwoPanel" aria-label="2日目を開く"><i aria-hidden="true">⌄</i></button></div>
+          <div id="dayTwoPanel" class="day-content" hidden>
           <div class="route-list">
           <article class="route-item"><time>11:00</time><div><p class="route-type">CHECK OUT</p><h3>はなもみじを出発</h3><p>忘れ物、冷蔵庫、充電器、ゴミを確認して鍵を返却。</p><div class="route-actions"><button type="button" data-guide-target="villa">施設情報 →</button><span>🚗 美山方面へ約1時間30分</span></div></div></article>
           <article class="route-item"><time>12:30</time><div><p class="route-type">LUNCH</p><h3>ローコスト昼食</h3><p>美山へ入る前に、道の駅や軽食で先に昼食を済ませる。</p></div></article>
@@ -489,6 +487,6 @@
   </section>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite">保存しました</div>
-<script src="./assets/js/app.js" defer></script>
+<script src="./assets/js/app.js?v=18" defer></script>
 </body>
 </html>

@@ -81,18 +81,20 @@ document.addEventListener('DOMContentLoaded', () => {
     button.addEventListener('click', () => showSubview('moreTop'));
   });
 
-  const dayAccordions = [...document.querySelectorAll('.day-accordion')];
-  function setDayOpen(accordion, open) {
-    const toggle = accordion.querySelector('.day-toggle');
-    const panel = accordion.querySelector('.day-panel');
+  const tripDaySections = [...document.querySelectorAll('.trip-day-section')];
+  function setDayOpen(section, open) {
+    const toggle = section.querySelector('.day-inline-toggle');
+    const panel = section.querySelector('.day-content');
     toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', section.dataset.tripDay + '日目を' + (open ? '閉じる' : '開く'));
+    toggle.querySelector('i').textContent = open ? '⌃' : '⌄';
     panel.hidden = !open;
-    accordion.classList.toggle('open', open);
+    section.classList.toggle('open', open);
   }
 
-  dayAccordions.forEach((accordion) => {
-    accordion.querySelector('.day-toggle').addEventListener('click', () => {
-      setDayOpen(accordion, accordion.querySelector('.day-toggle').getAttribute('aria-expanded') !== 'true');
+  tripDaySections.forEach((section) => {
+    section.querySelector('.day-inline-toggle').addEventListener('click', () => {
+      setDayOpen(section, section.querySelector('.day-inline-toggle').getAttribute('aria-expanded') !== 'true');
     });
   });
 
@@ -100,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
     timeZone: 'Asia/Tokyo', year: 'numeric', month: '2-digit', day: '2-digit'
   }).formatToParts(new Date()).filter((part) => part.type !== 'literal').map((part) => [part.type, part.value]));
   const isDayTwo = tokyoParts.year === '2026' && tokyoParts.month === '08' && tokyoParts.day === '04';
-  dayAccordions.forEach((accordion) => setDayOpen(accordion, isDayTwo ? accordion.dataset.tripDay === '2' : accordion.dataset.tripDay === '1'));
+  tripDaySections.forEach((section) => setDayOpen(section, isDayTwo ? section.dataset.tripDay === '2' : section.dataset.tripDay === '1'));
 
   const guideFilters = [...document.querySelectorAll('[data-guide-filter]')];
   function filterGuide(value = 'all') {
