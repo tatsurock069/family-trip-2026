@@ -1,11 +1,12 @@
 const CACHE_PREFIX = 'seki-family-trip-';
-const CACHE = CACHE_PREFIX + 'v22';
-const SHOT_GUIDE_CACHE = 'seki-shot-guides-v1';
+const CACHE = CACHE_PREFIX + 'v23';
+const SHOT_GUIDE_PREFIX = 'seki-shot-guides-';
+const SHOT_GUIDE_CACHE = SHOT_GUIDE_PREFIX + 'v2';
 const APP_SHELL = [
   './',
   './index.html',
-  './assets/css/style.css?v=22',
-  './assets/js/app.js?v=22',
+  './assets/css/style.css?v=23',
+  './assets/js/app.js?v=23',
   './assets/images/hero-ine.jpg',
   './assets/images/bbq-course.jpg',
   './assets/images/miyama.jpg',
@@ -14,6 +15,9 @@ const APP_SHELL = [
   './assets/images/destinations/motoise-kono.jpg',
   './assets/images/destinations/hanamomiji.jpg',
   './assets/images/home/villa-hotdog.jpg',
+  './assets/images/lunch/sankaiya-menu-1.webp',
+  './assets/images/lunch/sankaiya-menu-2.webp',
+  './assets/images/lunch/sankaiya-menu-3.webp',
   './assets/images/menu/camembert.jpg',
   './assets/images/menu/garlic-shrimp.jpg',
   './assets/images/menu/beef-tongue.jpg',
@@ -48,7 +52,10 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys()
       .then((keys) => Promise.all(
-        keys.filter((key) => key.startsWith(CACHE_PREFIX) && key !== CACHE)
+        keys.filter((key) =>
+          (key.startsWith(CACHE_PREFIX) && key !== CACHE) ||
+          (key.startsWith(SHOT_GUIDE_PREFIX) && key !== SHOT_GUIDE_CACHE)
+        )
           .map((key) => caches.delete(key))
       ))
       .then(() => self.clients.claim())

@@ -258,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
       planHighlightCard.dataset.guideTarget = planB ? 'kasamatsu' : 'beach';
       planHighlightImage.src = planB ? './assets/images/destinations/kasamatsu.jpg' : './assets/images/destinations/tomari-beach.jpg';
       planHighlightImage.alt = planB ? '傘松公園から天橋立を望むイメージ' : '静かな入り江にある泊海水浴場のイメージ';
-      document.getElementById('planHighlightMeta').textContent = planB ? '13:10 · PLAN B' : '12:20 · PLAN A';
+      document.getElementById('planHighlightMeta').textContent = planB ? '13:40 · PLAN B' : '11:10 · PLAN A';
       document.getElementById('planHighlightTitle').textContent = planB ? '天橋立傘松公園' : '泊海水浴場';
     }
     storage.set('sekiTripPlan', selectedPlan);
@@ -281,9 +281,9 @@ document.addEventListener('DOMContentLoaded', () => {
       ['2026-08-03T07:00:00+09:00', '07:00', '自宅を出発', '飲み物・酔い止め・モバイルバッテリーを最終確認。'],
       ['2026-08-03T09:45:00+09:00', '09:45', '伊根湾めぐり遊覧船', '乗船前に家族の集合カット。出航動画も忘れずに。'],
       ['2026-08-03T10:30:00+09:00', '10:30', '伊根の舟屋散策', 'ワイド、家族、路地のディテールを撮影。'],
-      ['2026-08-03T11:00:00+09:00', '11:00', '舟屋食堂でランチ', '現金を用意。海鮮の寄りと食べる表情を撮る。'],
-      ['2026-08-03T12:20:00+09:00', '12:20', '泊海水浴場', '水着・タオル・日焼け止め。約60分。'],
-      ['2026-08-03T14:00:00+09:00', '14:00', '10号館で鍵を受け取る', 'チェックインは14:00〜15:00。鍵を受け取ってから「はなもみじ」へ。'],
+      ['2026-08-03T11:10:00+09:00', '11:10', '泊海水浴場', '水着・タオル・日焼け止め。12:05頃に山海屋へ出発。'],
+      ['2026-08-03T12:55:00+09:00', '12:55', '山海屋でランチ', 'ミップル5階。予算目安10,500円。14:00頃の出発を目安に。'],
+      ['2026-08-03T14:25:00+09:00', '14:25', '10号館で鍵を受け取る', '15:00までを優先。鍵を受け取ってから「はなもみじ」へ。'],
       ['2026-08-03T17:30:00+09:00', '17:30', 'BBQスタート', '前菜から。サーロインは全員が揃ってから。'],
       ['2026-08-04T11:00:00+09:00', '11:00', 'はなもみじをチェックアウト', '忘れ物、冷蔵庫、充電器、ゴミ、鍵を確認。'],
       ['2026-08-04T12:30:00+09:00', '12:30', '美山の前に昼食', '道の駅や軽食で先に昼食を済ませる。'],
@@ -294,10 +294,10 @@ document.addEventListener('DOMContentLoaded', () => {
       ['2026-08-03T07:00:00+09:00', '07:00', '自宅を出発', '飲み物・酔い止め・モバイルバッテリーを最終確認。'],
       ['2026-08-03T09:45:00+09:00', '09:45', '伊根湾めぐり遊覧船', '乗船前に家族の集合カット。出航動画も忘れずに。'],
       ['2026-08-03T10:30:00+09:00', '10:30', '伊根の舟屋散策', 'ワイド、家族、路地のディテールを撮影。'],
-      ['2026-08-03T11:00:00+09:00', '11:00', '舟屋食堂でランチ', '現金を用意。食後は府中地区へ。'],
-      ['2026-08-03T12:45:00+09:00', '12:45', '元伊勢籠神社', '参拝、御朱印、鳥居から歩く家族を撮る。'],
-      ['2026-08-03T13:10:00+09:00', '13:10', '天橋立傘松公園', '股のぞきとリアクション動画を撮影。'],
-      ['2026-08-03T14:00:00+09:00', '14:00', '10号館で鍵を受け取る', 'チェックインは14:00〜15:00。鍵を受け取ってから「はなもみじ」へ。'],
+      ['2026-08-03T11:45:00+09:00', '11:45', '山海屋でランチ', 'ミップル5階。予算目安10,500円。食後は府中地区へ。'],
+      ['2026-08-03T13:15:00+09:00', '13:15', '元伊勢籠神社', '参拝、御朱印、鳥居から歩く家族を撮る。'],
+      ['2026-08-03T13:40:00+09:00', '13:40', '天橋立傘松公園', '14:20頃の下山を目安に、股のぞきとリアクション動画を撮影。'],
+      ['2026-08-03T14:45:00+09:00', '14:45', '10号館で鍵を受け取る', '15:00までを優先。鍵を受け取ってから「はなもみじ」へ。'],
       ['2026-08-03T17:30:00+09:00', '17:30', 'BBQスタート', '前菜から。サーロインは全員が揃ってから。'],
       ['2026-08-04T11:00:00+09:00', '11:00', 'はなもみじをチェックアウト', '忘れ物、冷蔵庫、充電器、ゴミ、鍵を確認。'],
       ['2026-08-04T12:30:00+09:00', '12:30', '美山の前に昼食', '道の駅や軽食で先に昼食を済ませる。'],
@@ -309,7 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const NEXT_MAP_QUERIES = {
     '伊根湾めぐり遊覧船': '伊根湾めぐり遊覧船',
     '伊根の舟屋散策': '伊根の舟屋',
-    '舟屋食堂でランチ': '舟屋食堂 伊根',
+    '山海屋でランチ': '山海屋 宮津シーサイドマートミップル',
     '泊海水浴場': '泊海水浴場 伊根',
     '元伊勢籠神社': '元伊勢籠神社',
     '天橋立傘松公園': '天橋立傘松公園',
@@ -648,7 +648,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ['ine-ambient','ine','伊根の環境音','波音または船のエンジン音を、会話せず10秒録る。','S','音声 · 10秒',null,'must','AUDIO'],
     ['ine-arrival-talk','ine','伊根に着いた第一声','景色を背に「最初に感じたこと」をひと言。','C','横動画 · Aロール',null,'must','A-ROLL'],
 
-    ['restaurant-exterior','lunch','舟屋食堂の外観','店名が読める位置から5秒固定。通行を妨げない。','W','横動画 · 5秒',null,'must','B-ROLL'],
+    ['restaurant-exterior','lunch','山海屋の入口・看板','ミップル5階と店名が分かる位置から5秒固定。通行を妨げない。','W','横動画 · 5秒',null,'must','B-ROLL'],
     ['menu-choice','lunch','メニューを選ぶ手元','メニュー→指差し→家族の表情を短く。','C','横動画 · 3カット',null,'nice','B-ROLL'],
     ['dish-arrival','lunch','料理が届く瞬間','置かれる皿と「おいしそう」の声を一緒に。','C','横動画 · 5秒',null,'nice','B-ROLL'],
     ['chopsticks-close','lunch','箸上げと料理の質感','刺身を持ち上げ、背景を整理して3秒止める。','C','横・縦両対応',null,'nice','B-ROLL'],
@@ -708,7 +708,7 @@ document.addEventListener('DOMContentLoaded', () => {
   ].map(([key,category,title,composition,frame,format,plan,priority,kind]) => ({key,category,title,composition,frame,format,plan,priority,kind}));
 
   const SHOTS = [...BASE_SHOTS, ...CREATOR_SHOTS];
-  const SHOT_GUIDE_CACHE = 'seki-shot-guides-v1';
+  const SHOT_GUIDE_CACHE = 'seki-shot-guides-v2';
   const SHOT_GUIDE_TOTAL_BYTES = 2731668;
   const SHOT_GUIDE_URLS = SHOTS.map((shot) => './assets/images/shot-guide/' + shot.key + '.webp');
   const openShotSamples = new Set();
@@ -736,8 +736,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (now < dayTwo) {
       if (hhmm < 930) return 'road';
       if (hhmm < 1100) return 'ine';
-      if (hhmm < 1220) return 'lunch';
-      if (hhmm < 1400) return selectedPlan === 'a' ? 'beach' : 'planb';
+      if (selectedPlan === 'a') {
+        if (hhmm < 1210) return 'beach';
+        if (hhmm < 1405) return 'lunch';
+      } else {
+        if (hhmm < 1300) return 'lunch';
+        if (hhmm < 1435) return 'planb';
+      }
       if (hhmm < 1700) return 'villa';
       return 'bbq';
     }
@@ -1191,6 +1196,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const openModal = (modal) => { modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false'); };
   const closeModal = (modal) => { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); };
+  const lunchMenuModal = document.getElementById('lunchMenuModal');
+  let lunchMenuTrigger = null;
+  function openLunchMenu(trigger) {
+    lunchMenuTrigger = trigger;
+    lunchMenuModal.querySelectorAll('img[data-src]').forEach((image) => {
+      if (!image.getAttribute('src')) image.src = image.dataset.src;
+    });
+    openModal(lunchMenuModal);
+    lunchMenuModal.querySelector('.modal-close-button').focus();
+  }
+  function closeLunchMenu() {
+    closeModal(lunchMenuModal);
+    lunchMenuTrigger?.focus();
+  }
+  document.querySelectorAll('[data-open-lunch-menu]').forEach((button) => {
+    button.addEventListener('click', () => openLunchMenu(button));
+  });
+  lunchMenuModal.querySelectorAll('[data-close-lunch-menu]').forEach((button) => {
+    button.addEventListener('click', closeLunchMenu);
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && lunchMenuModal.classList.contains('open')) closeLunchMenu();
+  });
   const currentMissionState = () => missionStates[activeMissionProfile];
   const isPreschoolProfile = (profileKey = activeMissionProfile) => ['second-daughter','third-daughter'].includes(profileKey);
   const isAssistedProfileMode = () => missionDevice?.mode === 'profile' && activeMissionProfile === 'third-daughter';
