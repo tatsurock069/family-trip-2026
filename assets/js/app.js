@@ -526,10 +526,10 @@ document.addEventListener('DOMContentLoaded', () => {
     ['no-litter','miyama','🍃','ゴミを出さずに散策する',15]
   ].map(([key,category,emoji,title,xp]) => ({key,category,emoji,title,xp}));
   const MISSION_PROFILES = [
-    ['eldest-son','長男'],['eldest-daughter','長女'],['second-son','次男'],
-    ['second-daughter','次女'],['third-daughter','三女'],['family','家族']
+    ['eldest-son','優典'],['eldest-daughter','綾菜'],['second-son','慶典'],
+    ['second-daughter','杏菜'],['third-daughter','波瑠菜'],['family','家族']
   ].map(([key,label]) => ({key,label}));
-  const profileLabel = (key) => MISSION_PROFILES.find((profile) => profile.key === key)?.label || '長男';
+  const profileLabel = (key) => MISSION_PROFILES.find((profile) => profile.key === key)?.label || '優典';
   const profileKeys = new Set(MISSION_PROFILES.map((profile) => profile.key));
   const legacyMissionKeys = ['find-seagull','family-jump','dad-photo','help-bbq','find-red-post'];
   const oldMissionState = migrateState(storage.get('sekiTripKids', {}), legacyMissionKeys);

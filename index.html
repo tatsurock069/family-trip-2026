@@ -284,15 +284,15 @@
       </header>
       <div class="screen-content">
         <section class="mission-device-bar">
-          <div><span id="missionModeBadge">公式記録</span><b id="activeMissionProfileLabel">長男</b><small id="missionDeviceNote">この端末が家族の公式記録です</small></div>
+          <div><span id="missionModeBadge">公式記録</span><b id="activeMissionProfileLabel">優典</b><small id="missionDeviceNote">この端末が家族の公式記録です</small></div>
           <button type="button" id="changeMissionMode">端末設定</button>
         </section>
         <div class="mission-profile-tabs" id="missionProfileTabs" aria-label="記録するメンバー">
-          <button type="button" class="active" data-mission-profile="eldest-son">長男</button>
-          <button type="button" data-mission-profile="eldest-daughter">長女</button>
-          <button type="button" data-mission-profile="second-son">次男</button>
-          <button type="button" data-mission-profile="second-daughter">次女</button>
-          <button type="button" data-mission-profile="third-daughter">三女</button>
+          <button type="button" class="active" data-mission-profile="eldest-son">優典</button>
+          <button type="button" data-mission-profile="eldest-daughter">綾菜</button>
+          <button type="button" data-mission-profile="second-son">慶典</button>
+          <button type="button" data-mission-profile="second-daughter">杏菜</button>
+          <button type="button" data-mission-profile="third-daughter">波瑠菜</button>
           <button type="button" data-mission-profile="family">家族</button>
         </div>
         <section class="mission-hero">
@@ -312,7 +312,7 @@
           <button type="button" id="toggleMissionResult">結果を表示</button>
         </div>
         <section class="mission-result" id="missionResult" hidden>
-          <div class="section-title"><div><p class="kicker dark">RESULT</p><h2 id="missionResultTitle">長男の記録</h2></div><strong id="missionResultScore">0 XP</strong></div>
+          <div class="section-title"><div><p class="kicker dark">RESULT</p><h2 id="missionResultTitle">優典の記録</h2></div><strong id="missionResultScore">0 XP</strong></div>
           <p id="missionResultSummary">達成 0 / 30</p>
           <div id="missionResultList"></div>
           <p class="mission-result-note">この端末内の記録です。家族の公式結果は管理者端末で確定します。</p>
@@ -412,15 +412,15 @@
   <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="missionModeTitle">
     <p class="kicker">MISSION DEVICE</p>
     <h2 id="missionModeTitle">この端末の使い方</h2>
-    <p class="modal-description">端末間の自動同期はしません。親端末を公式記録、長男・長女の端末を自己記録として使います。</p>
+    <p class="modal-description">端末間の自動同期はしません。親端末を公式記録、優典・綾菜の端末を自己記録として使います。</p>
     <div class="mode-option-grid">
       <button type="button" data-device-mode="manager"><b>家族管理モード</b><small>5人＋家族の公式記録</small></button>
-      <button type="button" data-device-mode="personal"><b>自分用モード</b><small>長男・長女の自己記録</small></button>
+      <button type="button" data-device-mode="personal"><b>自分用モード</b><small>優典・綾菜の自己記録</small></button>
     </div>
     <div id="personalProfileChooser" class="personal-profile-chooser" hidden>
       <p>この端末を使う人</p>
-      <button type="button" data-personal-profile="eldest-son">長男</button>
-      <button type="button" data-personal-profile="eldest-daughter">長女</button>
+      <button type="button" data-personal-profile="eldest-son">優典</button>
+      <button type="button" data-personal-profile="eldest-daughter">綾菜</button>
     </div>
     <button type="button" id="cancelMissionMode" class="danger-link" hidden>変更せず閉じる</button>
   </section>
