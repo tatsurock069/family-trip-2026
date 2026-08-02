@@ -280,7 +280,7 @@
 
     <section id="mission" class="screen">
       <header class="screen-hero mission-header">
-        <div><p class="kicker">KIDS QUEST</p><h1>旅を遊びに<br>変えよう。</h1><p>見つける、手伝う、笑わせる。家族でXPを集めよう。</p></div>
+        <div><p class="kicker" id="missionKicker">KIDS QUEST</p><h1 id="missionHeroTitle">旅を遊びに<br>変えよう。</h1><p id="missionHeroDescription">見つける、手伝う、笑わせる。家族でXPを集めよう。</p></div>
       </header>
       <div class="screen-content">
         <section class="mission-device-bar">
@@ -295,8 +295,8 @@
           <button type="button" data-mission-profile="third-daughter">波瑠菜</button>
         </div>
         <section class="mission-hero">
-          <div class="mission-ring" id="missionRing"><div><strong id="kidsXp">0</strong><small>XP</small></div></div>
-          <div><p class="kicker">YOUR RANK</p><h2 id="kidsRank">はじめての旅人</h2><p id="kidsProgress">0 / 75 ミッション</p><p id="rankNext">あと5個でランクアップ</p></div>
+          <div class="mission-ring" id="missionRing"><div><strong id="kidsXp">0</strong><small id="kidsXpLabel">XP</small></div></div>
+          <div><p class="kicker" id="missionRankKicker">YOUR RANK</p><h2 id="kidsRank">はじめての旅人</h2><p id="kidsProgress">0 / 75 ミッション</p><p id="rankNext">あと5個でランクアップ</p></div>
         </section>
         <div class="badge-row" id="badgeRow"><span data-level="15">🌊<small>SEA</small></span><span data-level="40">🤝<small>TEAM</small></span><span data-level="75">🏆<small>MASTER</small></span></div>
         <div class="mission-tabs" aria-label="ミッションカテゴリ">
@@ -312,7 +312,7 @@
           <button type="button" id="toggleMissionResult">結果を表示</button>
         </div>
         <section class="mission-result" id="missionResult" hidden>
-          <div class="section-title"><div><p class="kicker dark">RESULT</p><h2 id="missionResultTitle">優典の記録</h2></div><strong id="missionResultScore">0 CLEAR</strong></div>
+          <div class="section-title"><div><p class="kicker dark" id="missionResultKicker">RESULT</p><h2 id="missionResultTitle">優典の記録</h2></div><strong id="missionResultScore">0 CLEAR</strong></div>
           <p id="missionResultSummary">はじめての旅人 · 0 XP</p>
           <div id="missionResultList"></div>
           <p class="mission-result-note">この端末内の記録です。家族の公式結果は管理者端末で確定します。</p>
@@ -412,15 +412,22 @@
   <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="missionModeTitle">
     <p class="kicker">MISSION DEVICE</p>
     <h2 id="missionModeTitle">この端末の使い方</h2>
-    <p class="modal-description">端末間の自動同期はしません。親端末を公式記録、優典・綾菜の端末を自己記録として使います。</p>
+    <p class="modal-description">端末間の自動同期はしません。親端末は5人を管理し、本人用端末は年齢に合う表示で記録します。</p>
     <div class="mode-option-grid">
       <button type="button" data-device-mode="manager"><b>家族管理モード</b><small>5人の公式記録</small></button>
-      <button type="button" data-device-mode="personal"><b>自分用モード</b><small>優典・綾菜の自己記録</small></button>
+      <button type="button" data-device-mode="personal"><b>自分用モード</b><small>優典・綾菜・慶典の自己記録</small></button>
+      <button type="button" data-device-mode="toddler"><b>幼児モード</b><small>杏菜・波瑠菜のひらがな表示</small></button>
     </div>
     <div id="personalProfileChooser" class="personal-profile-chooser" hidden>
       <p>この端末を使う人</p>
       <button type="button" data-personal-profile="eldest-son">優典</button>
       <button type="button" data-personal-profile="eldest-daughter">綾菜</button>
+      <button type="button" data-personal-profile="second-son">慶典</button>
+    </div>
+    <div id="toddlerProfileChooser" class="personal-profile-chooser" hidden>
+      <p>この端末を使う人</p>
+      <button type="button" data-toddler-profile="second-daughter">杏菜</button>
+      <button type="button" data-toddler-profile="third-daughter">波瑠菜</button>
     </div>
     <button type="button" id="cancelMissionMode" class="danger-link" hidden>変更せず閉じる</button>
   </section>
@@ -441,7 +448,7 @@
   <div class="modal-backdrop" data-close-rank-up></div>
   <section class="modal-card rank-up-card" role="dialog" aria-modal="true" aria-labelledby="rankUpTitle">
     <div class="rank-up-mark">★</div>
-    <p class="kicker">RANK UP</p>
+    <p class="kicker" id="rankUpKicker">RANK UP</p>
     <h2 id="rankUpTitle">ランクアップ！</h2>
     <div id="rankUpList" class="rank-up-list"></div>
     <button type="button" class="primary-button rank-up-close" data-close-rank-up>つづける</button>
