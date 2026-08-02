@@ -296,9 +296,9 @@
         </div>
         <section class="mission-hero">
           <div class="mission-ring" id="missionRing"><div><strong id="kidsXp">0</strong><small>XP</small></div></div>
-          <div><p class="kicker">YOUR RANK</p><h2 id="kidsRank">かけだし旅人</h2><p id="kidsProgress">0 / 75 ミッション</p></div>
+          <div><p class="kicker">YOUR RANK</p><h2 id="kidsRank">はじめての旅人</h2><p id="kidsProgress">0 / 75 ミッション</p><p id="rankNext">あと5個でランクアップ</p></div>
         </section>
-        <div class="badge-row" id="badgeRow"><span data-level="250">🌊<small>SEA</small></span><span data-level="600">🔥<small>BBQ</small></span><span data-level="950">🏆<small>MASTER</small></span></div>
+        <div class="badge-row" id="badgeRow"><span data-level="15">🌊<small>SEA</small></span><span data-level="40">🤝<small>TEAM</small></span><span data-level="75">🏆<small>MASTER</small></span></div>
         <div class="mission-tabs" aria-label="ミッションカテゴリ">
           <button type="button" class="active" data-mission-category="all">すべて</button>
           <button type="button" data-mission-category="common">どこでも</button>
@@ -312,8 +312,8 @@
           <button type="button" id="toggleMissionResult">結果を表示</button>
         </div>
         <section class="mission-result" id="missionResult" hidden>
-          <div class="section-title"><div><p class="kicker dark">RESULT</p><h2 id="missionResultTitle">優典の記録</h2></div><strong id="missionResultScore">0 XP</strong></div>
-          <p id="missionResultSummary">達成 0 / 75</p>
+          <div class="section-title"><div><p class="kicker dark">RESULT</p><h2 id="missionResultTitle">優典の記録</h2></div><strong id="missionResultScore">0 CLEAR</strong></div>
+          <p id="missionResultSummary">はじめての旅人 · 0 XP</p>
           <div id="missionResultList"></div>
           <p class="mission-result-note">この端末内の記録です。家族の公式結果は管理者端末で確定します。</p>
         </section>
@@ -435,6 +435,16 @@
     <p class="field-label">達成したメンバー</p>
     <div class="batch-profile-grid" id="batchProfileGrid"></div>
     <div class="modal-actions"><button type="button" class="secondary-button" data-close-batch>キャンセル</button><button type="button" class="primary-button" id="saveBatchMission">まとめて記録</button></div>
+  </section>
+</div>
+<div class="app-modal rank-up-modal" id="rankUpModal" aria-hidden="true">
+  <div class="modal-backdrop" data-close-rank-up></div>
+  <section class="modal-card rank-up-card" role="dialog" aria-modal="true" aria-labelledby="rankUpTitle">
+    <div class="rank-up-mark">★</div>
+    <p class="kicker">RANK UP</p>
+    <h2 id="rankUpTitle">ランクアップ！</h2>
+    <div id="rankUpList" class="rank-up-list"></div>
+    <button type="button" class="primary-button rank-up-close" data-close-rank-up>つづける</button>
   </section>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite">保存しました</div>

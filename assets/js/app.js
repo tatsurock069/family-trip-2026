@@ -508,51 +508,57 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const MISSIONS = [
-    ['find-seagull','ine','🕊️','カモメを見つける',10],['boat-captain','ine','🚢','遊覧船の船長ポーズ',10],
-    ['count-funaya','ine','🏘️','舟屋を10軒見つける',15],['record-waves','ine','🎙️','伊根の波音を録音する',10],
-    ['seafood-reporter','ine','🐟','ランチを食レポする',15],['find-blue-roof','ine','🔵','船から青い屋根を見つける',10],
-    ['family-photographer','ine','📷','みんなの写真係をする',15],['ine-blue-hunt','ine','🔎','青いものを5つ見つける',15],
-    ['funaya-purpose-quiz','ine','💡','舟屋の使い方を答える',15],['sea-color-name','ine','🎨','海の色に名前をつける',10],
-    ['wave-to-boat','ine','👋','すれ違う船に手を振る',10],['funaya-frame','ine','🖼️','海と舟屋を一枚に撮る',15],
+    ['listen-sea-sounds','ine','👂','海から聞こえる音を3つ探す',10],['boat-captain','ine','🚢','遊覧船の船長ポーズ',10],
+    ['notice-funaya-detail','ine','🏘️','舟屋の好きな形を一つ説明する',15],['record-waves','ine','🎙️','伊根の波音を録音する',10],
+    ['seafood-reporter','ine','🐟','ランチを食レポする',15],['remember-boat-guide','ine','💡','遊覧船の案内を一つ覚える',10],
+    ['share-ine-impression','ine','💬','きょうだいと伊根の感想を交換する',15],['share-window-view','ine','🤝','船の窓際を譲り合う',15],
+    ['funaya-question','ine','❓','舟屋の不思議を一つ考える',15],['sea-color-name','ine','🎨','海の色に名前をつける',10],
+    ['wave-to-boat','ine','👋','すれ違う船に手を振る',10],['listen-waves-ten','ine','🌊','波音を静かに10秒聞く',15],
     ['ine-greeting','ine','☀️','伊根で元気にあいさつする',10],['favorite-funaya','ine','❤️','お気に入りの舟屋を決める',10],
     ['quiet-funaya','ine','🤫','舟屋の町を静かに10分歩く',20],
     ['help-bbq','bbq','🍖','BBQで一品手伝う',20],['veggie-hero','bbq','🥦','焼き野菜をひとつ食べる',15],
-    ['timer-captain','bbq','⏱️','BBQタイマー係になる',15],['grill-sound','bbq','🎬','焼ける音を動画に撮る',15],
-    ['table-setter','bbq','🍽️','お皿をみんなに配る',10],['serve-sausage','bbq','🌭','ソーセージを取り分ける',10],
-    ['clear-plates','bbq','🧹','食べ終わった皿を片付ける',15],['best-bbq-dish','bbq','👑','BBQの一番を決める',10],
+    ['grill-color-change','bbq','🎨','食材の焼く前後の違いを見つける',15],['listen-grill-sound','bbq','👂','食材が焼ける音を静かに聞く',15],
+    ['prepare-own-dish','bbq','🍽️','自分の食器を準備する',10],['observe-sausage','bbq','🌭','ソーセージの焼き加減を観察する',10],
+    ['clear-plates','bbq','🧹','食べ終わった皿を片付ける',15],['favorite-dish-reason','bbq','💬','好きだった料理と理由を伝える',10],
     ['wash-vegetables','bbq','💧','野菜を洗う',15],['carry-tableware','bbq','🥄','食器を安全に運ぶ',10],
-    ['hotdog-builder','bbq','🌭','ホットドッグを完成させる',15],['drink-server','bbq','🥤','飲み物を配る',10],
-    ['recipe-reader','bbq','📖','次の焼き方を読み上げる',10],['wait-grill','bbq','⌛','焼けるまでつまみ食いせず待つ',15],
+    ['hotdog-builder','bbq','🌭','ホットドッグを完成させる',15],['manage-own-drink','bbq','🥤','自分の飲み物を管理する',10],
+    ['remember-heat-setting','bbq','🔥','食材の火加減を一つ覚える',10],['wait-grill','bbq','⌛','焼けるまでつまみ食いせず待つ',15],
     ['sort-bbq-trash','bbq','♻️','BBQのゴミを分別する',20],
     ['family-jump','family','🕴️','家族全員でジャンプ写真',15],['dad-photo','family','📸','お父さんとツーショット',15],
-    ['mom-photo','family','💐','お母さんとツーショット',15],['grandma-smile','family','😊','おばあちゃんを笑顔にする',15],
-    ['thank-you','family','🤝','家族の誰かにありがとうを言う',15],['siblings-photo','family','👧','きょうだいの写真を撮る',15],
-    ['carry-bag','family','🎒','家族の荷物をひとつ運ぶ',10],['help-tired','family','💪','一番疲れている人を手伝う',20],
+    ['mom-photo','family','💐','お母さんとツーショット',15],['grandma-talk-together','family','😊','おばあちゃんの話を一緒に聞く',15],
+    ['thank-you','family','🤝','家族の誰かにありがとうを言う',15],['siblings-together-photo','family','👧','きょうだい5人で写真に入る',15],
+    ['manage-own-bag','family','🎒','自分の荷物を自分で管理する',10],['wait-for-family','family','🚶','遅れている家族を待つ',20],
     ['family-good-morning','family','☀️','家族全員におはようを言う',10],['sibling-high-five','family','🙌','きょうだい全員とハイタッチ',10],
-    ['grandma-story','family','📖','おばあちゃんの思い出話を聞く',15],['family-compliment','family','✨','家族の良いところを伝える',15],
-    ['family-funny-face','family','😆','家族で変顔写真を撮る',10],['family-photo-director','family','🎬','家族写真の監督になる',20],
-    ['family-laugh','family','😄','家族を3人以上笑わせる',15],
-    ['find-red-post','miyama','📮','美山の赤いポストを発見',15],['count-roofs','miyama','🏠','茅葺き屋根を5軒見つける',15],
+    ['grandma-question-together','family','📖','おばあちゃんの話を聞いて質問する',15],['family-compliment','family','✨','家族の良いところを伝える',15],
+    ['family-funny-face','family','😆','家族で変顔写真を撮る',10],['join-family-photo','family','🎬','声をかけられたら家族写真に集まる',20],
+    ['listen-to-family','family','😄','家族の話を最後まで聞く',15],
+    ['red-post-turn','miyama','📮','赤いポスト前で順番を守る',15],['favorite-roof-reason','miyama','🏠','好きな茅葺き屋根と理由を話す',15],
     ['quiet-walk','miyama','🤫','1分間静かに里を歩く',15],['nature-sound','miyama','🌿','美山の自然音を録音する',10],
-    ['best-memory','miyama','🏆','旅の一番を発表する',20],['find-insects','miyama','🐞','虫を3種類見つける',15],
-    ['no-litter','miyama','🍃','ゴミを出さずに散策する',15],['find-three-greens','miyama','🎨','緑色を3種類見つける',10],
+    ['best-memory','miyama','🏆','旅の一番を発表する',20],['observe-insect-gently','miyama','🐞','虫を触らず静かに観察する',15],
+    ['no-litter','miyama','🍃','ゴミを出さずに散策する',15],['describe-green','miyama','🎨','好きな緑色を言葉で表す',10],
     ['roof-sketch','miyama','✏️','茅葺き屋根を絵に描く',20],['miyama-greeting','miyama','☀️','美山で元気にあいさつする',10],
-    ['find-stream','miyama','💧','水の流れる場所を見つける',15],['flower-photo','miyama','🌼','季節の花を撮影する',10],
-    ['compare-roofs','miyama','🔍','茅葺き屋根の違いを見つける',15],['miyama-siblings-photo','miyama','📷','茅葺き屋根と5人で撮る',15],
+    ['listen-water','miyama','💧','水の音を静かに聞く',15],['protect-flowers','miyama','🌼','花を採らずに観察する',10],
+    ['discuss-roof-difference','miyama','🔍','屋根の違いをみんなで一つ考える',15],['miyama-siblings-photo','miyama','📷','茅葺き屋根と5人で撮る',15],
     ['slow-village-walk','miyama','🚶','走らずゆっくり里を一周する',15],
-    ['grandma-luggage','common','🎒','おばあちゃんの荷物を持つ',20],['common-younger-help','common','🤲','年下のきょうだいを手伝う',20],
+    ['grandma-checkin','common','🎒','おばあちゃんに「大丈夫？」と声をかける',20],['offer-help','common','🤲','困っている人に一度声をかける',20],
     ['seatbelt-check','common','✅','シートベルトを声かけ確認する',10],['keep-car-clean','common','🧹','車内をきれいに保つ',15],
-    ['pass-drinks','common','🥤','みんなへ飲み物を配る',10],['next-plan-announcer','common','📣','次の予定をみんなに伝える',10],
-    ['thank-driver','common','🚙','運転ありがとうを伝える',15],['no-fighting','common','🕊️','30分きょうだいげんかをしない',20],
-    ['count-tunnels','common','🔢','通ったトンネルを数える',10],['car-song','common','🎵','車内でみんなと一曲歌う',10],
-    ['travel-quiz','common','❓','旅行クイズを一問出す',15],['forgotten-item-check','common','👀','出発前に忘れ物を確認する',15],
+    ['own-drink-check','common','🥤','自分の飲み物を忘れず持つ',10],['remember-next-plan','common','📣','次の予定を聞いて覚える',10],
+    ['thank-driver','common','🚙','運転ありがとうを伝える',15],['kind-word','common','🕊️','きょうだいに優しい言葉をかける',20],
+    ['remember-window-view','common','⛰️','車窓の景色を一つ覚える',10],['car-song','common','🎵','車内でみんなと一曲歌う',10],
+    ['travel-quiz','common','❓','旅行クイズを一問出す',15],['own-seat-check','common','👀','出発前に自分の席まわりを確認する',15],
     ['rest-stretch','common','🙆','休憩でみんなとストレッチする',10],['view-reporter','common','⛰️','車窓の発見を一つ発表する',10],
-    ['collect-smiles','common','😊','3人以上を笑顔にする',15]
+    ['smile-greeting','common','😊','自分から笑顔であいさつする',15]
   ].map(([key,category,emoji,title,xp]) => ({key,category,emoji,title,xp}));
   const MISSION_PROFILES = [
     ['eldest-son','優典'],['eldest-daughter','綾菜'],['second-son','慶典'],
     ['second-daughter','杏菜'],['third-daughter','波瑠菜']
   ].map(([key,label]) => ({key,label}));
+  const MISSION_RANKS = [
+    'はじめての旅人','旅の見習い','発見ハンター','海の探検員',
+    '舟屋ウォーカー','BBQルーキー','BBQサポーター','家族のムードメーカー',
+    '旅のチームメイト','美山ネイチャー隊','思いやり名人','頼れる旅仲間',
+    '海の京都マスター','家族旅エース','関家の旅名人','トリップマスター'
+  ];
   const profileLabel = (key) => MISSION_PROFILES.find((profile) => profile.key === key)?.label || '優典';
   const profileKeys = new Set(MISSION_PROFILES.map((profile) => profile.key));
   const legacyMissionKeys = ['find-seagull','family-jump','dad-photo','help-bbq','find-red-post'];
@@ -577,6 +583,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const openModal = (modal) => { modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false'); };
   const closeModal = (modal) => { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); };
   const currentMissionState = () => missionStates[activeMissionProfile];
+  const rankIndexForCount = (count) => Math.min(Math.floor(count / 5), MISSION_RANKS.length - 1);
+  const rankForCount = (count) => MISSION_RANKS[rankIndexForCount(count)];
+
+  const rankUpModal = document.getElementById('rankUpModal');
+  function showRankUp(profileList) {
+    const uniqueProfiles = [...new Set(profileList)];
+    document.getElementById('rankUpTitle').textContent = uniqueProfiles.length === 1
+      ? profileLabel(uniqueProfiles[0]) + ' ランクアップ！'
+      : uniqueProfiles.length + '人がランクアップ！';
+    document.getElementById('rankUpList').innerHTML = uniqueProfiles.map((profileKey) => {
+      const count = missionStats(profileKey).completed.length;
+      return '<div><span>' + escapeHTML(profileLabel(profileKey)) + '</span><strong>' + escapeHTML(rankForCount(count)) + '</strong></div>';
+    }).join('');
+    openModal(rankUpModal);
+  }
+  document.querySelectorAll('[data-close-rank-up]').forEach((button) => {
+    button.addEventListener('click', () => closeModal(rankUpModal));
+  });
 
   function saveMissionStates() {
     storage.set('sekiTripKidsByProfile', missionStates);
@@ -590,8 +614,8 @@ document.addEventListener('DOMContentLoaded', () => {
   function updateMissionResult() {
     const result = missionStats(activeMissionProfile);
     document.getElementById('missionResultTitle').textContent = profileLabel(activeMissionProfile) + 'の記録';
-    document.getElementById('missionResultScore').textContent = result.xp + ' XP';
-    document.getElementById('missionResultSummary').textContent = '達成 ' + result.completed.length + ' / ' + MISSIONS.length;
+    document.getElementById('missionResultScore').textContent = result.completed.length + ' CLEAR';
+    document.getElementById('missionResultSummary').textContent = rankForCount(result.completed.length) + ' · ' + result.xp + ' XP';
     document.getElementById('missionResultList').innerHTML = result.completed.length
       ? result.completed.map((mission) => '<span>' + mission.emoji + ' ' + escapeHTML(mission.title) + '</span>').join('')
       : '<p>まだ達成したミッションはありません。</p>';
@@ -602,16 +626,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateMissions() {
     const {completed, xp} = missionStats(activeMissionProfile);
-    const maxXp = MISSIONS.reduce((sum, mission) => sum + mission.xp, 0);
+    const completedCount = completed.length;
+    const rankIndex = rankIndexForCount(completedCount);
+    const nextRankAt = Math.min((rankIndex + 1) * 5, MISSIONS.length);
+    const rankProgress = completedCount >= MISSIONS.length ? 1 : (completedCount % 5) / 5;
     const label = profileLabel(activeMissionProfile);
     document.getElementById('kidsXp').textContent = xp;
-    document.getElementById('kidsProgress').textContent = completed.length + ' / ' + MISSIONS.length + ' ミッション';
-    document.getElementById('homeKidsProgress').textContent = label + ' ' + xp + ' XP';
-    document.getElementById('missionRing').style.setProperty('--mission-progress', (xp / maxXp * 360) + 'deg');
-    document.getElementById('kidsRank').textContent =
-      xp >= 950 ? 'トリップマスター' : xp >= 600 ? '家族の冒険家' : xp >= 250 ? '海の探検家' : 'かけだし旅人';
+    document.getElementById('kidsProgress').textContent = completedCount + ' / ' + MISSIONS.length + ' ミッション';
+    document.getElementById('rankNext').textContent = completedCount >= MISSIONS.length
+      ? '全ミッションクリア！'
+      : 'あと' + (nextRankAt - completedCount) + '個でランクアップ';
+    document.getElementById('homeKidsProgress').textContent = label + ' ' + completedCount + ' / ' + MISSIONS.length;
+    document.getElementById('missionRing').style.setProperty('--mission-progress', (rankProgress * 360) + 'deg');
+    document.getElementById('kidsRank').textContent = MISSION_RANKS[rankIndex];
     document.querySelectorAll('#badgeRow [data-level]').forEach((badge) => {
-      badge.classList.toggle('unlocked', xp >= Number(badge.dataset.level));
+      badge.classList.toggle('unlocked', completedCount >= Number(badge.dataset.level));
     });
     updateMissionResult();
   }
@@ -645,11 +674,17 @@ document.addEventListener('DOMContentLoaded', () => {
     ).join('');
     grid.querySelectorAll('.kids-item').forEach((input) => {
       input.addEventListener('change', () => {
+        const beforeCount = missionStats(activeMissionProfile).completed.length;
         currentMissionState()[input.dataset.stateKey] = input.checked;
         saveMissionStates();
         input.closest('.mission-card').classList.toggle('completed', input.checked);
         updateMissions();
-        if (input.checked) showToast(profileLabel(activeMissionProfile) + ' ミッションクリア！');
+        const afterCount = missionStats(activeMissionProfile).completed.length;
+        if (input.checked && rankIndexForCount(afterCount) > rankIndexForCount(beforeCount)) {
+          showRankUp([activeMissionProfile]);
+        } else if (input.checked) {
+          showToast(profileLabel(activeMissionProfile) + ' ミッションクリア！');
+        }
       });
     });
     updateMissions();
@@ -730,11 +765,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const selected = [...document.querySelectorAll('#batchProfileGrid input:checked')];
     if (!selected.length) { showToast('達成したメンバーを選んでください'); return; }
     const missionKey = document.getElementById('batchMissionSelect').value;
+    const beforeCounts = Object.fromEntries(selected.map((input) => [input.value, missionStats(input.value).completed.length]));
     selected.forEach((input) => { missionStates[input.value][missionKey] = true; });
     saveMissionStates();
     closeModal(batchModal);
     renderMissions();
-    showToast(selected.length + '人分を公式記録に反映しました');
+    const rankedUp = selected.map((input) => input.value).filter((profileKey) =>
+      rankIndexForCount(missionStats(profileKey).completed.length) > rankIndexForCount(beforeCounts[profileKey])
+    );
+    if (rankedUp.length) showRankUp(rankedUp);
+    else showToast(selected.length + '人分を公式記録に反映しました');
   });
 
   document.getElementById('resetKids').addEventListener('click', () => {
