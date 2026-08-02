@@ -1,10 +1,10 @@
 const CACHE_PREFIX = 'seki-family-trip-';
-const CACHE = CACHE_PREFIX + 'v20';
+const CACHE = CACHE_PREFIX + 'v21';
 const APP_SHELL = [
   './',
   './index.html',
-  './assets/css/style.css?v=20',
-  './assets/js/app.js?v=20',
+  './assets/css/style.css?v=21',
+  './assets/js/app.js?v=21',
   './assets/images/hero-ine.jpg',
   './assets/images/bbq-course.jpg',
   './assets/images/miyama.jpg',

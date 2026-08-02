@@ -578,11 +578,16 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const SHOT_CATEGORIES = {
-    opening:['旅のはじまり','OPENING'], ine:['伊根・舟屋','INE'], lunch:['海鮮ランチ','LUNCH'],
+    opening:['旅のはじまり','OPENING'], road:['移動・共通','ON THE ROAD'], ine:['伊根・舟屋','INE'], lunch:['海鮮ランチ','LUNCH'],
     beach:['海水浴','PLAN A'], planb:['神社・絶景','PLAN B'], villa:['ヴィラ到着','VILLA'],
-    bbq:['BBQ','DINNER'], miyama:['美山','DAY 2'], ending:['旅の終わり','ENDING']
+    bbq:['BBQ','DINNER'], breakfast:['ヴィラの朝','DAY 2 MORNING'], miyama:['美山','DAY 2'], ending:['旅の終わり','ENDING']
   };
-  const SHOTS = [
+  const CORE_SHOT_KEYS = new Set([
+    'departure-family','first-road','boat-departure','boat-reaction','funaya-wide','funaya-family','seafood-top','first-bite',
+    'kids-at-sea','beach-wide','shrine-approach','kasamatsu-view','matanozoki','villa-reaction','pool-wide','grill-opening',
+    'steak-sear','steak-hands','sunset-toast','family-table','miyama-walk','red-post','kayabuki-wide','car-comments','last-road'
+  ]);
+  const BASE_SHOTS = [
     ['departure-family','opening','出発前、家族全員集合','家を背景に横位置。全員の足元まで入れる。','W','横写真'],
     ['loading-car','opening','荷物を積む手元','トランク越しに、バッグと手の動きを寄りで。','C','横動画'],
     ['first-road','opening','高速へ向かう車窓','フロントガラス越し。標識と朝の光を5秒固定。','V','縦動画'],
@@ -618,7 +623,91 @@ document.addEventListener('DOMContentLoaded', () => {
     ['car-comments','ending','車内で旅の感想','1人ひと言。「一番よかったのは？」','C','横動画'],
     ['best-moment','ending','子どものベスト場面','本人に今日のNo.1を選んでもらう。','C','縦動画'],
     ['last-road','ending','帰り道のラストカット','夕方の車窓を10秒固定。','W','横動画']
-  ].map(([key,category,title,composition,frame,format,plan]) => ({key,category,title,composition,frame,format,plan}));
+  ].map(([key,category,title,composition,frame,format,plan]) => ({
+    key, category, title, composition, frame, format, plan,
+    priority: CORE_SHOT_KEYS.has(key) ? 'must' : 'nice', kind: 'KEY'
+  }));
+
+  const CREATOR_SHOTS = [
+    ['opening-talk','opening','出発前オープニング','横位置で「行き先・家族8人・今日の見どころ」を20秒。','C','横動画 · Aロール',null,'must','A-ROLL'],
+    ['gear-check','opening','マイク・容量・電池を確認','DJI Mic、空き容量、予備電池を出発前に確認。','C','撮影準備',null,'must','CHECK'],
+    ['lock-door','opening','玄関を出て鍵を閉める','手元→家族が車へ向かう流れを5秒ずつ。自宅位置は映さない。','C','横動画 · 5秒',null,'nice','B-ROLL'],
+    ['car-start','opening','エンジン始動と出発','助手席からボタン、メーター、動き出す景色をつなぐ。','C','横動画 · 3カット',null,'nice','B-ROLL'],
+
+    ['road-sign','road','目的地へ向かう道路標識','助手席から安全に。標識が読める状態で5秒固定。','W','横動画 · 5秒',null,'nice','B-ROLL'],
+    ['window-landscape','road','移り変わる車窓','山・海・トンネル出口を各5秒。運転者は撮影しない。','W','横動画 · 3カット',null,'nice','B-ROLL'],
+    ['rest-stop','road','休憩地点の到着と出発','車を降りる足元、伸びをする家族、再出発を短く。','M','横動画 · 3カット',null,'bonus','B-ROLL'],
+    ['car-candid','road','車内の自然な家族','会話や笑顔を斜め前から。撮る前にひと言確認する。','C','横動画 · 10秒',null,'nice','B-ROLL'],
+    ['arrival-walk','road','目的地へ歩き始める','駐車場から看板へ向かう後ろ姿。腰の高さから追う。','M','横動画 · 7秒',null,'nice','B-ROLL'],
+    ['next-stop-talk','road','次の目的地をひと言紹介','到着前後に「次は○○へ行きます」を10秒。','C','横動画 · Aロール',null,'must','A-ROLL'],
+
+    ['ine-sign','ine','伊根の案内板・地名','看板を正面から5秒。次の家族カットへつなぐ。','W','横動画 · 5秒',null,'nice','B-ROLL'],
+    ['cruise-ticket','ine','チケットを受け取る手元','券面の個人情報を避け、受け渡しだけを寄りで。','C','横動画 · 5秒',null,'bonus','B-ROLL'],
+    ['boat-boarding','ine','船へ乗り込む足元','桟橋→足元→船内の順で3カット。','M','横動画 · 3カット',null,'nice','B-ROLL'],
+    ['boat-rope-wake','ine','ロープと白い航跡','出航前のロープ、出航後の航跡を各5秒固定。','C','横動画 · 2カット',null,'nice','B-ROLL'],
+    ['ine-ambient','ine','伊根の環境音','波音または船のエンジン音を、会話せず10秒録る。','S','音声 · 10秒',null,'must','AUDIO'],
+    ['ine-arrival-talk','ine','伊根に着いた第一声','景色を背に「最初に感じたこと」をひと言。','C','横動画 · Aロール',null,'must','A-ROLL'],
+
+    ['restaurant-exterior','lunch','舟屋食堂の外観','店名が読める位置から5秒固定。通行を妨げない。','W','横動画 · 5秒',null,'must','B-ROLL'],
+    ['menu-choice','lunch','メニューを選ぶ手元','メニュー→指差し→家族の表情を短く。','C','横動画 · 3カット',null,'nice','B-ROLL'],
+    ['dish-arrival','lunch','料理が届く瞬間','置かれる皿と「おいしそう」の声を一緒に。','C','横動画 · 5秒',null,'nice','B-ROLL'],
+    ['chopsticks-close','lunch','箸上げと料理の質感','刺身を持ち上げ、背景を整理して3秒止める。','C','横・縦両対応',null,'nice','B-ROLL'],
+    ['lunch-review','lunch','食後のミニ食レポ','味、量、子どもの反応を15秒でまとめる。','C','横動画 · Aロール',null,'must','A-ROLL'],
+    ['lunch-ambient','lunch','食卓の自然音','箸や食器の音を5秒。周囲の会話は入れない。','S','音声 · 5秒',null,'bonus','AUDIO'],
+
+    ['beach-arrival-talk','beach','海を見た第一声','海を背景に家族のリアクションを10秒。','C','横動画 · Aロール','a','must','A-ROLL'],
+    ['beach-prep','beach','サンダル・日焼け止め・浮き輪','準備する手元を各3秒。','C','横動画 · 3カット','a','nice','B-ROLL'],
+    ['enter-water','beach','水へ入る瞬間','足元から水面へ。機材を濡らさない距離で撮る。','M','60fps動画','a','nice','B-ROLL'],
+    ['beach-drops','beach','水滴と濡れたタオル','遊び終わった質感を寄りで3カット。','C','横動画 · 3カット','a','bonus','B-ROLL'],
+    ['beach-ambient','beach','波音を録る','家族の声を止め、波打ち際で10秒固定。','S','音声 · 10秒','a','must','AUDIO'],
+
+    ['shrine-arrival-talk','planb','神社到着のひと言','参拝前に目的と第一印象を10秒。','C','横動画 · Aロール','b','must','A-ROLL'],
+    ['temizu-detail','planb','手水の手元','柄杓、水、手の動きを静かに寄る。','C','縦動画','b','nice','B-ROLL'],
+    ['lift-ticket','planb','ケーブル・リフトの乗車券','券面→改札→乗り込む足元を短く。','C','横動画 · 3カット','b','nice','B-ROLL'],
+    ['lift-motion','planb','高度が上がる景色','動き始めと景色の変化を10秒固定。','W','横動画 · 10秒','b','nice','B-ROLL'],
+    ['kasamatsu-sign','planb','展望台の案内板','天橋立の方向が分かるように撮る。','W','横写真 · サムネ候補','b','bonus','THUMB'],
+
+    ['front-key-pickup','villa','10号館と鍵の受け取り','外観→フロント表示→鍵の手元。予約番号は映さない。','C','横動画 · 3カット',null,'must','B-ROLL'],
+    ['villa-exterior','villa','はなもみじ外観','建物全体と家族が入る到着カット。','W','横写真 · サムネ候補',null,'must','THUMB'],
+    ['unlock-villa','villa','鍵を開ける手元','鍵→ドアノブ→扉が開くまでを切らずに撮る。','C','横動画 · 7秒',null,'nice','B-ROLL'],
+    ['villa-walkthrough','villa','玄関からリビングへ','広角でゆっくり前進。急なパンを避ける。','M','横動画 · 10秒',null,'must','B-ROLL'],
+    ['villa-water-details','villa','プール・露天風呂の水面','人が入る前に水面と湯気を各5秒。','C','横動画 · 2カット',null,'nice','B-ROLL'],
+    ['stock-fridge','villa','食材を冷蔵庫へ入れる','買い出し袋→食材→閉じる手元を撮る。','C','横動画 · 3カット',null,'bonus','B-ROLL'],
+    ['villa-arrival-talk','villa','ヴィラの第一印象','お気に入り設備と今夜の楽しみを20秒。','C','横動画 · Aロール',null,'must','A-ROLL'],
+
+    ['bbq-intro-talk','bbq','BBQコースを紹介','今夜の12品とメインのサーロインを20秒で紹介。','C','横動画 · Aロール',null,'must','A-ROLL'],
+    ['bbq-prep','bbq','食材と調味料を並べる','肉・野菜・調味料を真上と斜めから。','W','横・縦両対応',null,'nice','B-ROLL'],
+    ['grill-ignite','bbq','グリル点火と温度計','安全な距離から点火→温度上昇を撮る。','C','横動画 · 2カット',null,'must','B-ROLL'],
+    ['seasoning-fall','bbq','塩とこしょうを振る','斜め逆光で粒が見える位置から60fps。','C','60fps動画',null,'nice','B-ROLL'],
+    ['lid-timer','bbq','フタを閉めてタイマー開始','フタ→温度計→タイマーボタンを3カット。','C','横動画 · 3カット',null,'nice','B-ROLL'],
+    ['steak-rest','bbq','肉を休ませる','アルミホイルで包み、時計も一緒に入れる。','C','横動画 · 5秒',null,'must','B-ROLL'],
+    ['bbq-plating','bbq','盛り付けて家族へ配る','断面→皿→受け取る笑顔をつなぐ。','C','横動画 · 3カット',null,'nice','B-ROLL'],
+    ['grill-sizzle-audio','bbq','焼ける音だけを録る','話さず、グリルへ近づきすぎず10秒。','S','音声 · 10秒',null,'must','AUDIO'],
+    ['bbq-review-talk','bbq','今夜の一番を発表','家族それぞれから短い感想をもらう。','C','横動画 · Aロール',null,'must','A-ROLL'],
+
+    ['morning-exterior','breakfast','朝のヴィラ外観','朝の光と静かな建物を5秒固定。','W','横動画 · 5秒',null,'must','B-ROLL'],
+    ['open-curtain','breakfast','カーテンを開ける','暗い室内から海の景色が現れるまで撮る。','M','横動画 · 7秒',null,'nice','B-ROLL'],
+    ['hotdog-build','breakfast','ホットドッグを作る手元','パン→ソーセージ→ピクルス→マスタード。','C','横・縦両対応',null,'must','B-ROLL'],
+    ['breakfast-table','breakfast','テラスへ朝食を並べる','宮津湾を背景に料理と家族を入れる。','W','横写真 · サムネ候補',null,'must','THUMB'],
+    ['morning-talk','breakfast','Day2オープニング','昨日の一番と今日の予定を20秒。','C','横動画 · Aロール',null,'must','A-ROLL'],
+    ['checkout-check','breakfast','忘れ物確認と荷造り','冷蔵庫、充電器、荷物、鍵を短くつなぐ。','C','横動画 · 4カット',null,'nice','B-ROLL'],
+    ['leave-villa','breakfast','ヴィラを出て振り返る','扉を閉め、家族が車へ向かう後ろ姿。','M','横動画 · 7秒',null,'must','B-ROLL'],
+
+    ['miyama-sign','miyama','美山の入口・案内板','地名が読める状態で5秒固定。','W','横動画 · 5秒',null,'must','B-ROLL'],
+    ['miyama-arrival-talk','miyama','美山到着の第一声','茅葺きを背景に期待と印象を10秒。','C','横動画 · Aロール',null,'must','A-ROLL'],
+    ['waterway-close','miyama','水路と流れる水','水面、草、流れを各3秒。','C','横動画 · 3カット',null,'nice','B-ROLL'],
+    ['miyama-family-view','miyama','集落を眺める家族','家族を手前、茅葺き集落を奥へ置く。','W','横動画 · 7秒',null,'nice','B-ROLL'],
+    ['miyama-ambient','miyama','美山の環境音','水、鳥、風の音を会話せず10秒録る。','S','音声 · 10秒',null,'must','AUDIO'],
+
+    ['pack-car-home','ending','帰りの荷物を積む','少し疲れた空気も含めて自然に撮る。','M','横動画 · 7秒',null,'nice','B-ROLL'],
+    ['last-look-back','ending','最後に旅先を振り返る','家族の後ろ姿から景色へゆっくり振る。','W','横動画 · 7秒',null,'must','B-ROLL'],
+    ['family-outro','ending','旅の締めコメント','一番よかった場所、料理、次にしたいことを30秒。','C','横動画 · Aロール',null,'must','A-ROLL'],
+    ['thumbnail-family','ending','サムネイル用の家族写真','顔を中央寄りにし、左右へ文字用の余白を残す。','W','横写真 · サムネ候補',null,'must','THUMB'],
+    ['privacy-review','ending','公開NG素材を確認','他人の顔、車番、予約番号、自宅位置、入浴・水着映像を確認。','C','公開前チェック',null,'must','CHECK'],
+    ['backup-media','ending','充電と素材バックアップ','空き容量を確認し、帰宅後すぐ充電・二重保存。','C','撮影後チェック',null,'must','CHECK']
+  ].map(([key,category,title,composition,frame,format,plan,priority,kind]) => ({key,category,title,composition,frame,format,plan,priority,kind}));
+
+  const SHOTS = [...BASE_SHOTS, ...CREATOR_SHOTS];
 
   const legacyShotKeys = ['departure-family','boat-departure','funaya-family','kids-at-sea','villa-reaction','steak-hands','sunset-toast','miyama-walk'];
   function migrateState(saved, legacyKeys) {
@@ -626,6 +715,37 @@ document.addEventListener('DOMContentLoaded', () => {
     return saved && typeof saved === 'object' ? saved : {};
   }
   let shotState = migrateState(storage.get('sekiTripShooting', {}), legacyShotKeys);
+  let shotReviewState = storage.get('sekiTripShotReviews', {});
+  if (!shotReviewState || typeof shotReviewState !== 'object' || Array.isArray(shotReviewState)) shotReviewState = {};
+  let shotFilter = ['all','pending','must'].includes(storage.get('sekiTripShotFilter', 'all'))
+    ? storage.get('sekiTripShotFilter', 'all') : 'all';
+
+  function suggestedShotCategory() {
+    const now = new Date();
+    const dayOne = new Date('2026-08-03T00:00:00+09:00');
+    const dayTwo = new Date('2026-08-04T00:00:00+09:00');
+    const finished = new Date('2026-08-05T00:00:00+09:00');
+    if (now < dayOne) return 'opening';
+    if (now >= finished) return 'ending';
+    const hhmm = Number(new Intl.DateTimeFormat('en', {timeZone:'Asia/Tokyo', hour:'2-digit', minute:'2-digit', hourCycle:'h23'}).format(now).replace(':',''));
+    if (now < dayTwo) {
+      if (hhmm < 930) return 'road';
+      if (hhmm < 1100) return 'ine';
+      if (hhmm < 1220) return 'lunch';
+      if (hhmm < 1400) return selectedPlan === 'a' ? 'beach' : 'planb';
+      if (hhmm < 1700) return 'villa';
+      return 'bbq';
+    }
+    if (hhmm < 1100) return 'breakfast';
+    if (hhmm < 1330) return 'road';
+    if (hhmm < 1630) return 'miyama';
+    return 'ending';
+  }
+
+  const savedShotCollapsed = storage.get('sekiTripShotCollapsed', null);
+  let shotCollapsed = savedShotCollapsed && typeof savedShotCollapsed === 'object' && !Array.isArray(savedShotCollapsed)
+    ? savedShotCollapsed
+    : Object.fromEntries(Object.keys(SHOT_CATEGORIES).map((category) => [category, category !== suggestedShotCategory()]));
 
   function visibleShots() {
     return SHOTS.filter((shot) => !shot.plan || shot.plan === selectedPlan);
@@ -643,39 +763,117 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  function filteredShots(shots) {
+    if (shotFilter === 'pending') return shots.filter((shot) => !shotState[shot.key]);
+    if (shotFilter === 'must') return shots.filter((shot) => shot.priority === 'must');
+    return shots;
+  }
+
+  function updateShotControls() {
+    document.querySelectorAll('[data-shot-filter]').forEach((button) => {
+      const active = button.dataset.shotFilter === shotFilter;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', String(active));
+    });
+    const categories = Object.keys(SHOT_CATEGORIES).filter((category) => visibleShots().some((shot) => shot.category === category));
+    const allCollapsed = categories.every((category) => Boolean(shotCollapsed[category]));
+    const toggle = document.getElementById('toggleAllShotCategories');
+    if (toggle) toggle.textContent = allCollapsed ? 'すべて開く' : 'すべて閉じる';
+  }
+
   function renderShots() {
     const container = document.getElementById('shotList');
     if (!container) return;
     const shots = visibleShots();
-    container.innerHTML = Object.entries(SHOT_CATEGORIES).map(([category, [title, english]]) => {
-      const entries = shots.filter((shot) => shot.category === category);
+    const markup = Object.entries(SHOT_CATEGORIES).map(([category, [title, english]]) => {
+      const allEntries = shots.filter((shot) => shot.category === category);
+      const entries = filteredShots(allEntries);
       if (!entries.length) return '';
       const cards = entries.map((shot) =>
-        '<label class="shot-card ' + (shotState[shot.key] ? 'checked' : '') + '">' +
-          '<span class="shot-frame">' + shot.frame + '</span>' +
-          '<span class="shot-copy"><b>' + shot.title + '</b><p>' + shot.composition + '</p><small>' + shot.format + '</small></span>' +
-          '<input class="shoot-item" data-state-key="' + shot.key + '" type="checkbox" ' + (shotState[shot.key] ? 'checked' : '') + '>' +
-        '</label>'
+        '<article class="shot-card ' + (shotState[shot.key] ? 'checked ' : '') + (shotReviewState[shot.key] ? 'review-' + shotReviewState[shot.key] : '') + '">' +
+          '<label class="shot-check-main"><span class="shot-frame">' + escapeHTML(shot.frame) + '</span>' +
+          '<span class="shot-copy"><span class="shot-badges"><em class="priority-' + shot.priority + '">' + shot.priority.toUpperCase() + '</em><em>' + escapeHTML(shot.kind) + '</em></span>' +
+          '<b>' + escapeHTML(shot.title) + '</b><p>' + escapeHTML(shot.composition) + '</p><small>' + escapeHTML(shot.format) + '</small></span>' +
+          '<input class="shoot-item" data-state-key="' + escapeHTML(shot.key) + '" type="checkbox" ' + (shotState[shot.key] ? 'checked' : '') + ' aria-label="' + escapeHTML(shot.title) + 'を撮影済みにする"></label>' +
+          '<div class="shot-review-actions"><button type="button" class="' + (shotReviewState[shot.key] === 'best' ? 'active' : '') + '" data-shot-review="best" data-shot-key="' + escapeHTML(shot.key) + '">★ ベスト</button>' +
+          '<button type="button" class="retake ' + (shotReviewState[shot.key] === 'retake' ? 'active' : '') + '" data-shot-review="retake" data-shot-key="' + escapeHTML(shot.key) + '">↻ 撮り直し</button></div></article>'
       ).join('');
-      return '<section class="shot-category"><div class="shot-category-head"><div><p class="kicker dark">' + english + '</p><h2>' + title + '</h2></div><span id="shot-progress-' + category + '">0 / 0</span></div>' + cards + '</section>';
+      const collapsed = Boolean(shotCollapsed[category]);
+      const done = allEntries.filter((shot) => shotState[shot.key]).length;
+      return '<section class="shot-category ' + (collapsed ? 'collapsed' : '') + '"><button type="button" class="shot-category-head" data-shot-category-toggle="' + category + '" aria-expanded="' + String(!collapsed) + '"><div><p class="kicker dark">' + english + '</p><h2>' + title + '</h2></div><span id="shot-progress-' + category + '">' + done + ' / ' + allEntries.length + '</span><i aria-hidden="true">›</i></button><div class="shot-category-body"' + (collapsed ? ' hidden' : '') + '>' + cards + '</div></section>';
     }).join('');
+    container.innerHTML = markup || '<div class="shoot-empty"><span>✓</span><b>' + (shotFilter === 'pending' ? '未撮影はありません' : '該当する項目はありません') + '</b><p>フィルターを切り替えると他の項目を確認できます。</p></div>';
+
+    container.querySelectorAll('[data-shot-category-toggle]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const category = button.dataset.shotCategoryToggle;
+        shotCollapsed[category] = !Boolean(shotCollapsed[category]);
+        storage.set('sekiTripShotCollapsed', shotCollapsed);
+        renderShots();
+      });
+    });
     container.querySelectorAll('.shoot-item').forEach((input) => {
       input.addEventListener('change', () => {
         shotState[input.dataset.stateKey] = input.checked;
+        if (input.checked && shotReviewState[input.dataset.stateKey] === 'retake') delete shotReviewState[input.dataset.stateKey];
+        if (!input.checked && shotReviewState[input.dataset.stateKey] === 'best') delete shotReviewState[input.dataset.stateKey];
         storage.set('sekiTripShooting', shotState);
-        input.closest('.shot-card').classList.toggle('checked', input.checked);
-        updateShotProgress();
+        storage.set('sekiTripShotReviews', shotReviewState);
+        const card = input.closest('.shot-card');
+        card.classList.toggle('checked', input.checked);
+        if (!shotReviewState[input.dataset.stateKey]) card.classList.remove('review-retake', 'review-best');
+        if (shotFilter === 'pending') renderShots();
+        else updateShotProgress();
+      });
+    });
+    container.querySelectorAll('[data-shot-review]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const key = button.dataset.shotKey;
+        const review = button.dataset.shotReview;
+        shotReviewState[key] = shotReviewState[key] === review ? '' : review;
+        if (!shotReviewState[key]) delete shotReviewState[key];
+        const active = shotReviewState[key] === review;
+        if (review === 'best' && shotReviewState[key] === 'best') shotState[key] = true;
+        if (review === 'retake' && shotReviewState[key] === 'retake') shotState[key] = false;
+        storage.set('sekiTripShotReviews', shotReviewState);
+        storage.set('sekiTripShooting', shotState);
+        renderShots();
+        showToast(active ? (review === 'best' ? 'ベストテイクを記録しました' : '撮り直しに追加しました') : 'マークを解除しました');
       });
     });
     updateShotProgress();
+    updateShotControls();
   }
 
-  document.getElementById('resetShoot').addEventListener('click', () => {
-    if (!window.confirm('撮影チェックをすべて解除しますか？')) return;
-    SHOTS.forEach((shot) => { shotState[shot.key] = false; });
-    storage.set('sekiTripShooting', shotState);
+  document.querySelectorAll('[data-shot-filter]').forEach((button) => {
+    button.addEventListener('click', () => {
+      shotFilter = button.dataset.shotFilter;
+      storage.set('sekiTripShotFilter', shotFilter);
+      renderShots();
+    });
+  });
+
+  document.getElementById('toggleAllShotCategories').addEventListener('click', () => {
+    const categories = Object.keys(SHOT_CATEGORIES).filter((category) => visibleShots().some((shot) => shot.category === category));
+    const allCollapsed = categories.every((category) => Boolean(shotCollapsed[category]));
+    categories.forEach((category) => { shotCollapsed[category] = !allCollapsed; });
+    storage.set('sekiTripShotCollapsed', shotCollapsed);
     renderShots();
-    showToast('撮影チェックを解除しました');
+  });
+
+  document.getElementById('resetShoot').addEventListener('click', () => {
+    if (!window.confirm('撮影チェックとベスト／撮り直し記録をすべて解除しますか？')) return;
+    SHOTS.forEach((shot) => { shotState[shot.key] = false; });
+    shotReviewState = {};
+    storage.set('sekiTripShooting', shotState);
+    storage.set('sekiTripShotReviews', shotReviewState);
+    renderShots();
+    showToast('撮影記録を解除しました');
+  });
+
+  const compositionGuide = document.querySelector('.composition-guide');
+  compositionGuide?.addEventListener('toggle', () => {
+    document.getElementById('compositionToggleLabel').textContent = compositionGuide.open ? '閉じる −' : '構図を見る ＋';
   });
 
   function persistStatic(selector, key, legacyKeys, onUpdate) {

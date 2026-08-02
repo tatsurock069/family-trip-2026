@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="./assets/icons/icon-180.png">
 <link rel="icon" type="image/png" sizes="192x192" href="./assets/icons/icon-192.png">
 <link rel="preload" href="./assets/images/hero-ine.jpg" as="image">
-<link rel="stylesheet" href="./assets/css/style.css?v=20">
+<link rel="stylesheet" href="./assets/css/style.css?v=21">
 <title>関家の旅｜海の京都</title>
 </head>
 <body>
@@ -274,16 +274,25 @@
           <div><p class="kicker">SHOOTING PROGRESS</p><strong id="shootProgress">0 / 0</strong></div>
           <div class="progress"><i id="shootProgressBar"></i></div>
         </article>
-        <section class="composition-guide" aria-labelledby="compositionTitle">
-          <div class="section-title"><div><p class="kicker dark">COMPOSITION SAMPLE</p><h2 id="compositionTitle">この画角をまねる</h2></div><span>横にスワイプ</span></div>
+        <details class="composition-guide" aria-labelledby="compositionTitle">
+          <summary class="section-title"><div><p class="kicker dark">COMPOSITION SAMPLE</p><h2 id="compositionTitle">この画角をまねる</h2></div><span id="compositionToggleLabel">構図を見る ＋</span></summary>
           <div class="composition-scroll">
             <figure><img src="./assets/images/shot-samples/wide.jpg" alt="舟屋と家族を小さく写すワイド構図" loading="lazy"><figcaption><b>W｜ワイド</b><span>景色を主役に。人物は小さく置く。</span></figcaption></figure>
             <figure><img src="./assets/images/shot-samples/close.jpg" alt="ステーキを切る手元に寄った構図" loading="lazy"><figcaption><b>C｜寄り</b><span>見せたい一点に近づき、背景をぼかす。</span></figcaption></figure>
             <figure><img src="./assets/images/shot-samples/motion.jpg" alt="海へ走る子どもを後ろから追う動きの構図" loading="lazy"><figcaption><b>M｜動き</b><span>進行方向に余白を残して後ろから追う。</span></figcaption></figure>
             <figure><img src="./assets/images/shot-samples/vertical.jpg" alt="赤いポストを左三分の一に置いた縦構図" loading="lazy"><figcaption><b>V｜縦</b><span>主役を中央から外し、奥行きを入れる。</span></figcaption></figure>
           </div>
-        </section>
-        <div class="shoot-legend"><span><i>W</i>ワイド</span><span><i>C</i>寄り</span><span><i>M</i>動き</span><span><i>V</i>縦動画</span></div>
+        </details>
+        <div class="shoot-legend"><span><i>W</i>ワイド</span><span><i>C</i>寄り</span><span><i>M</i>動き</span><span><i>V</i>縦動画</span><span><i>S</i>環境音</span></div>
+        <div class="shoot-toolbar">
+          <div class="shoot-filter" aria-label="撮影項目の絞り込み">
+            <button type="button" class="active" data-shot-filter="all" aria-pressed="true">すべて</button>
+            <button type="button" data-shot-filter="pending" aria-pressed="false">未撮影</button>
+            <button type="button" data-shot-filter="must" aria-pressed="false">必須</button>
+          </div>
+          <button type="button" id="toggleAllShotCategories" class="shoot-fold-all">すべて開く</button>
+        </div>
+        <p class="shoot-priority-note"><span>MUST</span>絶対に撮る　<span>NICE</span>余裕があれば　<span>BONUS</span>撮れたら最高</p>
         <div id="shotList"></div>
         <button type="button" id="resetShoot" class="danger-link">撮影チェックをすべて解除</button>
       </div>
@@ -503,6 +512,6 @@
   </section>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite">保存しました</div>
-<script src="./assets/js/app.js?v=20" defer></script>
+<script src="./assets/js/app.js?v=21" defer></script>
 </body>
 </html>
