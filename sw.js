@@ -1,5 +1,5 @@
 const CACHE_PREFIX = 'seki-family-trip-';
-const CACHE = CACHE_PREFIX + 'v13';
+const CACHE = CACHE_PREFIX + 'v14';
 const APP_SHELL = [
   './',
   './index.html',

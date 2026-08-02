@@ -591,10 +591,41 @@ document.addEventListener('DOMContentLoaded', () => {
     'rest-stretch':'おやすみで からだを のばそう','view-reporter':'くるまからみつけたものを はなそう',
     'smile-greeting':'じぶんから にこにこ あいさつしよう'
   };
+  const AGE_MISSION_TITLES = {
+    'eldest-son': {
+      'remember-boat-guide':'遊覧船の案内を要約して年下に伝える','share-window-view':'船の席を見て年下を窓側へ案内する','quiet-funaya':'年下へ声をかけて静かに舟屋を歩く',
+      'help-bbq':'BBQの一品を準備から配膳まで担当する','remember-heat-setting':'食材に合う火加減を一つ説明する','sort-bbq-trash':'分別場所を作り、最後まで確認する',
+      'manage-own-bag':'自分の荷物に加えて年下の忘れ物も確認する','wait-for-family':'最後尾を確認して家族を誘導する','grandma-question-together':'おばあちゃんの話を聞き、話題を広げる質問をする',
+      'favorite-roof-reason':'茅葺き屋根の特徴を調べて家族に説明する','discuss-roof-difference':'屋根の違いと理由をみんなで考える','slow-village-walk':'歩くペースを見て年下と一緒に里を一周する',
+      'grandma-checkin':'おばあちゃんの体調と荷物を気にかける','seatbelt-check':'出発前に全員のシートベルトを声かけ確認する','remember-next-plan':'次の予定と集合時刻を確認して家族へ伝える'
+    },
+    'eldest-daughter': {
+      'notice-funaya-detail':'舟屋らしさが伝わる細部を一つ撮影する','record-waves':'波音を10秒、雑音を避けて録音する','seafood-reporter':'料理の見た目と味を短く食レポする',
+      'grill-color-change':'焼く前後の色と質感の違いを写真に残す','favorite-dish-reason':'好きだった料理を理由つきで家族に紹介する','carry-tableware':'年下へ声をかけながら食器を安全に運ぶ',
+      'family-jump':'全員が入るジャンプ写真の撮影を手伝う','siblings-together-photo':'きょうだい5人の自然な写真を残す','family-compliment':'家族の良いところを具体的に一つ伝える',
+      'nature-sound':'美山らしい自然音を10秒きれいに録音する','describe-green':'美山の緑を自分らしい言葉で表現する','miyama-siblings-photo':'茅葺き屋根が入るきょうだい写真の構図を決める',
+      'offer-help':'困っている家族に気づいて先に声をかける','remember-window-view':'車窓で見つけた景色を写真か言葉で残す','view-reporter':'車窓の発見を家族に分かりやすく紹介する'
+    },
+    'second-son': {
+      'notice-funaya-detail':'形の違う舟屋を3軒見つける','remember-boat-guide':'船の案内を一つ覚えてクイズにする','funaya-question':'舟屋の「どうして？」を一つ見つける',
+      'help-bbq':'安全にできるBBQの仕事を一つ担当する','observe-sausage':'ソーセージの食べごろを色で見つける','remember-heat-setting':'強火と弱火を見分ける',
+      'manage-own-bag':'出発前に自分の荷物を3点確認する','wait-for-family':'家族が揃ったか一緒に数える','listen-to-family':'家族の話を途中でさえぎらず聞く',
+      'favorite-roof-reason':'形の違う茅葺き屋根を2つ見つける','observe-insect-gently':'虫を驚かせず30秒観察する','discuss-roof-difference':'屋根の違うところを一つ発見する',
+      'grandma-checkin':'おばあちゃんに荷物を持とうか聞く','remember-next-plan':'次に行く場所を覚えて答える','own-seat-check':'降りる前に自分の席の忘れ物を確認する'
+    },
+    'second-daughter': TODDLER_MISSION_TITLES,
+    'third-daughter': {
+      'listen-sea-sounds':'うみの おとを きこう','boat-captain':'せんちょう ぽーずを しよう','notice-funaya-detail':'すきな おうちを ゆびさそう','record-waves':'おとなと なみのおとを とろう','seafood-reporter':'おいしい！と いおう','remember-boat-guide':'ふねの おはなしを きこう','share-ine-impression':'きょうだいに にこっと しよう','share-window-view':'まどを じゅんばんこ しよう','funaya-question':'ふしぎな おうちを みつけよう','sea-color-name':'うみの いろを いおう','wave-to-boat':'おふねに てを ふろう','listen-waves-ten':'なみのおとを いっしょに きこう','ine-greeting':'こんにちはを いおう','favorite-funaya':'すきな おうちを えらぼう','quiet-funaya':'おとなと ゆっくり あるこう',
+      'help-bbq':'おさらを ひとつ ならべよう','veggie-hero':'やさいを ひとくち たべよう','grill-color-change':'おにくの いろを みよう','listen-grill-sound':'じゅーの おとを きこう','prepare-own-dish':'じぶんの おさらを もとう','observe-sausage':'そーせーじを みつけよう','clear-plates':'おさらを おとなに わたそう','favorite-dish-reason':'すきな ごはんを ゆびさそう','wash-vegetables':'おとなと やさいを あらおう','carry-tableware':'からのおさらを ゆっくり はこぼう','hotdog-builder':'ぱんに そーせーじを はさもう','manage-own-drink':'じぶんの のみものを もとう','remember-heat-setting':'あついから はなれて みよう','wait-grill':'やけるまで まとう','sort-bbq-trash':'ごみを おとなに わたそう',
+      'family-jump':'みんなと じゃんぷしよう','dad-photo':'おとうさんと しゃしんを とろう','mom-photo':'おかあさんと しゃしんを とろう','grandma-talk-together':'おばあちゃんの となりで きこう','thank-you':'ありがとうを いおう','siblings-together-photo':'きょうだいと しゃしんを とろう','manage-own-bag':'じぶんの かばんを もとう','wait-for-family':'みんなを まとう','family-good-morning':'おはようを いおう','sibling-high-five':'きょうだいと はいたっち','grandma-question-together':'おばあちゃんに おはなししてもらおう','family-compliment':'だいすきを つたえよう','family-funny-face':'おもしろい かおを しよう','join-family-photo':'しゃしんだよで あつまろう','listen-to-family':'おはなしを きこう',
+      'red-post-turn':'あかい ぽすとを みつけよう','favorite-roof-reason':'すきな やねを ゆびさそう','quiet-walk':'そーっと あるこう','nature-sound':'とりや みずの おとを きこう','best-memory':'たのしかった えを えらぼう','observe-insect-gently':'むしを そっと みよう','no-litter':'ごみを おとなに わたそう','describe-green':'みどりを みつけよう','roof-sketch':'おうちの えを かこう','miyama-greeting':'こんにちはを いおう','listen-water':'みずの おとを きこう','protect-flowers':'おはなを そっと みよう','discuss-roof-difference':'ちがう やねを みつけよう','miyama-siblings-photo':'みんなと しゃしんを とろう','slow-village-walk':'おとなと てをつないで あるこう',
+      'grandma-checkin':'おばあちゃんに だいじょうぶ？と きこう','offer-help':'おてつだい する？と きこう','seatbelt-check':'べるとを かちっと しよう','keep-car-clean':'ごみを ふくろに いれよう','own-drink-check':'のみものを もとう','remember-next-plan':'つぎは どこ？と きこう','thank-driver':'うんてん ありがとうを いおう','kind-word':'きょうだいに やさしく しよう','remember-window-view':'まどから すきなものを みつけよう','car-song':'くるまで うたおう','travel-quiz':'これなあに？と きこう','own-seat-check':'いすの まわりを おとなと みよう','rest-stretch':'ぐーっと のびよう','view-reporter':'みつけたものを ゆびさそう','smile-greeting':'にこにこ あいさつしよう'
+    }
+  };
   const MISSION_PROFILES = [
-    ['eldest-son','優典'],['eldest-daughter','綾菜'],['second-son','慶典'],
-    ['second-daughter','杏菜'],['third-daughter','波瑠菜']
-  ].map(([key,label]) => ({key,label}));
+    ['eldest-son','優典','中学2年'],['eldest-daughter','綾菜','小学6年'],['second-son','慶典','小学3年'],
+    ['second-daughter','杏菜','年長'],['third-daughter','波瑠菜','年少']
+  ].map(([key,label,grade]) => ({key,label,grade}));
   const MISSION_RANKS = [
     'はじめての旅人','旅の見習い','発見ハンター','海の探検員',
     '舟屋ウォーカー','BBQルーキー','BBQサポーター','家族のムードメーカー',
@@ -621,34 +652,36 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   storage.set('sekiTripKidsByProfile', missionStates);
 
-  const PERSONAL_PROFILE_KEYS = ['eldest-son','eldest-daughter','second-son'];
-  const TODDLER_PROFILE_KEYS = ['second-daughter','third-daughter'];
   let missionDevice = storage.get('sekiTripMissionDevice', null);
-  if (!missionDevice || !['manager','personal','toddler'].includes(missionDevice.mode)) missionDevice = null;
-  if (missionDevice?.mode === 'personal' && !PERSONAL_PROFILE_KEYS.includes(missionDevice.profile)) missionDevice = null;
-  if (missionDevice?.mode === 'toddler' && !TODDLER_PROFILE_KEYS.includes(missionDevice.profile)) missionDevice = null;
-  let activeMissionProfile = ['personal','toddler'].includes(missionDevice?.mode) ? missionDevice.profile
+  if (['personal','toddler'].includes(missionDevice?.mode) && profileKeys.has(missionDevice.profile)) {
+    missionDevice = {mode:'profile', profile:missionDevice.profile};
+    storage.set('sekiTripMissionDevice', missionDevice);
+  }
+  if (!missionDevice || !['manager','profile'].includes(missionDevice.mode)) missionDevice = null;
+  if (missionDevice?.mode === 'profile' && !profileKeys.has(missionDevice.profile)) missionDevice = null;
+  let activeMissionProfile = missionDevice?.mode === 'profile' ? missionDevice.profile
     : (profileKeys.has(missionDevice?.activeProfile) ? missionDevice.activeProfile : 'eldest-son');
   let activeMissionCategory = 'all';
 
   const openModal = (modal) => { modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false'); };
   const closeModal = (modal) => { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); };
   const currentMissionState = () => missionStates[activeMissionProfile];
-  const isToddlerMode = () => missionDevice?.mode === 'toddler';
-  const missionTitle = (mission) => isToddlerMode() ? (TODDLER_MISSION_TITLES[mission.key] || mission.title) : mission.title;
+  const isPreschoolProfile = (profileKey = activeMissionProfile) => ['second-daughter','third-daughter'].includes(profileKey);
+  const isAssistedProfileMode = () => missionDevice?.mode === 'profile' && activeMissionProfile === 'third-daughter';
+  const missionTitle = (mission, profileKey = activeMissionProfile) => AGE_MISSION_TITLES[profileKey]?.[mission.key] || mission.title;
   const rankIndexForCount = (count) => Math.min(Math.floor(count / 5), MISSION_RANKS.length - 1);
-  const rankForCount = (count) => (isToddlerMode() ? TODDLER_RANKS : MISSION_RANKS)[rankIndexForCount(count)];
+  const rankForCount = (count, profileKey = activeMissionProfile) => (isPreschoolProfile(profileKey) ? TODDLER_RANKS : MISSION_RANKS)[rankIndexForCount(count)];
 
   const rankUpModal = document.getElementById('rankUpModal');
   function showRankUp(profileList) {
     const uniqueProfiles = [...new Set(profileList)];
-    document.getElementById('rankUpKicker').textContent = isToddlerMode() ? 'らんくあっぷ' : 'RANK UP';
+    document.getElementById('rankUpKicker').textContent = isPreschoolProfile() ? 'らんくあっぷ' : 'RANK UP';
     document.getElementById('rankUpTitle').textContent = uniqueProfiles.length === 1
-      ? profileLabel(uniqueProfiles[0]) + (isToddlerMode() ? ' らんくあっぷ！' : ' ランクアップ！')
+      ? profileLabel(uniqueProfiles[0]) + (isPreschoolProfile(uniqueProfiles[0]) ? ' らんくあっぷ！' : ' ランクアップ！')
       : uniqueProfiles.length + '人がランクアップ！';
     document.getElementById('rankUpList').innerHTML = uniqueProfiles.map((profileKey) => {
       const count = missionStats(profileKey).completed.length;
-      return '<div><span>' + escapeHTML(profileLabel(profileKey)) + '</span><strong>' + escapeHTML(rankForCount(count)) + '</strong></div>';
+      return '<div><span>' + escapeHTML(profileLabel(profileKey)) + '</span><strong>' + escapeHTML(rankForCount(count, profileKey)) + '</strong></div>';
     }).join('');
     openModal(rankUpModal);
   }
@@ -667,15 +700,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateMissionResult() {
     const result = missionStats(activeMissionProfile);
-    document.getElementById('missionResultTitle').textContent = profileLabel(activeMissionProfile) + (isToddlerMode() ? 'の きろく' : 'の記録');
-    document.getElementById('missionResultScore').textContent = result.completed.length + (isToddlerMode() ? ' できた' : ' CLEAR');
-    document.getElementById('missionResultSummary').textContent = rankForCount(result.completed.length) + ' · ' + result.xp + (isToddlerMode() ? ' ぽいんと' : ' XP');
+    const preschool = isPreschoolProfile();
+    document.getElementById('missionResultTitle').textContent = profileLabel(activeMissionProfile) + (preschool ? 'の きろく' : 'の記録');
+    document.getElementById('missionResultScore').textContent = result.completed.length + (preschool ? ' できた' : ' CLEAR');
+    document.getElementById('missionResultSummary').textContent = rankForCount(result.completed.length) + ' · ' + result.xp + (preschool ? ' ぽいんと' : ' XP');
     document.getElementById('missionResultList').innerHTML = result.completed.length
       ? result.completed.map((mission) => '<span>' + mission.emoji + ' ' + escapeHTML(missionTitle(mission)) + '</span>').join('')
-      : '<p>' + (isToddlerMode() ? 'まだ できたものは ないよ。' : 'まだ達成したミッションはありません。') + '</p>';
-    document.querySelector('.mission-result-note').textContent = isToddlerMode()
-      ? 'このがめんを おやに みせよう。'
-      : missionDevice?.mode === 'personal'
+      : '<p>' + (preschool ? 'まだ できたものは ないよ。' : 'まだ達成したミッションはありません。') + '</p>';
+    document.querySelector('.mission-result-note').textContent = isAssistedProfileMode()
+      ? 'できたら おとなに おしえてね。きろくは かんりしゃが つけます。'
+      : preschool && missionDevice?.mode === 'profile'
+        ? 'このがめんを おやに みせよう。'
+      : missionDevice?.mode === 'profile'
         ? 'この画面を親に見せて、家族の公式記録へ反映してもらおう。'
       : 'この端末の記録が家族の公式結果です。';
   }
@@ -688,10 +724,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const rankProgress = completedCount >= MISSIONS.length ? 1 : (completedCount % 5) / 5;
     const label = profileLabel(activeMissionProfile);
     document.getElementById('kidsXp').textContent = xp;
-    document.getElementById('kidsProgress').textContent = completedCount + ' / ' + MISSIONS.length + (isToddlerMode() ? ' できた' : ' ミッション');
+    const preschool = isPreschoolProfile();
+    document.getElementById('kidsProgress').textContent = completedCount + ' / ' + MISSIONS.length + (preschool ? ' できた' : ' ミッション');
     document.getElementById('rankNext').textContent = completedCount >= MISSIONS.length
-      ? (isToddlerMode() ? 'ぜんぶ できた！' : '全ミッションクリア！')
-      : 'あと' + (nextRankAt - completedCount) + (isToddlerMode() ? 'こで らんくあっぷ' : '個でランクアップ');
+      ? (preschool ? 'ぜんぶ できた！' : '全ミッションクリア！')
+      : 'あと' + (nextRankAt - completedCount) + (preschool ? 'こで らんくあっぷ' : '個でランクアップ');
     document.getElementById('homeKidsProgress').textContent = label + ' ' + completedCount + ' / ' + MISSIONS.length;
     document.getElementById('missionRing').style.setProperty('--mission-progress', (rankProgress * 360) + 'deg');
     document.getElementById('kidsRank').textContent = rankForCount(completedCount);
@@ -702,55 +739,59 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateMissionDeviceUI() {
-    const personal = missionDevice?.mode === 'personal';
-    const toddler = isToddlerMode();
-    const lockedProfile = personal || toddler;
-    document.getElementById('mission').classList.toggle('toddler-mode', toddler);
-    document.getElementById('missionModeBadge').textContent = toddler ? 'じぶんの きろく' : personal ? '自己記録' : '公式記録';
+    const personal = missionDevice?.mode === 'profile';
+    const preschool = isPreschoolProfile();
+    const assisted = isAssistedProfileMode();
+    document.getElementById('mission').classList.toggle('toddler-mode', preschool);
+    document.getElementById('mission').classList.toggle('assisted-mode', assisted);
+    document.getElementById('missionModeBadge').textContent = assisted ? 'おとなと いっしょ' : personal ? (preschool ? 'じぶんの きろく' : '自己記録') : '公式記録';
     document.getElementById('activeMissionProfileLabel').textContent = profileLabel(activeMissionProfile);
-    document.getElementById('missionDeviceNote').textContent = toddler
-      ? 'できたら おやに みせよう'
-      : personal ? '達成後、結果画面を親に見せよう' : 'この端末が家族の公式記録です';
-    document.getElementById('missionProfileTabs').hidden = lockedProfile;
-    document.getElementById('openBatchMission').hidden = lockedProfile;
-    document.querySelector('.mission-action-row').classList.toggle('personal', lockedProfile);
-    document.getElementById('missionHeroTitle').innerHTML = toddler ? 'たびを あそびに<br>かえよう。' : '旅を遊びに<br>変えよう。';
-    document.getElementById('missionKicker').textContent = toddler ? 'こども みっしょん' : 'KIDS QUEST';
-    document.getElementById('missionHeroDescription').textContent = toddler
-      ? 'みつける、てつだう、たのしむ。できたを あつめよう。'
+    document.getElementById('missionDeviceNote').textContent = assisted
+      ? 'できたら おとなに おしえてね'
+      : personal ? (preschool ? 'できたら おやに みせよう' : '達成後、結果画面を親に見せよう') : 'この端末が家族の公式記録です';
+    document.getElementById('missionProfileTabs').hidden = personal;
+    document.getElementById('openBatchMission').hidden = personal;
+    document.querySelector('.mission-action-row').classList.toggle('personal', personal);
+    document.getElementById('missionHeroTitle').innerHTML = preschool ? 'たびを あそびに<br>かえよう。' : '旅を遊びに<br>変えよう。';
+    document.getElementById('missionKicker').textContent = preschool ? 'こども みっしょん' : 'KIDS QUEST';
+    document.getElementById('missionHeroDescription').textContent = assisted
+      ? 'みつけたら おとなに おしえてね。'
+      : preschool ? 'みつける、てつだう、たのしむ。できたを あつめよう。'
       : '見つける、手伝う、笑わせる。家族でXPを集めよう。';
-    document.getElementById('missionRankKicker').textContent = toddler ? 'いまの らんく' : 'YOUR RANK';
-    document.getElementById('missionResultKicker').textContent = toddler ? 'けっか' : 'RESULT';
-    document.getElementById('kidsXpLabel').textContent = toddler ? 'ぽいんと' : 'XP';
-    document.getElementById('changeMissionMode').textContent = toddler ? 'つかうひとを かえる' : '端末設定';
-    const categoryLabels = toddler
+    document.getElementById('missionRankKicker').textContent = preschool ? 'いまの らんく' : 'YOUR RANK';
+    document.getElementById('missionResultKicker').textContent = preschool ? 'けっか' : 'RESULT';
+    document.getElementById('kidsXpLabel').textContent = preschool ? 'ぽいんと' : 'XP';
+    document.getElementById('changeMissionMode').textContent = preschool ? 'つかうひとを かえる' : '端末設定';
+    const categoryLabels = preschool
       ? {all:'すべて',common:'どこでも',ine:'いね',bbq:'ばーべきゅー',family:'かぞく',miyama:'みやま'}
       : {all:'すべて',common:'どこでも',ine:'伊根',bbq:'BBQ',family:'家族',miyama:'美山'};
     document.querySelectorAll('[data-mission-category]').forEach((button) => {
       button.textContent = categoryLabels[button.dataset.missionCategory];
     });
-    const badgeLabels = toddler ? ['うみ','なかま','めいじん'] : ['SEA','TEAM','MASTER'];
+    const badgeLabels = preschool ? ['うみ','なかま','めいじん'] : ['SEA','TEAM','MASTER'];
     document.querySelectorAll('#badgeRow small').forEach((label, index) => { label.textContent = badgeLabels[index]; });
     document.getElementById('toggleMissionResult').textContent = missionResult.hidden
-      ? (toddler ? 'けっかを みる' : '結果を表示')
-      : (toddler ? 'けっかを とじる' : '結果を閉じる');
+      ? (preschool ? 'けっかを みる' : '結果を表示')
+      : (preschool ? 'けっかを とじる' : '結果を閉じる');
     document.querySelectorAll('[data-mission-profile]').forEach((button) => {
       const active = button.dataset.missionProfile === activeMissionProfile;
       button.classList.toggle('active', active);
       button.setAttribute('aria-pressed', String(active));
     });
-    document.getElementById('resetKids').textContent = profileLabel(activeMissionProfile) + (toddler ? 'の みっしょんを やりなおす' : 'のミッションをリセット');
+    document.getElementById('resetKids').hidden = assisted;
+    document.getElementById('resetKids').textContent = profileLabel(activeMissionProfile) + (preschool ? 'の みっしょんを やりなおす' : 'のミッションをリセット');
   }
 
   function renderMissions() {
     updateMissionDeviceUI();
     const state = currentMissionState();
+    const assisted = isAssistedProfileMode();
     const grid = document.getElementById('kidsMissionGrid');
     const visibleMissions = MISSIONS.filter((mission) => activeMissionCategory === 'all' || mission.category === activeMissionCategory);
     grid.innerHTML = visibleMissions.map((mission) =>
       '<label class="mission-card ' + (state[mission.key] ? 'completed' : '') + '">' +
-        '<input class="kids-item" data-state-key="' + mission.key + '" type="checkbox" ' + (state[mission.key] ? 'checked' : '') + '>' +
-        '<span class="mission-emoji">' + mission.emoji + '</span><b>' + escapeHTML(missionTitle(mission)) + '</b><small>+' + mission.xp + (isToddlerMode() ? ' ぽいんと' : ' XP') + '</small></label>'
+        '<input class="kids-item" data-state-key="' + mission.key + '" type="checkbox" ' + (state[mission.key] ? 'checked' : '') + (assisted ? ' disabled' : '') + '>' +
+        '<span class="mission-emoji">' + mission.emoji + '</span><b>' + escapeHTML(missionTitle(mission)) + '</b><small>' + (assisted ? 'おとなに おしえてね' : '+' + mission.xp + (isPreschoolProfile() ? ' ぽいんと' : ' XP')) + '</small></label>'
     ).join('');
     grid.querySelectorAll('.kids-item').forEach((input) => {
       input.addEventListener('change', () => {
@@ -763,7 +804,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (input.checked && rankIndexForCount(afterCount) > rankIndexForCount(beforeCount)) {
           showRankUp([activeMissionProfile]);
         } else if (input.checked) {
-          showToast(profileLabel(activeMissionProfile) + (isToddlerMode() ? ' できた！' : ' ミッションクリア！'));
+          showToast(profileLabel(activeMissionProfile) + (isPreschoolProfile() ? ' できた！' : ' ミッションクリア！'));
         }
       });
     });
@@ -793,45 +834,23 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const missionModeModal = document.getElementById('missionModeModal');
-  const personalProfileChooser = document.getElementById('personalProfileChooser');
-  const toddlerProfileChooser = document.getElementById('toddlerProfileChooser');
   const cancelMissionMode = document.getElementById('cancelMissionMode');
   function showMissionModeSettings(firstRun = false) {
-    personalProfileChooser.hidden = true;
-    toddlerProfileChooser.hidden = true;
     cancelMissionMode.hidden = firstRun;
     openModal(missionModeModal);
   }
   document.getElementById('changeMissionMode').addEventListener('click', () => showMissionModeSettings(false));
   cancelMissionMode.addEventListener('click', () => closeModal(missionModeModal));
-  document.querySelector('[data-device-mode="manager"]').addEventListener('click', () => {
-    missionDevice = {mode:'manager', activeProfile:profileKeys.has(activeMissionProfile) ? activeMissionProfile : 'eldest-son'};
-    activeMissionProfile = missionDevice.activeProfile;
-    storage.set('sekiTripMissionDevice', missionDevice);
-    closeModal(missionModeModal);
-    renderMissions();
-  });
-  document.querySelector('[data-device-mode="personal"]').addEventListener('click', () => {
-    personalProfileChooser.hidden = false;
-    toddlerProfileChooser.hidden = true;
-  });
-  document.querySelector('[data-device-mode="toddler"]').addEventListener('click', () => {
-    personalProfileChooser.hidden = true;
-    toddlerProfileChooser.hidden = false;
-  });
-  document.querySelectorAll('[data-personal-profile]').forEach((button) => {
+  document.querySelectorAll('[data-device-profile]').forEach((button) => {
     button.addEventListener('click', () => {
-      activeMissionProfile = button.dataset.personalProfile;
-      missionDevice = {mode:'personal', profile:activeMissionProfile};
-      storage.set('sekiTripMissionDevice', missionDevice);
-      closeModal(missionModeModal);
-      renderMissions();
-    });
-  });
-  document.querySelectorAll('[data-toddler-profile]').forEach((button) => {
-    button.addEventListener('click', () => {
-      activeMissionProfile = button.dataset.toddlerProfile;
-      missionDevice = {mode:'toddler', profile:activeMissionProfile};
+      const selected = button.dataset.deviceProfile;
+      if (selected === 'manager') {
+        missionDevice = {mode:'manager', activeProfile:profileKeys.has(activeMissionProfile) ? activeMissionProfile : 'eldest-son'};
+        activeMissionProfile = missionDevice.activeProfile;
+      } else {
+        activeMissionProfile = selected;
+        missionDevice = {mode:'profile', profile:activeMissionProfile};
+      }
       storage.set('sekiTripMissionDevice', missionDevice);
       closeModal(missionModeModal);
       renderMissions();
@@ -842,8 +861,8 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('toggleMissionResult').addEventListener('click', (event) => {
     missionResult.hidden = !missionResult.hidden;
     event.currentTarget.textContent = missionResult.hidden
-      ? (isToddlerMode() ? 'けっかを みる' : '結果を表示')
-      : (isToddlerMode() ? 'けっかを とじる' : '結果を閉じる');
+      ? (isPreschoolProfile() ? 'けっかを みる' : '結果を表示')
+      : (isPreschoolProfile() ? 'けっかを とじる' : '結果を閉じる');
     if (!missionResult.hidden) missionResult.scrollIntoView({behavior:'smooth', block:'nearest'});
   });
 
@@ -877,11 +896,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('resetKids').addEventListener('click', () => {
     const label = profileLabel(activeMissionProfile);
-    if (!window.confirm(label + (isToddlerMode() ? 'の みっしょんを ぜんぶ やりなおす？' : 'のミッションをすべてリセットしますか？'))) return;
+    if (isAssistedProfileMode()) return;
+    if (!window.confirm(label + (isPreschoolProfile() ? 'の みっしょんを ぜんぶ やりなおす？' : 'のミッションをすべてリセットしますか？'))) return;
     missionStates[activeMissionProfile] = {};
     saveMissionStates();
     renderMissions();
-    showToast(label + (isToddlerMode() ? 'の きろくを やりなおしたよ' : 'のミッションをリセットしました'));
+    showToast(label + (isPreschoolProfile() ? 'の きろくを やりなおしたよ' : 'のミッションをリセットしました'));
   });
 
   if (!missionDevice) showMissionModeSettings(true);

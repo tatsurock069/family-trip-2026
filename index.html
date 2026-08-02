@@ -412,22 +412,14 @@
   <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="missionModeTitle">
     <p class="kicker">MISSION DEVICE</p>
     <h2 id="missionModeTitle">この端末の使い方</h2>
-    <p class="modal-description">端末間の自動同期はしません。親端末は5人を管理し、本人用端末は年齢に合う表示で記録します。</p>
+    <p class="modal-description">この端末を使う人を選んでください。ミッションは学年に合う内容へ切り替わります。端末間の自動同期はしません。</p>
     <div class="mode-option-grid">
-      <button type="button" data-device-mode="manager"><b>家族管理モード</b><small>5人の公式記録</small></button>
-      <button type="button" data-device-mode="personal"><b>自分用モード</b><small>優典・綾菜・慶典の自己記録</small></button>
-      <button type="button" data-device-mode="toddler"><b>幼児モード</b><small>杏菜・波瑠菜のひらがな表示</small></button>
-    </div>
-    <div id="personalProfileChooser" class="personal-profile-chooser" hidden>
-      <p>この端末を使う人</p>
-      <button type="button" data-personal-profile="eldest-son">優典</button>
-      <button type="button" data-personal-profile="eldest-daughter">綾菜</button>
-      <button type="button" data-personal-profile="second-son">慶典</button>
-    </div>
-    <div id="toddlerProfileChooser" class="personal-profile-chooser" hidden>
-      <p>この端末を使う人</p>
-      <button type="button" data-toddler-profile="second-daughter">杏菜</button>
-      <button type="button" data-toddler-profile="third-daughter">波瑠菜</button>
+      <button type="button" data-device-profile="manager"><b>管理者</b><small>5人の公式記録を管理</small></button>
+      <button type="button" data-device-profile="eldest-son"><b>優典</b><small>中学2年・判断と年下のサポート</small></button>
+      <button type="button" data-device-profile="eldest-daughter"><b>綾菜</b><small>小学6年・観察、撮影と声かけ</small></button>
+      <button type="button" data-device-profile="second-son"><b>慶典</b><small>小学3年・発見と簡単なお手伝い</small></button>
+      <button type="button" data-device-profile="second-daughter"><b>杏菜</b><small>年長・ひらがなで自分で挑戦</small></button>
+      <button type="button" data-device-profile="third-daughter"><b>波瑠菜</b><small>年少・おとなといっしょ（記録は管理者）</small></button>
     </div>
     <button type="button" id="cancelMissionMode" class="danger-link" hidden>変更せず閉じる</button>
   </section>
