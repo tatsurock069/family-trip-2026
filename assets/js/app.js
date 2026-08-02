@@ -81,8 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const planTabs = [...document.querySelectorAll('.plan-tab')];
-  const baseCost = 28000 + 14800 + 20000;
-  let estimatedTotal = 85800;
+  const baseCost = 28360 + 14800 + 20000;
+  let estimatedTotal = 86160;
   let selectedPlan = 'a';
 
   const budgetItems = [...document.querySelectorAll('.cost[data-budget-key]')];
@@ -148,11 +148,12 @@ document.addEventListener('DOMContentLoaded', () => {
       ['2026-08-03T10:30:00+09:00', '10:30', '伊根の舟屋散策', 'ワイド、家族、路地のディテールを撮影。'],
       ['2026-08-03T11:00:00+09:00', '11:00', '舟屋食堂でランチ', '現金を用意。海鮮の寄りと食べる表情を撮る。'],
       ['2026-08-03T12:20:00+09:00', '12:20', '泊海水浴場', '水着・タオル・日焼け止め。約60分。'],
-      ['2026-08-03T14:30:00+09:00', '14:30', 'ヴィラへチェックイン', '冷蔵品を入れて、プールとBBQ準備。'],
+      ['2026-08-03T14:00:00+09:00', '14:00', '10号館で鍵を受け取る', 'チェックインは14:00〜15:00。鍵を受け取ってから「はなもみじ」へ。'],
       ['2026-08-03T17:30:00+09:00', '17:30', 'BBQスタート', '前菜から。サーロインは全員が揃ってから。'],
-      ['2026-08-04T10:00:00+09:00', '10:00', 'ヴィラを出発', '忘れ物、冷蔵庫、充電器を確認。'],
-      ['2026-08-04T11:30:00+09:00', '11:30', '美山かやぶきの里', '赤いポストと家族の後ろ姿を撮影。'],
-      ['2026-08-04T16:00:00+09:00', '16:00', '大阪へ帰着', '車内でベストシーンと感想を収録。']
+      ['2026-08-04T11:00:00+09:00', '11:00', 'はなもみじをチェックアウト', '忘れ物、冷蔵庫、充電器、ゴミ、鍵を確認。'],
+      ['2026-08-04T12:30:00+09:00', '12:30', '美山の前に昼食', '道の駅や軽食で先に昼食を済ませる。'],
+      ['2026-08-04T13:30:00+09:00', '13:30', '美山かやぶきの里', '赤いポストと家族の後ろ姿を撮影。'],
+      ['2026-08-04T17:30:00+09:00', '17:30', '大阪へ帰着', '車内でベストシーンと感想を収録。']
     ],
     b: [
       ['2026-08-03T07:00:00+09:00', '07:00', '湊町を出発', '飲み物・酔い止め・モバイルバッテリーを最終確認。'],
@@ -161,11 +162,12 @@ document.addEventListener('DOMContentLoaded', () => {
       ['2026-08-03T11:00:00+09:00', '11:00', '舟屋食堂でランチ', '現金を用意。食後は府中地区へ。'],
       ['2026-08-03T12:45:00+09:00', '12:45', '元伊勢籠神社', '参拝、御朱印、鳥居から歩く家族を撮る。'],
       ['2026-08-03T13:10:00+09:00', '13:10', '天橋立傘松公園', '股のぞきとリアクション動画を撮影。'],
-      ['2026-08-03T14:30:00+09:00', '14:30', 'ヴィラへチェックイン', 'プールとBBQ準備。'],
+      ['2026-08-03T14:00:00+09:00', '14:00', '10号館で鍵を受け取る', 'チェックインは14:00〜15:00。鍵を受け取ってから「はなもみじ」へ。'],
       ['2026-08-03T17:30:00+09:00', '17:30', 'BBQスタート', '前菜から。サーロインは全員が揃ってから。'],
-      ['2026-08-04T10:00:00+09:00', '10:00', 'ヴィラを出発', '忘れ物、冷蔵庫、充電器を確認。'],
-      ['2026-08-04T11:30:00+09:00', '11:30', '美山かやぶきの里', '赤いポストと家族の後ろ姿を撮影。'],
-      ['2026-08-04T16:00:00+09:00', '16:00', '大阪へ帰着', '車内でベストシーンと感想を収録。']
+      ['2026-08-04T11:00:00+09:00', '11:00', 'はなもみじをチェックアウト', '忘れ物、冷蔵庫、充電器、ゴミ、鍵を確認。'],
+      ['2026-08-04T12:30:00+09:00', '12:30', '美山の前に昼食', '道の駅や軽食で先に昼食を済ませる。'],
+      ['2026-08-04T13:30:00+09:00', '13:30', '美山かやぶきの里', '赤いポストと家族の後ろ姿を撮影。'],
+      ['2026-08-04T17:30:00+09:00', '17:30', '大阪へ帰着', '車内でベストシーンと感想を収録。']
     ]
   };
 
@@ -243,6 +245,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!shoppingQuantities || typeof shoppingQuantities !== 'object' || Array.isArray(shoppingQuantities)) shoppingQuantities = {};
   let customShopping = storage.get('sekiTripCustomShopping', []);
   if (!Array.isArray(customShopping)) customShopping = [];
+  let shoppingCollapsed = storage.get('sekiTripShoppingCollapsed', {});
+  if (!shoppingCollapsed || typeof shoppingCollapsed !== 'object' || Array.isArray(shoppingCollapsed)) shoppingCollapsed = {};
 
   function allShoppingItems() {
     return [...SHOP_CATALOG, ...customShopping.map((item) => ({ ...item, custom: true, emoji: item.emoji || '＋' }))];
@@ -265,6 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('shopCategories');
     const items = allShoppingItems();
     container.innerHTML = Object.entries(CATEGORY_INFO).map(([category, [title, english]]) => {
+      const collapsed = Boolean(shoppingCollapsed[category]);
       const rows = items.filter((item) => item.category === category).map((item) => {
         const qty = shoppingQuantities[item.key] || item.qty;
         return '<div class="shop-item-row ' + (shoppingState[item.key] ? 'checked' : '') + '" data-shop-key="' + escapeHTML(item.key) + '">' +
@@ -274,8 +279,24 @@ document.addEventListener('DOMContentLoaded', () => {
           (item.custom ? '<button type="button" class="delete-item" data-delete-shop="' + escapeHTML(item.key) + '" aria-label="' + escapeHTML(item.name) + 'を削除">×</button>' : '<span class="shop-emoji">' + item.emoji + '</span>') +
           '</div>';
       }).join('');
-      return '<section class="shop-category"><div class="shop-category-head"><div><p class="kicker dark">' + english + '</p><h2>' + title + '</h2></div><span id="shop-progress-' + category + '">0 / 0</span></div><div class="shop-list">' + (rows || '<p class="empty-note">項目なし</p>') + '</div></section>';
+      return '<section class="shop-category ' + (collapsed ? 'collapsed' : '') + '" data-shop-category="' + category + '">' +
+        '<button type="button" class="shop-category-head" data-shop-category-toggle="' + category + '" aria-expanded="' + String(!collapsed) + '"><div><p class="kicker dark">' + english + '</p><h2>' + title + '</h2></div><span class="shop-category-progress" id="shop-progress-' + category + '">0 / 0</span><i class="shop-category-chevron" aria-hidden="true">›</i></button>' +
+        '<div class="shop-list"' + (collapsed ? ' hidden' : '') + '>' + (rows || '<p class="empty-note">項目なし</p>') + '</div></section>';
     }).join('');
+
+    container.querySelectorAll('[data-shop-category-toggle]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const category = button.dataset.shopCategoryToggle;
+        const section = button.closest('.shop-category');
+        const list = section.querySelector('.shop-list');
+        const collapsed = !section.classList.contains('collapsed');
+        shoppingCollapsed[category] = collapsed;
+        storage.set('sekiTripShoppingCollapsed', shoppingCollapsed);
+        section.classList.toggle('collapsed', collapsed);
+        list.hidden = collapsed;
+        button.setAttribute('aria-expanded', String(!collapsed));
+      });
+    });
 
     container.querySelectorAll('.shop-item').forEach((input) => {
       input.addEventListener('change', () => {
