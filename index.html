@@ -283,11 +283,23 @@
         <div><p class="kicker">KIDS QUEST</p><h1>旅を遊びに<br>変えよう。</h1><p>見つける、手伝う、笑わせる。家族でXPを集めよう。</p></div>
       </header>
       <div class="screen-content">
+        <section class="mission-device-bar">
+          <div><span id="missionModeBadge">公式記録</span><b id="activeMissionProfileLabel">長男</b><small id="missionDeviceNote">この端末が家族の公式記録です</small></div>
+          <button type="button" id="changeMissionMode">端末設定</button>
+        </section>
+        <div class="mission-profile-tabs" id="missionProfileTabs" aria-label="記録するメンバー">
+          <button type="button" class="active" data-mission-profile="eldest-son">長男</button>
+          <button type="button" data-mission-profile="eldest-daughter">長女</button>
+          <button type="button" data-mission-profile="second-son">次男</button>
+          <button type="button" data-mission-profile="second-daughter">次女</button>
+          <button type="button" data-mission-profile="third-daughter">三女</button>
+          <button type="button" data-mission-profile="family">家族</button>
+        </div>
         <section class="mission-hero">
           <div class="mission-ring" id="missionRing"><div><strong id="kidsXp">0</strong><small>XP</small></div></div>
-          <div><p class="kicker">YOUR RANK</p><h2 id="kidsRank">かけだし旅人</h2><p id="kidsProgress">0 / 20 ミッション</p></div>
+          <div><p class="kicker">YOUR RANK</p><h2 id="kidsRank">かけだし旅人</h2><p id="kidsProgress">0 / 30 ミッション</p></div>
         </section>
-        <div class="badge-row" id="badgeRow"><span data-level="80">🌊<small>SEA</small></span><span data-level="160">🔥<small>BBQ</small></span><span data-level="250">🏆<small>MASTER</small></span></div>
+        <div class="badge-row" id="badgeRow"><span data-level="120">🌊<small>SEA</small></span><span data-level="260">🔥<small>BBQ</small></span><span data-level="400">🏆<small>MASTER</small></span></div>
         <div class="mission-tabs" aria-label="ミッションカテゴリ">
           <button type="button" class="active" data-mission-category="all">すべて</button>
           <button type="button" data-mission-category="ine">伊根</button>
@@ -295,6 +307,16 @@
           <button type="button" data-mission-category="family">家族</button>
           <button type="button" data-mission-category="miyama">美山</button>
         </div>
+        <div class="mission-action-row">
+          <button type="button" id="openBatchMission">複数人にまとめて記録</button>
+          <button type="button" id="toggleMissionResult">結果を表示</button>
+        </div>
+        <section class="mission-result" id="missionResult" hidden>
+          <div class="section-title"><div><p class="kicker dark">RESULT</p><h2 id="missionResultTitle">長男の記録</h2></div><strong id="missionResultScore">0 XP</strong></div>
+          <p id="missionResultSummary">達成 0 / 30</p>
+          <div id="missionResultList"></div>
+          <p class="mission-result-note">この端末内の記録です。家族の公式結果は管理者端末で確定します。</p>
+        </section>
         <div id="kidsMissionGrid" class="mission-grid"></div>
         <button type="button" id="resetKids" class="danger-link">ミッションをリセット</button>
       </div>
@@ -383,6 +405,36 @@
       <button type="button" class="secondary-button" data-close-quantity>キャンセル</button>
       <button type="button" class="primary-button" id="saveQuantity">保存</button>
     </div>
+  </section>
+</div>
+<div class="app-modal mission-mode-modal" id="missionModeModal" aria-hidden="true">
+  <div class="modal-backdrop"></div>
+  <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="missionModeTitle">
+    <p class="kicker">MISSION DEVICE</p>
+    <h2 id="missionModeTitle">この端末の使い方</h2>
+    <p class="modal-description">端末間の自動同期はしません。親端末を公式記録、長男・長女の端末を自己記録として使います。</p>
+    <div class="mode-option-grid">
+      <button type="button" data-device-mode="manager"><b>家族管理モード</b><small>5人＋家族の公式記録</small></button>
+      <button type="button" data-device-mode="personal"><b>自分用モード</b><small>長男・長女の自己記録</small></button>
+    </div>
+    <div id="personalProfileChooser" class="personal-profile-chooser" hidden>
+      <p>この端末を使う人</p>
+      <button type="button" data-personal-profile="eldest-son">長男</button>
+      <button type="button" data-personal-profile="eldest-daughter">長女</button>
+    </div>
+    <button type="button" id="cancelMissionMode" class="danger-link" hidden>変更せず閉じる</button>
+  </section>
+</div>
+<div class="app-modal" id="batchMissionModal" aria-hidden="true">
+  <div class="modal-backdrop" data-close-batch></div>
+  <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="batchMissionTitle">
+    <p class="kicker">BATCH RECORD</p>
+    <h2 id="batchMissionTitle">まとめて達成を記録</h2>
+    <label class="field-label" for="batchMissionSelect">ミッション</label>
+    <select id="batchMissionSelect"></select>
+    <p class="field-label">達成したメンバー</p>
+    <div class="batch-profile-grid" id="batchProfileGrid"></div>
+    <div class="modal-actions"><button type="button" class="secondary-button" data-close-batch>キャンセル</button><button type="button" class="primary-button" id="saveBatchMission">まとめて記録</button></div>
   </section>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite">保存しました</div>

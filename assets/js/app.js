@@ -506,51 +506,122 @@ document.addEventListener('DOMContentLoaded', () => {
   const MISSIONS = [
     ['find-seagull','ine','🕊️','カモメを見つける',10],['boat-captain','ine','🚢','遊覧船の船長ポーズ',10],
     ['count-funaya','ine','🏘️','舟屋を10軒見つける',15],['record-waves','ine','🎙️','伊根の波音を録音する',10],
-    ['seafood-reporter','ine','🐟','ランチを食レポする',15],
+    ['seafood-reporter','ine','🐟','ランチを食レポする',15],['find-blue-roof','ine','🔵','船から青い屋根を見つける',10],
+    ['family-photographer','ine','📷','家族の写真係をする',15],
     ['help-bbq','bbq','🍖','BBQで一品手伝う',20],['veggie-hero','bbq','🥦','焼き野菜をひとつ食べる',15],
     ['timer-captain','bbq','⏱️','BBQタイマー係になる',15],['grill-sound','bbq','🎬','焼ける音を動画に撮る',15],
-    ['table-setter','bbq','🍽️','お皿をみんなに配る',10],
+    ['table-setter','bbq','🍽️','お皿をみんなに配る',10],['serve-sausage','bbq','🌭','ソーセージを取り分ける',10],
+    ['clear-plates','bbq','🧹','食べ終わった皿を片付ける',15],['best-bbq-dish','bbq','👑','BBQの一番を決める',10],
     ['family-jump','family','🕴️','家族全員でジャンプ写真',15],['dad-photo','family','📸','お父さんとツーショット',15],
     ['mom-photo','family','💐','お母さんとツーショット',15],['grandma-smile','family','😊','おばあちゃんを笑顔にする',15],
-    ['thank-you','family','🤝','家族の誰かにありがとうを言う',15],
+    ['thank-you','family','🤝','家族の誰かにありがとうを言う',15],['siblings-photo','family','👧','兄弟姉妹を撮影する',15],
+    ['carry-bag','family','🎒','荷物をひとつ運ぶ',10],['help-tired','family','💪','一番疲れている人を手伝う',20],
     ['find-red-post','miyama','📮','美山の赤いポストを発見',15],['count-roofs','miyama','🏠','茅葺き屋根を5軒見つける',15],
     ['quiet-walk','miyama','🤫','1分間静かに里を歩く',15],['nature-sound','miyama','🌿','美山の自然音を録音する',10],
-    ['best-memory','miyama','🏆','旅の一番を発表する',20]
+    ['best-memory','miyama','🏆','旅の一番を発表する',20],['find-insects','miyama','🐞','虫を3種類見つける',15],
+    ['no-litter','miyama','🍃','ゴミを出さずに散策する',15]
   ].map(([key,category,emoji,title,xp]) => ({key,category,emoji,title,xp}));
+  const MISSION_PROFILES = [
+    ['eldest-son','長男'],['eldest-daughter','長女'],['second-son','次男'],
+    ['second-daughter','次女'],['third-daughter','三女'],['family','家族']
+  ].map(([key,label]) => ({key,label}));
+  const profileLabel = (key) => MISSION_PROFILES.find((profile) => profile.key === key)?.label || '長男';
+  const profileKeys = new Set(MISSION_PROFILES.map((profile) => profile.key));
   const legacyMissionKeys = ['find-seagull','family-jump','dad-photo','help-bbq','find-red-post'];
-  let missionState = migrateState(storage.get('sekiTripKids', {}), legacyMissionKeys);
+  const oldMissionState = migrateState(storage.get('sekiTripKids', {}), legacyMissionKeys);
+  const savedProfileStates = storage.get('sekiTripKidsByProfile', null);
+  let missionStates = savedProfileStates && typeof savedProfileStates === 'object' && !Array.isArray(savedProfileStates)
+    ? savedProfileStates : {family: oldMissionState};
+  MISSION_PROFILES.forEach((profile) => {
+    if (!missionStates[profile.key] || typeof missionStates[profile.key] !== 'object' || Array.isArray(missionStates[profile.key])) {
+      missionStates[profile.key] = {};
+    }
+  });
+  storage.set('sekiTripKidsByProfile', missionStates);
+
+  let missionDevice = storage.get('sekiTripMissionDevice', null);
+  if (!missionDevice || !['manager','personal'].includes(missionDevice.mode)) missionDevice = null;
+  if (missionDevice?.mode === 'personal' && !['eldest-son','eldest-daughter'].includes(missionDevice.profile)) missionDevice = null;
+  let activeMissionProfile = missionDevice?.mode === 'personal' ? missionDevice.profile
+    : (profileKeys.has(missionDevice?.activeProfile) ? missionDevice.activeProfile : 'eldest-son');
   let activeMissionCategory = 'all';
 
+  const openModal = (modal) => { modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false'); };
+  const closeModal = (modal) => { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); };
+  const currentMissionState = () => missionStates[activeMissionProfile];
+
+  function saveMissionStates() {
+    storage.set('sekiTripKidsByProfile', missionStates);
+  }
+
+  function missionStats(profileKey) {
+    const completed = MISSIONS.filter((mission) => missionStates[profileKey]?.[mission.key]);
+    return {completed, xp: completed.reduce((sum, mission) => sum + mission.xp, 0)};
+  }
+
+  function updateMissionResult() {
+    const result = missionStats(activeMissionProfile);
+    document.getElementById('missionResultTitle').textContent = profileLabel(activeMissionProfile) + 'の記録';
+    document.getElementById('missionResultScore').textContent = result.xp + ' XP';
+    document.getElementById('missionResultSummary').textContent = '達成 ' + result.completed.length + ' / ' + MISSIONS.length;
+    document.getElementById('missionResultList').innerHTML = result.completed.length
+      ? result.completed.map((mission) => '<span>' + mission.emoji + ' ' + escapeHTML(mission.title) + '</span>').join('')
+      : '<p>まだ達成したミッションはありません。</p>';
+    document.querySelector('.mission-result-note').textContent = missionDevice?.mode === 'personal'
+      ? 'この画面を親に見せて、家族の公式記録へ反映してもらおう。'
+      : 'この端末の記録が家族の公式結果です。';
+  }
+
   function updateMissions() {
-    const completed = MISSIONS.filter((mission) => missionState[mission.key]);
-    const xp = completed.reduce((sum, mission) => sum + mission.xp, 0);
+    const {completed, xp} = missionStats(activeMissionProfile);
     const maxXp = MISSIONS.reduce((sum, mission) => sum + mission.xp, 0);
+    const label = profileLabel(activeMissionProfile);
     document.getElementById('kidsXp').textContent = xp;
     document.getElementById('kidsProgress').textContent = completed.length + ' / ' + MISSIONS.length + ' ミッション';
-    document.getElementById('homeKidsProgress').textContent = xp + ' XP';
+    document.getElementById('homeKidsProgress').textContent = label + ' ' + xp + ' XP';
     document.getElementById('missionRing').style.setProperty('--mission-progress', (xp / maxXp * 360) + 'deg');
     document.getElementById('kidsRank').textContent =
-      xp >= 250 ? 'トリップマスター' : xp >= 160 ? '家族の冒険家' : xp >= 80 ? '海の探検家' : 'かけだし旅人';
+      xp >= 400 ? 'トリップマスター' : xp >= 260 ? '家族の冒険家' : xp >= 120 ? '海の探検家' : 'かけだし旅人';
     document.querySelectorAll('#badgeRow [data-level]').forEach((badge) => {
       badge.classList.toggle('unlocked', xp >= Number(badge.dataset.level));
     });
+    updateMissionResult();
+  }
+
+  function updateMissionDeviceUI() {
+    const personal = missionDevice?.mode === 'personal';
+    document.getElementById('missionModeBadge').textContent = personal ? '自己記録' : '公式記録';
+    document.getElementById('activeMissionProfileLabel').textContent = profileLabel(activeMissionProfile);
+    document.getElementById('missionDeviceNote').textContent = personal
+      ? '達成後、結果画面を親に見せよう' : 'この端末が家族の公式記録です';
+    document.getElementById('missionProfileTabs').hidden = personal;
+    document.getElementById('openBatchMission').hidden = personal;
+    document.querySelector('.mission-action-row').classList.toggle('personal', personal);
+    document.querySelectorAll('[data-mission-profile]').forEach((button) => {
+      const active = button.dataset.missionProfile === activeMissionProfile;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', String(active));
+    });
+    document.getElementById('resetKids').textContent = profileLabel(activeMissionProfile) + 'のミッションをリセット';
   }
 
   function renderMissions() {
+    updateMissionDeviceUI();
+    const state = currentMissionState();
     const grid = document.getElementById('kidsMissionGrid');
     const visibleMissions = MISSIONS.filter((mission) => activeMissionCategory === 'all' || mission.category === activeMissionCategory);
     grid.innerHTML = visibleMissions.map((mission) =>
-      '<label class="mission-card ' + (missionState[mission.key] ? 'completed' : '') + '">' +
-        '<input class="kids-item" data-state-key="' + mission.key + '" type="checkbox" ' + (missionState[mission.key] ? 'checked' : '') + '>' +
-        '<span class="mission-emoji">' + mission.emoji + '</span><b>' + mission.title + '</b><small>+' + mission.xp + ' XP</small></label>'
+      '<label class="mission-card ' + (state[mission.key] ? 'completed' : '') + '">' +
+        '<input class="kids-item" data-state-key="' + mission.key + '" type="checkbox" ' + (state[mission.key] ? 'checked' : '') + '>' +
+        '<span class="mission-emoji">' + mission.emoji + '</span><b>' + escapeHTML(mission.title) + '</b><small>+' + mission.xp + ' XP</small></label>'
     ).join('');
     grid.querySelectorAll('.kids-item').forEach((input) => {
       input.addEventListener('change', () => {
-        missionState[input.dataset.stateKey] = input.checked;
-        storage.set('sekiTripKids', missionState);
+        currentMissionState()[input.dataset.stateKey] = input.checked;
+        saveMissionStates();
         input.closest('.mission-card').classList.toggle('completed', input.checked);
         updateMissions();
-        if (input.checked) showToast('ミッションクリア！ XP獲得');
+        if (input.checked) showToast(profileLabel(activeMissionProfile) + ' ミッションクリア！');
       });
     });
     updateMissions();
@@ -568,13 +639,86 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  document.getElementById('resetKids').addEventListener('click', () => {
-    if (!window.confirm('ミッションをすべてリセットしますか？')) return;
-    MISSIONS.forEach((mission) => { missionState[mission.key] = false; });
-    storage.set('sekiTripKids', missionState);
-    renderMissions();
-    showToast('ミッションをリセットしました');
+  document.querySelectorAll('[data-mission-profile]').forEach((button) => {
+    button.addEventListener('click', () => {
+      if (missionDevice?.mode === 'personal') return;
+      activeMissionProfile = button.dataset.missionProfile;
+      missionDevice = {mode:'manager', activeProfile:activeMissionProfile};
+      storage.set('sekiTripMissionDevice', missionDevice);
+      renderMissions();
+    });
   });
+
+  const missionModeModal = document.getElementById('missionModeModal');
+  const personalProfileChooser = document.getElementById('personalProfileChooser');
+  const cancelMissionMode = document.getElementById('cancelMissionMode');
+  function showMissionModeSettings(firstRun = false) {
+    personalProfileChooser.hidden = true;
+    cancelMissionMode.hidden = firstRun;
+    openModal(missionModeModal);
+  }
+  document.getElementById('changeMissionMode').addEventListener('click', () => showMissionModeSettings(false));
+  cancelMissionMode.addEventListener('click', () => closeModal(missionModeModal));
+  document.querySelector('[data-device-mode="manager"]').addEventListener('click', () => {
+    missionDevice = {mode:'manager', activeProfile:profileKeys.has(activeMissionProfile) ? activeMissionProfile : 'eldest-son'};
+    activeMissionProfile = missionDevice.activeProfile;
+    storage.set('sekiTripMissionDevice', missionDevice);
+    closeModal(missionModeModal);
+    renderMissions();
+  });
+  document.querySelector('[data-device-mode="personal"]').addEventListener('click', () => {
+    personalProfileChooser.hidden = false;
+  });
+  document.querySelectorAll('[data-personal-profile]').forEach((button) => {
+    button.addEventListener('click', () => {
+      activeMissionProfile = button.dataset.personalProfile;
+      missionDevice = {mode:'personal', profile:activeMissionProfile};
+      storage.set('sekiTripMissionDevice', missionDevice);
+      closeModal(missionModeModal);
+      renderMissions();
+    });
+  });
+
+  const missionResult = document.getElementById('missionResult');
+  document.getElementById('toggleMissionResult').addEventListener('click', (event) => {
+    missionResult.hidden = !missionResult.hidden;
+    event.currentTarget.textContent = missionResult.hidden ? '結果を表示' : '結果を閉じる';
+    if (!missionResult.hidden) missionResult.scrollIntoView({behavior:'smooth', block:'nearest'});
+  });
+
+  const batchModal = document.getElementById('batchMissionModal');
+  document.getElementById('batchMissionSelect').innerHTML = MISSIONS.map((mission) =>
+    '<option value="' + mission.key + '">' + escapeHTML(mission.title) + '</option>'
+  ).join('');
+  document.getElementById('batchProfileGrid').innerHTML = MISSION_PROFILES.map((profile) =>
+    '<label><input type="checkbox" value="' + profile.key + '"><span>' + profile.label + '</span></label>'
+  ).join('');
+  document.getElementById('openBatchMission').addEventListener('click', () => {
+    document.querySelectorAll('#batchProfileGrid input').forEach((input) => { input.checked = false; });
+    openModal(batchModal);
+  });
+  document.querySelectorAll('[data-close-batch]').forEach((button) => button.addEventListener('click', () => closeModal(batchModal)));
+  document.getElementById('saveBatchMission').addEventListener('click', () => {
+    const selected = [...document.querySelectorAll('#batchProfileGrid input:checked')];
+    if (!selected.length) { showToast('達成したメンバーを選んでください'); return; }
+    const missionKey = document.getElementById('batchMissionSelect').value;
+    selected.forEach((input) => { missionStates[input.value][missionKey] = true; });
+    saveMissionStates();
+    closeModal(batchModal);
+    renderMissions();
+    showToast(selected.length + '人分を公式記録に反映しました');
+  });
+
+  document.getElementById('resetKids').addEventListener('click', () => {
+    const label = profileLabel(activeMissionProfile);
+    if (!window.confirm(label + 'のミッションをすべてリセットしますか？')) return;
+    missionStates[activeMissionProfile] = {};
+    saveMissionStates();
+    renderMissions();
+    showToast(label + 'のミッションをリセットしました');
+  });
+
+  if (!missionDevice) showMissionModeSettings(true);
 
   let expenses = storage.get('sekiTripExpenses', []);
   if (!Array.isArray(expenses)) expenses = [];
