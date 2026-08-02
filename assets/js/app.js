@@ -57,8 +57,9 @@ document.addEventListener('DOMContentLoaded', () => {
       screen.classList.toggle('active', active);
       screen.setAttribute('aria-hidden', String(!active));
     });
+    const navScreen = id === 'shopping' ? 'more' : (id === 'guide' ? 'home' : id);
     navs.forEach((nav) => {
-      const active = nav.dataset.screen === id;
+      const active = nav.dataset.screen === navScreen;
       nav.classList.toggle('active', active);
       nav.setAttribute('aria-current', active ? 'page' : 'false');
     });
@@ -78,6 +79,49 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   document.querySelectorAll('[data-back]').forEach((button) => {
     button.addEventListener('click', () => showSubview('moreTop'));
+  });
+
+  const dayAccordions = [...document.querySelectorAll('.day-accordion')];
+  function setDayOpen(accordion, open) {
+    const toggle = accordion.querySelector('.day-toggle');
+    const panel = accordion.querySelector('.day-panel');
+    toggle.setAttribute('aria-expanded', String(open));
+    panel.hidden = !open;
+    accordion.classList.toggle('open', open);
+  }
+
+  dayAccordions.forEach((accordion) => {
+    accordion.querySelector('.day-toggle').addEventListener('click', () => {
+      setDayOpen(accordion, accordion.querySelector('.day-toggle').getAttribute('aria-expanded') !== 'true');
+    });
+  });
+
+  const tokyoParts = Object.fromEntries(new Intl.DateTimeFormat('en', {
+    timeZone: 'Asia/Tokyo', year: 'numeric', month: '2-digit', day: '2-digit'
+  }).formatToParts(new Date()).filter((part) => part.type !== 'literal').map((part) => [part.type, part.value]));
+  const isDayTwo = tokyoParts.year === '2026' && tokyoParts.month === '08' && tokyoParts.day === '04';
+  dayAccordions.forEach((accordion) => setDayOpen(accordion, isDayTwo ? accordion.dataset.tripDay === '2' : accordion.dataset.tripDay === '1'));
+
+  const guideFilters = [...document.querySelectorAll('[data-guide-filter]')];
+  function filterGuide(value = 'all') {
+    guideFilters.forEach((button) => button.classList.toggle('active', button.dataset.guideFilter === value));
+    document.querySelectorAll('.destination-card').forEach((card) => {
+      card.hidden = value !== 'all' && card.dataset.guideDay !== value;
+    });
+  }
+  guideFilters.forEach((button) => button.addEventListener('click', () => filterGuide(button.dataset.guideFilter)));
+  document.querySelectorAll('[data-guide-target]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const target = document.getElementById('destination-' + button.dataset.guideTarget);
+      if (!target) return;
+      filterGuide('all');
+      showScreen('guide');
+      requestAnimationFrame(() => {
+        target.scrollIntoView({ block: 'start', behavior: 'auto' });
+        target.classList.add('spotlight');
+        window.setTimeout(() => target.classList.remove('spotlight'), 1300);
+      });
+    });
   });
 
   const planTabs = [...document.querySelectorAll('.plan-tab')];
@@ -124,8 +168,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('planA').classList.toggle('active', selectedPlan === 'a');
     document.getElementById('planB').classList.toggle('active', selectedPlan === 'b');
     document.getElementById(selectedPlan === 'a' ? 'costA' : 'costB').checked = true;
-    document.getElementById('heroPlanName').textContent =
-      selectedPlan === 'a' ? 'PLAN A · 海水浴' : 'PLAN B · 神社・絶景';
+    const dayOneTitle = document.getElementById('dayOneTitle');
+    if (dayOneTitle) dayOneTitle.textContent = selectedPlan === 'a' ? '伊根と、夏の海。' : '伊根と、天橋立。';
     storage.set('sekiTripPlan', selectedPlan);
     updateTotal();
     renderShots();
